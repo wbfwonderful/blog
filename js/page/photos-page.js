@@ -4,6 +4,7 @@ function photosPageHandle() {
   const layoutImages = () => {
     const gallery = document.querySelector('.photo-album-box')
     const images = gallery.querySelectorAll('img')
+
     const columns = 3
     gallery.style.columnCount = `${columns}`
     const columnHeights = new Array(columns).fill(0)
@@ -15,6 +16,7 @@ function photosPageHandle() {
   }
   layoutImages()
 }
+
 
 if (KEEP.theme_config?.pjax?.enable === true && KEEP.utils) {
   photosPageHandle()
