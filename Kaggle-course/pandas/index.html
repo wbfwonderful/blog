@@ -317,7 +317,7 @@
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
-                    <span class="datetime" data-updated="Tue Dec 03 2024 15:46:00 GMT+0800">2024-12-03 15:46:00</span>
+                    <span class="datetime" data-updated="Tue Dec 03 2024 20:20:21 GMT+0800">2024-12-03 20:20:21</span>
                 </span>
             
         
@@ -340,10 +340,10 @@
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/blog/tags/Kaggle/">Kaggle</a></li>
                         
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/blog/tags/Python/">Python</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/blog/tags/Pandas/">Pandas</a></li>
                         
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/blog/tags/Pandas/">Pandas</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/blog/tags/Python/">Python</a></li>
                         
                     
                 </ul>
@@ -353,12 +353,12 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>1.4k 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>2.4k 字</span>
             </span>
         
         
             <span class="meta-info-item post-min2read">
-                <i class="icon fas fa-clock"></i>&nbsp;<span>5 分钟</span>
+                <i class="icon fas fa-clock"></i>&nbsp;<span>9 分钟</span>
             </span>
         
         
@@ -426,7 +426,7 @@
 <p><img  
                        lazyload
                        alt="image"
-                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/pd5.png"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/pd8.png"
                        
                  ></p>
 <h2 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h2><p>数据可以以许多不同的形式和格式中的任何一种进行存储。到目前为止，其中最基本的是 CSV 文件。当你打开一个 CSV 文件时，你会看到这样的东西：</p>
@@ -454,7 +454,7 @@
 <p>相比之下，loc 使用索引中的信息来完成工作。由于数据集通常包含有意义的索引，因此使用loc通常更容易。<br>例如，访问所有行的以下属性：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.loc[:, [<span class="string">&#x27;taster_name&#x27;</span>, <span class="string">&#x27;taster_twitter_handle&#x27;</span>, <span class="string">&#x27;points&#x27;</span>]]</span><br></pre></td></tr></table></figure>
 
-<h3 id="loc-还是-iloc-？"><a href="#loc-还是-iloc-？" class="headerlink" title="loc 还是 iloc ？"></a><code>loc</code> 还是 <code>iloc</code> ？</h3><ul>
+<h3 id="loc-还是-iloc-？"><a href="#loc-还是-iloc-？" class="headerlink" title="loc 还是 iloc ？"></a>loc 还是 iloc ？</h3><ul>
 <li>iloc 使用标准的索引策略，<code>0:10</code> 的结果是 <code>0,...,9</code>，而 loc 的结果是 <code>0,...,10</code>。</li>
 <li>loc 可以这样用：<code>df.loc[&#39;a&#39;:&#39;d&#39;]</code> ，表示索引标签 a 到 d 之间的所有列。<strong>（包括 d）</strong></li>
 <li>iloc 索引数值位置，loc 索引标签，且 loc <strong>包括“结尾”</strong>。</li>
@@ -492,9 +492,99 @@
 <h2 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h2><p>给一整列赋值：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将整列都赋值为 everyone</span></span><br><span class="line">reviews[<span class="string">&#x27;critic&#x27;</span>] = <span class="string">&#x27;everyone&#x27;</span></span><br><span class="line"><span class="comment"># 也可以使用可迭代的对象（list、range等）</span></span><br><span class="line">reviews[<span class="string">&#x27;index_backwards&#x27;</span>] = <span class="built_in">range</span>(<span class="built_in">len</span>(reviews), <span class="number">0</span>, -<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 
+<h1 id="总结函数和映射"><a href="#总结函数和映射" class="headerlink" title="总结函数和映射"></a>总结函数和映射</h1><blockquote>
+<p>Extract insights from your data.</p>
+</blockquote>
+<h2 id="总结函数"><a href="#总结函数" class="headerlink" title="总结函数"></a>总结函数</h2><p>使用 <code>describe()</code> 方法获取对数据的高级描述：<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/pd7.png"
+                       
+                 ></p>
+<p>对不同的数据类型，会有不同的总结，例如对字符串：<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/pd9.png"
+                       
+                 ></p>
+<p>mean() 方法：查看某一列的平均值。<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/pd10.png"
+                       
+                 ></p>
+<p>unique() 方法：查看某一列的唯一值列表。（对应于 describe 输出的 unique 关键字）<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/pd11.png"
+                       
+                 ></p>
+<p>count() 方法：查看某一列的唯一值列表以及其出现次数。<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/pd12.png"
+                       
+                 ></p>
+<h2 id="映射（Maps）"><a href="#映射（Maps）" class="headerlink" title="映射（Maps）"></a>映射（Maps）</h2><p>批量修改某些列。</p>
+<p>例如，想要将某一列减去其均值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">review_points_mean = reviews.points.mean()</span><br><span class="line">reviews.points.<span class="built_in">map</span>(<span class="keyword">lambda</span> p: p - review_points_mean)</span><br></pre></td></tr></table></figure>
+<p>传递给 map() 的函数应该期望得到来自 Series 的单个值（在上面的示例中是一个点值，即 p），并返回该值的转换版本（即 p - review_points_mean）。map（）返回一个新的 Series ，其中所有的值都已被函数转换过。</p>
+<p>这里 <code>lambda</code> 表示匿名函数，其等价于以下函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">my_function</span>(<span class="params">p</span>):</span><br><span class="line">    <span class="keyword">return</span> p - review_points_mean</span><br></pre></td></tr></table></figure>
 
+<p>同样地， apply() 方法同样可以实现上述过程：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">remean_points</span>(<span class="params">row</span>):</span><br><span class="line">    row.points = row.points - review_points_mean</span><br><span class="line">    <span class="keyword">return</span> row</span><br><span class="line"></span><br><span class="line">reviews.apply(remean_points, axis=<span class="string">&#x27;columns&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
+<p>此外，也可以直接使用操作符 <code>+</code> 、 <code>-</code> 等直接对 Series 对象进行操作，这比上述两个函数更高效，但是不支持更复杂的情况。</p>
+<h1 id="分组和排序"><a href="#分组和排序" class="headerlink" title="分组和排序"></a>分组和排序</h1><blockquote>
+<p>Scale up your level of insight. The more complex the dataset, the more this matters</p>
+</blockquote>
+<h2 id="分组分析"><a href="#分组分析" class="headerlink" title="分组分析"></a>分组分析</h2><p>以下代码等同于 value_counts() 方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reviews.groupby(<span class="string">&#x27;points&#x27;</span>).points.count()</span><br></pre></td></tr></table></figure>
 
+<p>即按照 points 列进行分组，分组之后再对 point 列进行计数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reviews.groupby(<span class="string">&#x27;points&#x27;</span>).price.<span class="built_in">min</span>()</span><br></pre></td></tr></table></figure>
+<p>上述代码按照 points 列进行分组，分组之后，在每个组里面计算最小值。</p>
+<p>生成的每个组可以视为 DataFrame 的一个片段，其中仅包含具有匹配值的数据。可以直接使用 apply() 方法访问这个 DataFrame，然后可以通过任何方式操作数据。例如，下面是从数据集中的每个酒厂中选择第一个被评论的葡萄酒名称的一种方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reviews.groupby(<span class="string">&#x27;winery&#x27;</span>).apply(<span class="keyword">lambda</span> df: df.title.iloc[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+<p>对于更细粒度的，还可以按多个列分组。举个例子，以下是我们如何按国家和省份挑选最好的葡萄酒：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reviews.groupby([<span class="string">&#x27;country&#x27;</span>, <span class="string">&#x27;province&#x27;</span>]).apply(<span class="keyword">lambda</span> df: df.loc[df.points.idxmax()])</span><br></pre></td></tr></table></figure>
+
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>简单排序（默认升序）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">countries_reviewed.sort_values(by=<span class="string">&#x27;len&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>按照多个列进行排序：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">countries_reviewed.sort_values(by=[<span class="string">&#x27;country&#x27;</span>, <span class="string">&#x27;len&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<h1 id="数据类型和缺失值"><a href="#数据类型和缺失值" class="headerlink" title="数据类型和缺失值"></a>数据类型和缺失值</h1><blockquote>
+<p>Deal with the most common progress-blocking problems</p>
+</blockquote>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>DataFrame 或Series 中每列的数据类型称为 <code>dtype</code> 。可以使用 dtype 属性获取特定列的类型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reviews.price.dtype</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>dtypes 属性返回 DataFrame 中每一列的数据类型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reviews.dtypes</span><br></pre></td></tr></table></figure>
+
+<p>注意，字符串的类型为 object 。</p>
+<p>可以使用 astype() 方法进行数据转换：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reviews.points.astype(<span class="string">&#x27;float64&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="缺失值"><a href="#缺失值" class="headerlink" title="缺失值"></a>缺失值</h2><p>使用 fillna() 方法来替换缺失值。通常可以设置为“unkonwn”字符串，便于后续更改。这种值通常被称作“哨兵”，还包括“Undisclosed”、“Invalid”等。</p>
+<p>此外可以使用 replace() 方法来替换设置的哨兵值。</p>
+<h1 id="重命名和组合"><a href="#重命名和组合" class="headerlink" title="重命名和组合"></a>重命名和组合</h1><blockquote>
+<p>Data comes in from many sources. Help it all make sense together</p>
+</blockquote>
+<h2 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h2><p>有时需要更改列明或索引名。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 points 列更名为 score</span></span><br><span class="line">reviews.rename(columns=&#123;<span class="string">&#x27;points&#x27;</span>: <span class="string">&#x27;score&#x27;</span>&#125;)</span><br><span class="line"><span class="comment"># 将第一行和第二行更名为 firstEntry 和 secondEntry</span></span><br><span class="line">reviews.rename(index=&#123;<span class="number">0</span>: <span class="string">&#x27;firstEntry&#x27;</span>, <span class="number">1</span>: <span class="string">&#x27;secondEntry&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h2><p>组合来自多个 DataFrame 或 Series 的数据。</p>
+<p>例如，两个 CSV 文件有相同的列，最简单的方法是 conca() 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">canadian_youtube = pd.read_csv(<span class="string">&quot;../input/youtube-new/CAvideos.csv&quot;</span>)</span><br><span class="line">british_youtube = pd.read_csv(<span class="string">&quot;../input/youtube-new/GBvideos.csv&quot;</span>)</span><br><span class="line"></span><br><span class="line">pd.concat([canadian_youtube, british_youtube])</span><br></pre></td></tr></table></figure>
+
+<p>例如，组合两个具有相同索引的 CSV 文件：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">left = canadian_youtube.set_index([<span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;trending_date&#x27;</span>])</span><br><span class="line">right = british_youtube.set_index([<span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;trending_date&#x27;</span>])</span><br><span class="line"></span><br><span class="line">left.join(right, lsuffix=<span class="string">&#x27;_CAN&#x27;</span>, rsuffix=<span class="string">&#x27;_UK&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>lsuffix 和 rsuffix 参数用于区分两个相同的列。</p>
 
                     
                 </div>
@@ -509,7 +599,7 @@
             </div>
 
             <div class="copyright-post-link border-box text-ellipsis">
-                2024/11/30/202411/pandas/
+                Kaggle-course/pandas/
             </div>
         </div>
 
@@ -565,11 +655,11 @@
                                     </li>
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/blog/tags/Python/">Python</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/blog/tags/Pandas/">Pandas</a>
                                     </li>
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/blog/tags/Pandas/">Pandas</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/blog/tags/Python/">Python</a>
                                     </li>
                                 
                             </ul>
@@ -612,7 +702,7 @@
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/blog/2024/11/28/202411/intro-to-ML/"
+                                   href="/blog/Kaggle-course/intro-to-ML/"
                                    title="Kaggle Courses-3-机器学习介绍"
                                 >
                                     <span class="title flex-center">
@@ -644,7 +734,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E3%80%81%E8%AF%BB%E5%92%8C%E5%86%99"><span class="nav-number">1.</span> <span class="nav-text">创建、读和写</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B"><span class="nav-number">1.1.</span> <span class="nav-text">开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE"><span class="nav-number">1.2.</span> <span class="nav-text">创建数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DataFrame"><span class="nav-number">1.2.1.</span> <span class="nav-text">DataFrame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Series"><span class="nav-number">1.2.2.</span> <span class="nav-text">Series</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.</span> <span class="nav-text">读取数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E3%80%81%E9%80%89%E6%8B%A9%E5%92%8C%E8%B5%8B%E5%80%BC"><span class="nav-number">2.</span> <span class="nav-text">索引、选择和赋值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%94%9F%E8%AE%BF%E9%97%AE%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text">原生访问器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pandas-%E4%B8%AD%E7%9A%84%E7%B4%A2%E5%BC%95"><span class="nav-number">2.2.</span> <span class="nav-text">Pandas 中的索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%B4%A2%E5%BC%95%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">2.2.1.</span> <span class="nav-text">基于索引的选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%A0%87%E7%AD%BE%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">2.2.2.</span> <span class="nav-text">基于标签的选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#loc-%E8%BF%98%E6%98%AF-iloc-%EF%BC%9F"><span class="nav-number">2.2.3.</span> <span class="nav-text">loc 还是 iloc ？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95"><span class="nav-number">2.3.</span> <span class="nav-text">操作索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E9%80%89%E6%8B%A9"><span class="nav-number">2.4.</span> <span class="nav-text">条件选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC"><span class="nav-number">2.5.</span> <span class="nav-text">赋值</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E3%80%81%E8%AF%BB%E5%92%8C%E5%86%99"><span class="nav-number">1.</span> <span class="nav-text">创建、读和写</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B"><span class="nav-number">1.1.</span> <span class="nav-text">开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE"><span class="nav-number">1.2.</span> <span class="nav-text">创建数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DataFrame"><span class="nav-number">1.2.1.</span> <span class="nav-text">DataFrame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Series"><span class="nav-number">1.2.2.</span> <span class="nav-text">Series</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.</span> <span class="nav-text">读取数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E3%80%81%E9%80%89%E6%8B%A9%E5%92%8C%E8%B5%8B%E5%80%BC"><span class="nav-number">2.</span> <span class="nav-text">索引、选择和赋值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%94%9F%E8%AE%BF%E9%97%AE%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text">原生访问器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pandas-%E4%B8%AD%E7%9A%84%E7%B4%A2%E5%BC%95"><span class="nav-number">2.2.</span> <span class="nav-text">Pandas 中的索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%B4%A2%E5%BC%95%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">2.2.1.</span> <span class="nav-text">基于索引的选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%A0%87%E7%AD%BE%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">2.2.2.</span> <span class="nav-text">基于标签的选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#loc-%E8%BF%98%E6%98%AF-iloc-%EF%BC%9F"><span class="nav-number">2.2.3.</span> <span class="nav-text">loc 还是 iloc ？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95"><span class="nav-number">2.3.</span> <span class="nav-text">操作索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E9%80%89%E6%8B%A9"><span class="nav-number">2.4.</span> <span class="nav-text">条件选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC"><span class="nav-number">2.5.</span> <span class="nav-text">赋值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E5%87%BD%E6%95%B0%E5%92%8C%E6%98%A0%E5%B0%84"><span class="nav-number">3.</span> <span class="nav-text">总结函数和映射</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text">总结函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%A0%E5%B0%84%EF%BC%88Maps%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">映射（Maps）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E5%92%8C%E6%8E%92%E5%BA%8F"><span class="nav-number">4.</span> <span class="nav-text">分组和排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E5%88%86%E6%9E%90"><span class="nav-number">4.1.</span> <span class="nav-text">分组分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F"><span class="nav-number">4.2.</span> <span class="nav-text">排序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E7%BC%BA%E5%A4%B1%E5%80%BC"><span class="nav-number">5.</span> <span class="nav-text">数据类型和缺失值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.1.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E5%A4%B1%E5%80%BC"><span class="nav-number">5.2.</span> <span class="nav-text">缺失值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E5%91%BD%E5%90%8D%E5%92%8C%E7%BB%84%E5%90%88"><span class="nav-number">6.</span> <span class="nav-text">重命名和组合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%91%BD%E5%90%8D"><span class="nav-number">6.1.</span> <span class="nav-text">重命名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E5%90%88"><span class="nav-number">6.2.</span> <span class="nav-text">组合</span></a></li></ol></li></ol>
     </div>
 </div>
 
@@ -690,7 +780,7 @@
             
                 <span class="count-item border-box word">
                     <span class="item-type border-box">总字数</span>
-                    <span class="item-value border-box word">4.7k</span>
+                    <span class="item-value border-box word">5.7k</span>
                 </span>
             
 
@@ -838,7 +928,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E3%80%81%E8%AF%BB%E5%92%8C%E5%86%99"><span class="nav-number">1.</span> <span class="nav-text">创建、读和写</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B"><span class="nav-number">1.1.</span> <span class="nav-text">开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE"><span class="nav-number">1.2.</span> <span class="nav-text">创建数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DataFrame"><span class="nav-number">1.2.1.</span> <span class="nav-text">DataFrame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Series"><span class="nav-number">1.2.2.</span> <span class="nav-text">Series</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.</span> <span class="nav-text">读取数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E3%80%81%E9%80%89%E6%8B%A9%E5%92%8C%E8%B5%8B%E5%80%BC"><span class="nav-number">2.</span> <span class="nav-text">索引、选择和赋值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%94%9F%E8%AE%BF%E9%97%AE%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text">原生访问器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pandas-%E4%B8%AD%E7%9A%84%E7%B4%A2%E5%BC%95"><span class="nav-number">2.2.</span> <span class="nav-text">Pandas 中的索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%B4%A2%E5%BC%95%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">2.2.1.</span> <span class="nav-text">基于索引的选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%A0%87%E7%AD%BE%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">2.2.2.</span> <span class="nav-text">基于标签的选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#loc-%E8%BF%98%E6%98%AF-iloc-%EF%BC%9F"><span class="nav-number">2.2.3.</span> <span class="nav-text">loc 还是 iloc ？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95"><span class="nav-number">2.3.</span> <span class="nav-text">操作索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E9%80%89%E6%8B%A9"><span class="nav-number">2.4.</span> <span class="nav-text">条件选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC"><span class="nav-number">2.5.</span> <span class="nav-text">赋值</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E3%80%81%E8%AF%BB%E5%92%8C%E5%86%99"><span class="nav-number">1.</span> <span class="nav-text">创建、读和写</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B"><span class="nav-number">1.1.</span> <span class="nav-text">开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE"><span class="nav-number">1.2.</span> <span class="nav-text">创建数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DataFrame"><span class="nav-number">1.2.1.</span> <span class="nav-text">DataFrame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Series"><span class="nav-number">1.2.2.</span> <span class="nav-text">Series</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.</span> <span class="nav-text">读取数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E3%80%81%E9%80%89%E6%8B%A9%E5%92%8C%E8%B5%8B%E5%80%BC"><span class="nav-number">2.</span> <span class="nav-text">索引、选择和赋值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%94%9F%E8%AE%BF%E9%97%AE%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text">原生访问器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pandas-%E4%B8%AD%E7%9A%84%E7%B4%A2%E5%BC%95"><span class="nav-number">2.2.</span> <span class="nav-text">Pandas 中的索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%B4%A2%E5%BC%95%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">2.2.1.</span> <span class="nav-text">基于索引的选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%A0%87%E7%AD%BE%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">2.2.2.</span> <span class="nav-text">基于标签的选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#loc-%E8%BF%98%E6%98%AF-iloc-%EF%BC%9F"><span class="nav-number">2.2.3.</span> <span class="nav-text">loc 还是 iloc ？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95"><span class="nav-number">2.3.</span> <span class="nav-text">操作索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E9%80%89%E6%8B%A9"><span class="nav-number">2.4.</span> <span class="nav-text">条件选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC"><span class="nav-number">2.5.</span> <span class="nav-text">赋值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E5%87%BD%E6%95%B0%E5%92%8C%E6%98%A0%E5%B0%84"><span class="nav-number">3.</span> <span class="nav-text">总结函数和映射</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text">总结函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%A0%E5%B0%84%EF%BC%88Maps%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">映射（Maps）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E5%92%8C%E6%8E%92%E5%BA%8F"><span class="nav-number">4.</span> <span class="nav-text">分组和排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E5%88%86%E6%9E%90"><span class="nav-number">4.1.</span> <span class="nav-text">分组分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F"><span class="nav-number">4.2.</span> <span class="nav-text">排序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E7%BC%BA%E5%A4%B1%E5%80%BC"><span class="nav-number">5.</span> <span class="nav-text">数据类型和缺失值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.1.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E5%A4%B1%E5%80%BC"><span class="nav-number">5.2.</span> <span class="nav-text">缺失值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E5%91%BD%E5%90%8D%E5%92%8C%E7%BB%84%E5%90%88"><span class="nav-number">6.</span> <span class="nav-text">重命名和组合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%91%BD%E5%90%8D"><span class="nav-number">6.1.</span> <span class="nav-text">重命名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E5%90%88"><span class="nav-number">6.2.</span> <span class="nav-text">组合</span></a></li></ol></li></ol>
     </div>
 </div>
 
