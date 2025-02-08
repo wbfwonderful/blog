@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="wbfwonderful">
+    
+    <title>
+        
+            Kaggle Courses-3-机器学习介绍 |
+        
+        wbfwonderful&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/blog/css/style.css">
+
+    
+        <link rel="shortcut icon" href="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile-transparent.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/brands.min.css">
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"wbfwonderful.github.io","root":"/blog/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"wbfwonderful's Blog","author":"wbfwonderful","avatar":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg","logo":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg","favicon":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile-transparent.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","categories":"/categories || fa-solid fa-layer-group","photos":"/photos || fa-solid fa-image","about":"/about || fa-solid fa-user-graduate"},"first_screen":{"enable":true,"background_img":"/images/screen.gif","background_img_dark":"/images/screen.gif","description":null,"hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/wbfwonderful","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":"wangbf23@mail2.sysu.edu.cn","bilibili":"https://space.bilibili.com/214019111"}},"scroll":{"progress_bar":false,"percent":false,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"created || fa-solid fa-arrow-up-from-bracket","post_datetime_format":"YYYY-MM-DD HH:mm:ss"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null,"icon":null},"created_datetime_icon":"fa-solid fa-arrow-up-from-bracket","updated_datetime_icon":"fa-solid fa-arrows-rotate"},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2024,"word_count":true,"site_deploy":{"enable":true,"provider":"github","url":"https://github.com"},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":["/css/custom-photos.css"],"js":[null]},"root":"/blog","source_data":{"photos":[{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg","name":"头像"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/hainan-warship.jpg","name":"海南舰"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/mayday.jpg","name":"5525深圳站"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/balls.gif","name":"五月天五个球球"}]},"version":"4.2.4"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/blog/">
+                    <img src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg">
+                </a>
+            
+            <a class="site-name border-box" href="/blog/">
+               wbfwonderful&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/tags">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/categories">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                
+                                分类
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/photos">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-image"></i>
+                                
+                                相册
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/tags">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tags"></i>
+                                </span>
+                            
+                            标签
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/categories">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                </span>
+                            
+                            分类
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/photos">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-image"></i>
+                                </span>
+                            
+                            相册
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        Kaggle Courses-3-机器学习介绍
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">wbfwonderful</span>
+                                
+                                    <span class="author-badge">Lv1</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-arrow-up-from-bracket"></i>&nbsp;
+                <span class="datetime">2024-11-28 22:03:42</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
+                    <span class="datetime" data-updated="Sat Feb 08 2025 11:12:32 GMT+0800">2025-02-08 11:12:32</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/blog/categories/Kaggle-courses/">Kaggle courses</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/blog/tags/Kaggle/">Kaggle</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/blog/tags/Pandas/">Pandas</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/blog/tags/Python/">Python</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>2.7k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>10 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <div class="keep-note primary"><p>Learn the core ideas in machine learning, and build your first models. Click <a class="link"   target="_blank" rel="noopener" href="https://www.kaggle.com/learn/intro-to-machine-learning" >here<i class="fas fa-external-link-alt"></i></a> for more information.</p>
+</div>
+
+<h1 id="模型是如何工作的？"><a href="#模型是如何工作的？" class="headerlink" title="模型是如何工作的？"></a>模型是如何工作的？</h1><blockquote>
+<p>The first step.</p>
+</blockquote>
+<h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><p>考虑以下场景：</p>
+<ul>
+<li>你表弟做房地产投机赚了几百万美元。因为你对数据科学感兴趣，他提出要和你成为商业伙伴。他会提供钱，你会提供模型来预测各种房子的价值。</li>
+<li>你问你的堂兄他过去是如何预测房地产价值的，他说这只是直觉。但更多的质疑表明，他从过去看过的房子中识别出了价格模式，并用这些模式来预测他正在考虑的新房。</li>
+<li>…</li>
+</ul>
+<p>考虑这个简单的决策树：<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/decision-tree1.png"
+                       
+                 ><br>它只把房子分成两类。所考虑的任何房屋的预测价格都是同一类别房屋的历史平均价格。</p>
+<p>通过数据来决定如何将房屋分为两类，同时决定其预测价格。从数据中捕获模式的这一步称为<strong>拟合</strong>(fitting)或<strong>训练</strong>(training)模型。用于拟合模型的数据称为<strong>训练数据</strong>(training data)。</p>
+<h2 id="改进决策树"><a href="#改进决策树" class="headerlink" title="改进决策树"></a>改进决策树</h2><p>以下哪个决策树更有效？<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/decision-tree2.png"
+                       
+                 ><br>左边的决策树（决策树1）可能更有意义，因为它抓住了一个现实，即卧室多的房子往往比卧室少的房子卖得更高。这种模式最大的缺点是，它没有考虑到影响房价的大多数因素，比如浴室数量、地块大小、位置等。</p>
+<p>可以使用具有更多“分裂”的树来捕获更多因素。这些树被称为“更深的”树。考虑到每栋房子地块总面积的决策树可能是这样的：<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/decision-tree3.png"
+                       
+                 ><br>房子的预测价格在这棵树的底部。我们做出预测的底部点被称为<strong>叶子</strong> (leaf)。</p>
+<h1 id="初步探索数据"><a href="#初步探索数据" class="headerlink" title="初步探索数据"></a>初步探索数据</h1><blockquote>
+<p>Load and understand your data.</p>
+</blockquote>
+<h2 id="使用-Pandas-来加载数据"><a href="#使用-Pandas-来加载数据" class="headerlink" title="使用 Pandas 来加载数据"></a>使用 Pandas 来加载数据</h2><p>Pandas 是数据科学家用来探索和操作数据的主要工具。大多数人在代码中将 pandas 缩写为 <code>pd</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+<p>Pandas 库中最重要的部分是 <code>DataFrame</code>。DataFrame 保存了您可能认为是表的数据类型。这类似于 Excel 中的工作表或 SQL 数据库中的表。</p>
+<p>使用如下命令来读取 csv 文件，并进行展示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_csv(<span class="string">&#x27;my_csv.csv&#x27;</span>)</span><br><span class="line">df.describe()</span><br></pre></td></tr></table></figure>
+<p>更多关于 pandas 的<a href="/blog/Kaggle-course/pandas-kaggle/" title="Kaggle Courses-4-pandas">介绍</a>。</p>
+<h2 id="对数据的解释"><a href="#对数据的解释" class="headerlink" title="对数据的解释"></a>对数据的解释</h2><p>某个 csv 文件通过 <code>.describe()</code> 展示的结果为：<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/decision-tree-sample.png"
+                       
+                 ></p>
+<ul>
+<li>结果为原始数据集中的每列显示8个数字。第一个数字是 count，显示有多少行具有非缺失值。<ul>
+<li>缺失值的产生有很多原因。例如，在调查一间卧室的房子时，不会收集第二间卧室的大小。我们将回到丢失数据的话题。</li>
+</ul>
+</li>
+<li>第二个值是均值，也就是平均值。在此之下，std 是标准偏差，它衡量数值的数值分布。</li>
+<li>后续五个值：将该列的数据升序排序形成一个列表，在列表中走四分之一，会发现一个大于 25% 且小于 75% 的值。这是 <strong>25%</strong> 的定义。</li>
+</ul>
+<h1 id="第一个机器学习模型"><a href="#第一个机器学习模型" class="headerlink" title="第一个机器学习模型"></a>第一个机器学习模型</h1><blockquote>
+<p>Building your first model. Hurray!</p>
+</blockquote>
+<h2 id="选择建模的数据"><a href="#选择建模的数据" class="headerlink" title="选择建模的数据"></a>选择建模的数据</h2><p>一条数据有很多变量，如何选择合适的变量？我们先用直觉选几个变量。后面的课程将展示自动确定变量优先级的统计技术。</p>
+<p>首先需要查看数据集中所有列的列表。通过 DataFrame 的 columns 属性完成：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">melbourne_file_path = <span class="string">&#x27;../input/melbourne-housing-snapshot/melb_data.csv&#x27;</span></span><br><span class="line">melbourne_data = pd.read_csv(melbourne_file_path) </span><br><span class="line"><span class="built_in">print</span>(melbourne_data.columns)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Index([&#x27;Suburb&#x27;, &#x27;Address&#x27;, &#x27;Rooms&#x27;, &#x27;Type&#x27;, &#x27;Price&#x27;, &#x27;Method&#x27;, &#x27;SellerG&#x27;,</span><br><span class="line">       &#x27;Date&#x27;, &#x27;Distance&#x27;, &#x27;Postcode&#x27;, &#x27;Bedroom2&#x27;, &#x27;Bathroom&#x27;, &#x27;Car&#x27;,</span><br><span class="line">       &#x27;Landsize&#x27;, &#x27;BuildingArea&#x27;, &#x27;YearBuilt&#x27;, &#x27;CouncilArea&#x27;, &#x27;Lattitude&#x27;,</span><br><span class="line">       &#x27;Longtitude&#x27;, &#x27;Regionname&#x27;, &#x27;Propertycount&#x27;],</span><br><span class="line">      dtype=&#x27;object&#x27;)</span><br></pre></td></tr></table></figure>
+<p>某些数据可能有缺失值，后续课程会解决缺失值。这里简单地删除有缺失的数据，通过 <code>.dropna()</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">melbourne_data = melbourne_data.dropna(axis=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>注意 <code>.dropna()</code> 不会在当前 DataFrame 上进行修改，而是会返回一个新的对象，所以需要赋值给新对象。</p>
+<p>获取 DataFrame 子集的方法：</p>
+<ul>
+<li>使用点 <code>.</code></li>
+<li>使用一个列名列表</li>
+</ul>
+<h3 id="选择预测目标"><a href="#选择预测目标" class="headerlink" title="选择预测目标"></a>选择预测目标</h3><p>通过点 <code>.</code> 来访问某个变量的数据。这些数据存储在一个 <code>Series</code> 中，它大致类似于只有单列数据的 <code>DataFrame</code> 。需要预测的变量为 Price ，定义为y：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y = melbourne_data.Price</span><br></pre></td></tr></table></figure>
+
+<h3 id="选择特征"><a href="#选择特征" class="headerlink" title="选择特征"></a>选择特征</h3><p>“特征”定义为输入模型的数据列，并后续用于预测。使用列名列表来获取，并定义为 x：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">melbourne_features = [<span class="string">&#x27;Rooms&#x27;</span>, <span class="string">&#x27;Bathroom&#x27;</span>, <span class="string">&#x27;Landsize&#x27;</span>, <span class="string">&#x27;Lattitude&#x27;</span> <span class="string">&#x27;Longtitude&#x27;</span>]</span><br><span class="line">x = melbourne_data[melbourne_features]</span><br></pre></td></tr></table></figure>
+<p>使用 <code>.head()</code> 方法查看头部几个样本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x.head()</span><br></pre></td></tr></table></figure>
+
+<h2 id="构建模型"><a href="#构建模型" class="headerlink" title="构建模型"></a>构建模型</h2><p>使用 <strong>scikit-learn</strong> 包来创建模型。代码中写作 <strong>sklearn</strong>。</p>
+<p>通过以下步骤来构建模型：</p>
+<ul>
+<li><strong>定义</strong>：模型类型、模型参数</li>
+<li><strong>拟合（训练）</strong>：从数据中学习模式</li>
+<li><strong>预测</strong>：<em>Just what it sounds like</em>（原文🤔）</li>
+<li><strong>评估</strong>：确定模型的准确度</li>
+</ul>
+<p>一个简单的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeRegressor</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define model. Specify a number for random_state to ensure same results each run</span></span><br><span class="line">melbourne_model = DecisionTreeRegressor(random_state=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># Fit model</span></span><br><span class="line">melbourne_model.fit(X, y)</span><br></pre></td></tr></table></figure>
+
+<p>设置 <code>random_state</code> 确保在每一个轮次中获取相同的结果。但是模型的性能和这个数字无关。</p>
+<p>现在使用训练好的模型来预测输入的前 5 个数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">melbourne_model.predict(X.head())</span><br></pre></td></tr></table></figure>
+<h1 id="模型验证"><a href="#模型验证" class="headerlink" title="模型验证"></a>模型验证</h1><blockquote>
+<p>Measure the performance of your model, so you can test and compare alternatives.</p>
+</blockquote>
+<h2 id="什么是模型验证"><a href="#什么是模型验证" class="headerlink" title="什么是模型验证"></a>什么是模型验证</h2><p>许多人在衡量预测准确性时犯了一个巨大的错误。他们用训练数据进行预测，并将这些预测与训练数据中的目标值进行比较。稍后您将看到这种方法的问题以及如何解决它，但让我们先考虑一下如何做这个。</p>
+<p>考虑最简单的平均绝对误差（Mean Absolute Error, MAE）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error = actual - predicted</span><br></pre></td></tr></table></figure>
+
+<p>使用 scikit-learn 计算 MAE：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_absolute_error</span><br><span class="line"></span><br><span class="line">predicted_home_prices = melbourne_model.predict(X)</span><br><span class="line">mean_absolute_error(y, predicted_home_prices)</span><br></pre></td></tr></table></figure>
+
+<h2 id="“In-Sample”分数的问题"><a href="#“In-Sample”分数的问题" class="headerlink" title="“In-Sample”分数的问题"></a>“In-Sample”分数的问题</h2><p>前面提到的评价方式是一种“样本内”分数（in-sample）。是同统一数据来训练和预测。想象以下场景：</p>
+<blockquote>
+<p>在大型房地产市场中，门的颜色与房价无关。然而，在您用于构建模型的数据样本中，所有带有绿色门的房屋都非常昂贵。这个模型的工作是找到预测房价的模式，所以它会看到这个模式，它总是会预测绿色门的房屋的高价格。由于该模式是从训练数据中导出的，因此该模型在训练数据中会显得准确。但是，如果当模型看到新的数据时，这种模式不成立，那么在实际使用时，模型将非常不准确。</p>
+</blockquote>
+<p>由于模型的实用价值来自于对<strong>新数据</strong>的预测，因此我们在未用于构建模型的数据上衡量性能。要做到这一点，最直接的方法是从模型构建过程中排除一些数据，然后使用这些数据来测试模型对以前没有见过的数据的准确性。这些数据称为<strong>验证数据</strong>（validation data）。</p>
+<h2 id="Coding-it"><a href="#Coding-it" class="headerlink" title="Coding it!"></a>Coding it!</h2><p>scikit-learn 提供了 <code>train_test_solit</code> 方法来划分训练集和测试集。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line"><span class="comment"># split data into training and validation data, for both features and target</span></span><br><span class="line"><span class="comment"># The split is based on a random number generator. Supplying a numeric value to</span></span><br><span class="line"><span class="comment"># the random_state argument guarantees we get the same split every time we</span></span><br><span class="line"><span class="comment"># run this script.</span></span><br><span class="line">train_X, val_X, train_y, val_y = train_test_split(X, y, random_state = <span class="number">0</span>, test_size=<span class="number">0.2</span>)</span><br><span class="line"><span class="comment"># Define model</span></span><br><span class="line">melbourne_model = DecisionTreeRegressor()</span><br><span class="line"><span class="comment"># Fit model</span></span><br><span class="line">melbourne_model.fit(train_X, train_y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># get predicted prices on validation data</span></span><br><span class="line">val_predictions = melbourne_model.predict(val_X)</span><br><span class="line"><span class="built_in">print</span>(mean_absolute_error(val_y, val_predictions))</span><br></pre></td></tr></table></figure>
+
+<p>通过设置 <code>test_size</code> 来更改测试集的比例。</p>
+<h2 id="Wow"><a href="#Wow" class="headerlink" title="Wow!"></a>Wow!</h2><p>经过测试，样本内数据的平均绝对误差约为500美元，而样本外超过25万美元！</p>
+<h1 id="欠拟合和过拟合"><a href="#欠拟合和过拟合" class="headerlink" title="欠拟合和过拟合"></a>欠拟合和过拟合</h1><blockquote>
+<p>Fine-tune your model for better performance.</p>
+</blockquote>
+<h2 id="实验不同模型"><a href="#实验不同模型" class="headerlink" title="实验不同模型"></a>实验不同模型</h2><p>两个极端</p>
+<ul>
+<li>当我们把房子分成许多片叶子时，每片叶子上的房子也更少。房子很少的树叶会做出非常接近这些房子的实际价值的预测，但它们对新数据的预测可能非常不可靠（因为每次预测都只基于几所房子）。<ul>
+<li>这是一种被称为过拟合的现象，即模型几乎完美地匹配训练数据，但在验证和其他新数据方面表现不佳。另一方面，如果我们把树画得很浅，它就不会把房子分成很明显的组。</li>
+</ul>
+</li>
+<li>如果一棵树只把房子分成2个或4个，每一组仍然有各种各样的房子。对大多数机构来说，结果预测可能还很遥远，甚至在训练数据中也是如此（出于同样的原因，它在验证中也会很糟糕）。<ul>
+<li>当一个模型无法捕捉数据中的重要区别和模式，因此即使在训练数据中也表现不佳，这被称为欠拟合。</li>
+</ul>
+</li>
+</ul>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>通过设置不同数量的决策树结点数量 <code>max_leaf_nodes</code>，计算出不同的精确率。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_absolute_error</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeRegressor</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_mae</span>(<span class="params">max_leaf_nodes, train_X, val_X, train_y, val_y</span>):</span><br><span class="line">    model = DecisionTreeRegressor(max_leaf_nodes=max_leaf_nodes, random_state=<span class="number">0</span>)</span><br><span class="line">    model.fit(train_X, train_y)</span><br><span class="line">    preds_val = model.predict(val_X)</span><br><span class="line">    mae = mean_absolute_error(val_y, preds_val)</span><br><span class="line">    <span class="keyword">return</span>(mae)</span><br></pre></td></tr></table></figure>
+
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>两种情况：</p>
+<ul>
+<li><strong>过拟合</strong>：捕捉未来不会再出现的虚假模式，导致预测不那么准确</li>
+<li><strong>欠拟合</strong>：无法捕捉相关的模式，同样导致预测不准确</li>
+</ul>
+<h1 id="随机森林"><a href="#随机森林" class="headerlink" title="随机森林"></a>随机森林</h1><blockquote>
+<p>Using a more sophisticated machine learning algorithm.</p>
+</blockquote>
+<h2 id="引入-1"><a href="#引入-1" class="headerlink" title="引入"></a>引入</h2><p>决策树留给你一个艰难的决定。有很多叶子的深树会过拟合，因为每个预测都是来自叶子附近的少数房屋的历史数据。但是一棵叶子很少的浅树会表现得很差，因为它无法在原始数据中捕捉到尽可能多的区别。</p>
+<p>即使是今天最复杂的建模技术也面临着欠拟合和过拟合之间的紧张关系。但是，许多模型都有聪明的想法，可以带来更好的性能。我们将以<strong>随机森林</strong>为例。</p>
+<p>随机森林使用许多树，它通过平均每个组成树的预测来进行预测。它通常比单一决策树具有更好的预测准确性，并且在默认参数下工作得很好。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestRegressor</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_absolute_error</span><br><span class="line"></span><br><span class="line">forest_model = RandomForestRegressor(random_state=<span class="number">1</span>)</span><br><span class="line">forest_model.fit(train_X, train_y)</span><br><span class="line">melb_preds = forest_model.predict(val_X)</span><br><span class="line"><span class="built_in">print</span>(mean_absolute_error(val_y, melb_preds))</span><br></pre></td></tr></table></figure>
+<h2 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h2><p>可能还有进一步改进的空间，但这已经比25万的最佳决策树误差有了很大的改进。有一些参数允许你改变随机森林的性能，就像我们改变单个决策树的最大深度一样。但随机森林模型的一个最佳特征是，即使没有这种调整，它们通常也能合理地工作。</p>
+<h1 id="机器学习比赛"><a href="#机器学习比赛" class="headerlink" title="机器学习比赛"></a>机器学习比赛</h1><blockquote>
+<p>Enter the world of machine learning competitions to keep improving and see your progress.</p>
+</blockquote>
+<p>It’s your turn!</p>
+
+                    
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                Kaggle Courses-3-机器学习介绍
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                Kaggle-course/intro-to-ML/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">wbfwonderful</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2024-11-28 22:03</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank">
+                        
+                            <i class="fa-brands fa-creative-commons"></i>
+                            <i class="fa-brands fa-creative-commons-by"></i>
+                            <i class="fa-brands fa-creative-commons-nc"></i>
+                            <i class="fa-brands fa-creative-commons-sa"></i>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/blog/tags/Kaggle/">Kaggle</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/blog/tags/Pandas/">Pandas</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/blog/tags/Python/">Python</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/blog/Kaggle-course/pandas-kaggle/"
+                                   title="Kaggle Courses-4-pandas"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Kaggle Courses-4-pandas</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/blog/Kaggle-course/python-kaggle/"
+                                   title="Kaggle Courses-2-python"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Kaggle Courses-2-python</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">模型是如何工作的？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5"><span class="nav-number">1.1.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B%E5%86%B3%E7%AD%96%E6%A0%91"><span class="nav-number">1.2.</span> <span class="nav-text">改进决策树</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">2.</span> <span class="nav-text">初步探索数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Pandas-%E6%9D%A5%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE"><span class="nav-number">2.1.</span> <span class="nav-text">使用 Pandas 来加载数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%95%B0%E6%8D%AE%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="nav-number">2.2.</span> <span class="nav-text">对数据的解释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">第一个机器学习模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E5%BB%BA%E6%A8%A1%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">3.1.</span> <span class="nav-text">选择建模的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E9%A2%84%E6%B5%8B%E7%9B%AE%E6%A0%87"><span class="nav-number">3.1.1.</span> <span class="nav-text">选择预测目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E7%89%B9%E5%BE%81"><span class="nav-number">3.1.2.</span> <span class="nav-text">选择特征</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.2.</span> <span class="nav-text">构建模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E9%AA%8C%E8%AF%81"><span class="nav-number">4.</span> <span class="nav-text">模型验证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%A8%A1%E5%9E%8B%E9%AA%8C%E8%AF%81"><span class="nav-number">4.1.</span> <span class="nav-text">什么是模型验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%80%9CIn-Sample%E2%80%9D%E5%88%86%E6%95%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">4.2.</span> <span class="nav-text">“In-Sample”分数的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding-it"><span class="nav-number">4.3.</span> <span class="nav-text">Coding it!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wow"><span class="nav-number">4.4.</span> <span class="nav-text">Wow!</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AC%A0%E6%8B%9F%E5%90%88%E5%92%8C%E8%BF%87%E6%8B%9F%E5%90%88"><span class="nav-number">5.</span> <span class="nav-text">欠拟合和过拟合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%B8%8D%E5%90%8C%E6%A8%A1%E5%9E%8B"><span class="nav-number">5.1.</span> <span class="nav-text">实验不同模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">5.2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">5.3.</span> <span class="nav-text">结论</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97"><span class="nav-number">6.</span> <span class="nav-text">随机森林</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5-1"><span class="nav-number">6.1.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA-1"><span class="nav-number">6.2.</span> <span class="nav-text">结论</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%AF%94%E8%B5%9B"><span class="nav-number">7.</span> <span class="nav-text">机器学习比赛</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2024</span>&nbsp;-&nbsp;2025
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/blog/">wbfwonderful</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+                <a target="_blank" rel="nofollow" href="https://github.com">
+            
+            本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/blog/images/brands/github.png"></span> 提供部署服务
+            
+                </a>
+            
+        </div>
+    
+
+    
+        <div class="count-info info-item">
+            
+                <span class="count-item border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">5.7k</span>
+                </span>
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">模型是如何工作的？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5"><span class="nav-number">1.1.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B%E5%86%B3%E7%AD%96%E6%A0%91"><span class="nav-number">1.2.</span> <span class="nav-text">改进决策树</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">2.</span> <span class="nav-text">初步探索数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Pandas-%E6%9D%A5%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE"><span class="nav-number">2.1.</span> <span class="nav-text">使用 Pandas 来加载数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%95%B0%E6%8D%AE%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="nav-number">2.2.</span> <span class="nav-text">对数据的解释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">第一个机器学习模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E5%BB%BA%E6%A8%A1%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">3.1.</span> <span class="nav-text">选择建模的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E9%A2%84%E6%B5%8B%E7%9B%AE%E6%A0%87"><span class="nav-number">3.1.1.</span> <span class="nav-text">选择预测目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E7%89%B9%E5%BE%81"><span class="nav-number">3.1.2.</span> <span class="nav-text">选择特征</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.2.</span> <span class="nav-text">构建模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E9%AA%8C%E8%AF%81"><span class="nav-number">4.</span> <span class="nav-text">模型验证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%A8%A1%E5%9E%8B%E9%AA%8C%E8%AF%81"><span class="nav-number">4.1.</span> <span class="nav-text">什么是模型验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%80%9CIn-Sample%E2%80%9D%E5%88%86%E6%95%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">4.2.</span> <span class="nav-text">“In-Sample”分数的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding-it"><span class="nav-number">4.3.</span> <span class="nav-text">Coding it!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wow"><span class="nav-number">4.4.</span> <span class="nav-text">Wow!</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AC%A0%E6%8B%9F%E5%90%88%E5%92%8C%E8%BF%87%E6%8B%9F%E5%90%88"><span class="nav-number">5.</span> <span class="nav-text">欠拟合和过拟合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%B8%8D%E5%90%8C%E6%A8%A1%E5%9E%8B"><span class="nav-number">5.1.</span> <span class="nav-text">实验不同模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">5.2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">5.3.</span> <span class="nav-text">结论</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97"><span class="nav-number">6.</span> <span class="nav-text">随机森林</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5-1"><span class="nav-number">6.1.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA-1"><span class="nav-number">6.2.</span> <span class="nav-text">结论</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%AF%94%E8%B5%9B"><span class="nav-number">7.</span> <span class="nav-text">机器学习比赛</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/lazyload.min.js"></script>
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/copyright-info.min.js"></script>
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

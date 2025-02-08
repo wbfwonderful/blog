@@ -1,0 +1,29 @@
+/* 父容器：三列布局 */
+.photo-album-box {
+    display: flex;                   /* 水平排列三列 */
+    gap: 20px;                       /* 列间距 */
+  }
+  
+  /* 列样式 */
+  .photo-album-box .column {
+    flex: 1;                         /* 每列宽度均等 */
+    display: flex;
+    flex-direction: column;          /* 垂直排列图片及描述 */
+    gap: 20px;                       /* 每张图片及描述之间的间距 */
+  }
+  
+  /* 图片样式 */
+  .photo-album-box .column span img {
+    width: 100%;                     /* 图片宽度占满列 */
+    height: auto;                    /* 高度自适应 */
+    border-radius: 10px;              /* 可选：圆角样式 */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1); /* 可选：阴影样式 */
+  }
+  
+  /* 描述文字样式 */
+  .photo-album-box .column span .description {
+    text-align: center;              /* 居中显示文字 */
+    font-size: 14px;                 /* 字体大小 */
+    color: #555;                     /* 可选：文字颜色 */
+  }
+  
