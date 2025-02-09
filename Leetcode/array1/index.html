@@ -9,7 +9,7 @@
     
     <title>
         
-            Hello World 👋 |
+            【代码随想录】数组1-二分查找 |
         
         wbfwonderful&#39;s Blog
     </title>
@@ -283,7 +283,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        Hello World 👋
+                        【代码随想录】数组1-二分查找
                     </div>
                 
 
@@ -311,30 +311,48 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-arrow-up-from-bracket"></i>&nbsp;
-                <span class="datetime">2024-11-24 19:09:33</span>
+                <span class="datetime">2025-02-09 13:36:11</span>
             </span>
 
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
-                    <span class="datetime" data-updated="Sat Nov 30 2024 10:46:32 GMT+0800">2024-11-30 10:46:32</span>
+                    <span class="datetime" data-updated="Sun Feb 09 2025 15:19:53 GMT+0800">2025-02-09 15:19:53</span>
                 </span>
             
         
 
         
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/blog/categories/Leetcode/">Leetcode</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
 
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/blog/tags/Array/">Array</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>28 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>976 字</span>
             </span>
         
         
             <span class="meta-info-item post-min2read">
-                <i class="icon fas fa-clock"></i>&nbsp;<span>1 分钟</span>
+                <i class="icon fas fa-clock"></i>&nbsp;<span>4 分钟</span>
             </span>
         
         
@@ -356,12 +374,73 @@
                     
 
                     
-                         <h2 id="😏欢迎来到我的博客"><a href="#😏欢迎来到我的博客" class="headerlink" title="😏欢迎来到我的博客"></a>😏欢迎来到我的博客</h2><p>你也许可以看到：</p>
+                         <h1 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h1><ul>
+<li>数组元素按照顺序排列</li>
+<li>数组元素无法删除，只能替代（填充）</li>
+<li>python 中，使用 <code>list</code>，代码中 <code>List</code> 是类型注解中的一种表示方式，通常出现在类型提示中。python 3.9 之后可以使用内置的 <code>list</code> 来替代 <code>List</code>。</li>
+</ul>
+<h1 id="704-二分查找"><a href="#704-二分查找" class="headerlink" title="704. 二分查找"></a>704. 二分查找</h1><blockquote>
+<p>题目链接 <a class="link"   target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/description/" >link<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [-1,0,3,5,9,12], target = 9     </span><br><span class="line">输出: 4       </span><br><span class="line">解释: 9 出现在 nums 中并且下标为 4     </span><br></pre></td></tr></table></figure>
+<h2 id="两个要点"><a href="#两个要点" class="headerlink" title="两个要点"></a>两个要点</h2><ul>
+<li>数组中元素按照顺序排列</li>
+<li>无重复的数字（否则元素下标不唯一）<ul>
+<li>如果有重复的数字，要求返回最小的那个呢？</li>
+</ul>
+</li>
+</ul>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><ul>
+<li>区间定义：定义 target 所在的区间是左闭右开还是左右全闭</li>
+<li>核心：将数组分割为三个部分<ul>
+<li>左右全闭：[0, middle-1] , middle, [middle + 1, len - 1] 或者</li>
+<li>左开右闭：[0, middle) , middle, [middle + 1, len)</li>
+</ul>
+</li>
+</ul>
+<h3 id="左右全闭"><a href="#左右全闭" class="headerlink" title="左右全闭"></a>左右全闭</h3><ul>
+<li>区间为 [left, right]：<ul>
+<li>定义 right 为 len(nums) - 1，因为 right 要有含义</li>
+<li>循环条件 while(left &lt;&#x3D; right) ，因为left &#x3D;&#x3D; right是有意义的</li>
+<li>判断条件，若 middle 大于 target ，则遍历左区间，设置 right &#x3D; middle - 1，因为此时为右闭区间，不会再访问 middle；同理，若 middle 小于 target，则遍历右边区间，设置 left &#x3D; middle + 1，同样因为是闭区间，不会再访问 middle。</li>
+</ul>
+</li>
+<li>代码：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">search</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = <span class="built_in">len</span>(nums) - <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> left &lt;= right:</span><br><span class="line">            middle = <span class="built_in">int</span>((left + right) / <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">if</span> nums[middle] &gt; target:</span><br><span class="line">                right = middle - <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> nums[middle] &lt; target:</span><br><span class="line">                left = middle + <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> middle</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="左闭右开"><a href="#左闭右开" class="headerlink" title="左闭右开"></a>左闭右开</h3><ul>
+<li><p>区间为 [left, right)：</p>
 <ul>
-<li>✍️学习记录</li>
-<li>💻技术分享</li>
-<li>📑日常流水账</li>
-<li>…</li>
+<li>定义 right 为 len(nums)，因为不会访问 right，所以设置为区间长度</li>
+<li>循环条件 while(left &lt; right) ，因为left &#x3D;&#x3D; right没有意义（右边为开区间）</li>
+<li>判断条件，若 middle 大于 target ，则遍历左区间，设置 <strong>right &#x3D; middle</strong>，因为此时为右开区间，设置 right&#x3D;middle 实际上下一次会访问 middle - 1 。</li>
+</ul>
+</li>
+<li><p>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">search</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="keyword">while</span> left &lt; right:</span><br><span class="line">            middle = <span class="built_in">int</span>((left + right) / <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">if</span> nums[middle] &gt; target:</span><br><span class="line">                right = middle</span><br><span class="line">            <span class="keyword">elif</span> nums[middle] &lt; target:</span><br><span class="line">                left = middle + <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> middle</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span> </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="相关题目1：35-搜索插入位置"><a href="#相关题目1：35-搜索插入位置" class="headerlink" title="相关题目1：35. 搜索插入位置"></a>相关题目1：35. 搜索插入位置</h1><blockquote>
+<p>题目链接 <a class="link"   target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-insert-position/description/" >link<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
+<p>你可以假设数组中无重复元素。</p>
+<h2 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h2><ul>
+<li><p><strong>无重复元素</strong> + <strong>升序排列</strong>，考虑二分查找</p>
+</li>
+<li><p>这道题相较于二分查找，只是多了一个 target 不存在的情况，在这个情况下，一定满足 left &#x3D;&#x3D; right + 1 （左右都为闭区间的情况）</p>
+<ul>
+<li>因为，在循环的最后一轮，满足 left &#x3D;&#x3D; right，此时 只剩下最后一个数字，middle 也为 left （right）。此时若 middle 数小于 target，则 left + 1，反之则 right - 1。</li>
+<li>基于这个原理，若 middle 数小于 target，target 应该放在 middle + 1 上，若 middle 数大于 target，则 target 应该放在 middle 上</li>
+<li>对比上述两条，可以发现：<ul>
+<li>middle 数小于 target，left + 1，放在 middle + 1的位置</li>
+<li>middle 数大于 target， right - 1, middle 不变，放在 middle 的位置</li>
+<li>middle 的变化和 left 相同，即小于时加1，大于时不变，而最后一轮循环时 middle、left、right 均相同，则最后的结果一定为 left。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>代码如下，只需将二分查找的代码的最后一行，改为 return left 即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">search</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = <span class="built_in">len</span>(nums) - <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> left &lt;= right:</span><br><span class="line">            middle = <span class="built_in">int</span>((left + right) / <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">if</span> nums[middle] &gt; target:</span><br><span class="line">                right = middle - <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> nums[middle] &lt; target:</span><br><span class="line">                left = middle + <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> middle</span><br><span class="line">        <span class="keyword">return</span> left</span><br></pre></td></tr></table></figure></li>
 </ul>
 
                     
@@ -373,11 +452,11 @@
     <div class="copyright-info-content border-box">
         <div class="copyright-info-top border-box">
             <div class="copyright-post-title border-box text-ellipsis">
-                Hello World 👋
+                【代码随想录】数组1-二分查找
             </div>
 
             <div class="copyright-post-link border-box text-ellipsis">
-                hello-world/
+                Leetcode/array1/
             </div>
         </div>
 
@@ -393,7 +472,7 @@
                 <div class="type">
                     发布于
                 </div>
-                <div class="content">2024-11-24 19:09</div>
+                <div class="content">2025-02-09 13:36</div>
             </div>
 
 
@@ -425,6 +504,14 @@
 
                 <div class="post-bottom-tags-and-share border-box">
                     <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/blog/tags/Array/">Array</a>
+                                    </li>
+                                
+                            </ul>
                         
                     </div>
                     <div>
@@ -463,19 +550,35 @@
                             <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
-                                   href="/blog/Mark/hexo-command/"
-                                   title="hexo基本命令"
+                                   href="/blog/Mark/git-443/"
+                                   title="git timeout 报错443解决方法"
                                 >
                                     <span class="left arrow-icon flex-center">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">hexo基本命令</span>
+                                        <span class="post-nav-title-item text-ellipsis">git timeout 报错443解决方法</span>
                                         <span class="post-nav-item">上一篇</span>
                                     </span>
                                 </a>
                             </div>
                         
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/blog/Kaggle-course/pandas-kaggle/"
+                                   title="Kaggle Courses-4-pandas"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Kaggle Courses-4-pandas</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
                         
                     </div>
                 
@@ -496,7 +599,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%98%8F%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2"><span class="nav-number">1.</span> <span class="nav-text">😏欢迎来到我的博客</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">基本知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#704-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-number">2.</span> <span class="nav-text">704. 二分查找</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E8%A6%81%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">两个要点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">解法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A6%E5%8F%B3%E5%85%A8%E9%97%AD"><span class="nav-number">2.2.1.</span> <span class="nav-text">左右全闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A6%E9%97%AD%E5%8F%B3%E5%BC%80"><span class="nav-number">2.2.2.</span> <span class="nav-text">左闭右开</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE1%EF%BC%9A35-%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">相关题目1：35. 搜索插入位置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A6%81%E7%82%B9"><span class="nav-number">3.1.</span> <span class="nav-text">要点</span></a></li></ol></li></ol>
     </div>
 </div>
 
@@ -690,7 +793,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%98%8F%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2"><span class="nav-number">1.</span> <span class="nav-text">😏欢迎来到我的博客</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">基本知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#704-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-number">2.</span> <span class="nav-text">704. 二分查找</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E8%A6%81%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">两个要点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">解法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A6%E5%8F%B3%E5%85%A8%E9%97%AD"><span class="nav-number">2.2.1.</span> <span class="nav-text">左右全闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A6%E9%97%AD%E5%8F%B3%E5%BC%80"><span class="nav-number">2.2.2.</span> <span class="nav-text">左闭右开</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE1%EF%BC%9A35-%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">相关题目1：35. 搜索插入位置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A6%81%E7%82%B9"><span class="nav-number">3.1.</span> <span class="nav-text">要点</span></a></li></ol></li></ol>
     </div>
 </div>
 
