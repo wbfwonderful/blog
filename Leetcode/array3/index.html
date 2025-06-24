@@ -9,7 +9,7 @@
     
     <title>
         
-            【代码随想录】数组1-二分查找 |
+            【代码随想录】数组3-滑动窗口法 |
         
         wbfwonderful&#39;s Blog
     </title>
@@ -283,7 +283,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        【代码随想录】数组1-二分查找
+                        【代码随想录】数组3-滑动窗口法
                     </div>
                 
 
@@ -311,13 +311,13 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-arrow-up-from-bracket"></i>&nbsp;
-                <span class="datetime">2025-02-09 13:36:11</span>
+                <span class="datetime">2025-06-23 16:16:29</span>
             </span>
 
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
-                    <span class="datetime" data-updated="Tue Jun 17 2025 10:40:03 GMT+0800">2025-06-17 10:40:03</span>
+                    <span class="datetime" data-updated="Tue Jun 24 2025 22:01:25 GMT+0800">2025-06-24 22:01:25</span>
                 </span>
             
         
@@ -347,12 +347,12 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>1.6k 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>2.4k 字</span>
             </span>
         
         
             <span class="meta-info-item post-min2read">
-                <i class="icon fas fa-clock"></i>&nbsp;<span>6 分钟</span>
+                <i class="icon fas fa-clock"></i>&nbsp;<span>10 分钟</span>
             </span>
         
         
@@ -374,117 +374,97 @@
                     
 
                     
-                         <h1 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h1><ul>
-<li>数组元素按照顺序排列</li>
-<li>数组元素无法删除，只能替代（填充）</li>
-<li>python 中，使用 <code>list</code>，代码中 <code>List</code> 是类型注解中的一种表示方式，通常出现在类型提示中。python 3.9 之后可以使用内置的 <code>list</code> 来替代 <code>List</code>。</li>
-</ul>
-<h1 id="704-二分查找"><a href="#704-二分查找" class="headerlink" title="704. 二分查找"></a>704. 二分查找</h1><blockquote>
-<p>题目链接 <a class="link"   target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/description/" >link<i class="fas fa-external-link-alt"></i></a></p>
+                         <h1 id="209-长度最小的子数组"><a href="#209-长度最小的子数组" class="headerlink" title="209.长度最小的子数组"></a>209.长度最小的子数组</h1><blockquote>
+<p>题目链接 <a class="link"   target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-size-subarray-sum/description/" >link<i class="fas fa-external-link-alt"></i></a><br>给定一个含有 n 个正整数的数组和一个正整数 target 。</p>
 </blockquote>
-<p>给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。</p>
-<blockquote>
-<p>输入: nums &#x3D; [-1,0,3,5,9,12], target &#x3D; 9<br>输出: 4<br>解释: 9 出现在 nums 中并且下标为 4     </p>
-</blockquote>
-<h2 id="两个要点"><a href="#两个要点" class="headerlink" title="两个要点"></a>两个要点</h2><ul>
-<li>数组中元素按照顺序排列</li>
-<li>无重复的数字（否则元素下标不唯一）<ul>
-<li>如果有重复的数字，要求返回最小的那个呢？</li>
-</ul>
-</li>
-</ul>
-<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><ul>
-<li>区间定义：定义 target 所在的区间是左闭右开还是左右全闭</li>
-<li>核心：将数组分割为三个部分<ul>
-<li>左右全闭：[0, middle-1] , middle, [middle + 1, len - 1] 或者</li>
-<li>左开右闭：[0, middle) , middle, [middle + 1, len)</li>
-</ul>
-</li>
-</ul>
-<h3 id="左右全闭"><a href="#左右全闭" class="headerlink" title="左右全闭"></a>左右全闭</h3><ul>
-<li>区间为 [left, right]：<ul>
-<li>定义 right 为 len(nums) - 1，因为 right 要有含义</li>
-<li>循环条件 while(left &lt;&#x3D; right) ，因为left &#x3D;&#x3D; right是有意义的</li>
-<li>判断条件，若 middle 大于 target ，则遍历左区间，设置 right &#x3D; middle - 1，因为此时为右闭区间，不会再访问 middle；同理，若 middle 小于 target，则遍历右边区间，设置 left &#x3D; middle + 1，同样因为是闭区间，不会再访问 middle。</li>
-</ul>
-</li>
-<li>代码：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">search</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = <span class="built_in">len</span>(nums) - <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> left &lt;= right:</span><br><span class="line">            middle = <span class="built_in">int</span>((left + right) / <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">if</span> nums[middle] &gt; target:</span><br><span class="line">                right = middle - <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> nums[middle] &lt; target:</span><br><span class="line">                left = middle + <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> middle</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        </span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="左闭右开"><a href="#左闭右开" class="headerlink" title="左闭右开"></a>左闭右开</h3><ul>
-<li><p>区间为 [left, right)：</p>
-<ul>
-<li>定义 right 为 len(nums)，因为不会访问 right，所以设置为区间长度</li>
-<li>循环条件 while(left &lt; right) ，因为left &#x3D;&#x3D; right没有意义（右边为开区间）</li>
-<li>判断条件，若 middle 大于 target ，则遍历左区间，设置 <strong>right &#x3D; middle</strong>，因为此时为右开区间，设置 right&#x3D;middle 实际上下一次会访问 middle - 1 。</li>
-</ul>
-</li>
-<li><p>代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">search</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="keyword">while</span> left &lt; right:</span><br><span class="line">            middle = <span class="built_in">int</span>((left + right) / <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">if</span> nums[middle] &gt; target:</span><br><span class="line">                right = middle</span><br><span class="line">            <span class="keyword">elif</span> nums[middle] &lt; target:</span><br><span class="line">                left = middle + <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> middle</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span> </span><br></pre></td></tr></table></figure></li>
-</ul>
-<h1 id="相关题目1：35-搜索插入位置"><a href="#相关题目1：35-搜索插入位置" class="headerlink" title="相关题目1：35. 搜索插入位置"></a>相关题目1：35. 搜索插入位置</h1><blockquote>
-<p>题目链接 <a class="link"   target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-insert-position/description/" >link<i class="fas fa-external-link-alt"></i></a></p>
-</blockquote>
-<p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
-<p>你可以假设数组中无重复元素。</p>
-<h2 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h2><ul>
-<li><p><strong>无重复元素</strong> + <strong>升序排列</strong>，考虑二分查找</p>
-</li>
-<li><p>这道题相较于二分查找，只是多了一个 target 不存在的情况，在这个情况下，一定满足 left &#x3D;&#x3D; right + 1 （左右都为闭区间的情况）</p>
-<ul>
-<li>因为，在循环的最后一轮，满足 left &#x3D;&#x3D; right，此时 只剩下最后一个数字，middle 也为 left （right）。此时若 middle 数小于 target，则 left + 1，反之则 right - 1。</li>
-<li>基于这个原理，若 middle 数小于 target，target 应该放在 middle + 1 上，若 middle 数大于 target，则 target 应该放在 middle 上</li>
-<li>对比上述两条，可以发现：<ul>
-<li>middle 数小于 target，left + 1，放在 middle + 1的位置</li>
-<li>middle 数大于 target， right - 1, middle 不变，放在 middle 的位置</li>
-<li>middle 的变化和 left 相同，即小于时加1，大于时不变，而最后一轮循环时 middle、left、right 均相同，则最后的结果一定为 left。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>代码如下，只需将二分查找的代码的最后一行，改为 return left 即可</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">search</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = <span class="built_in">len</span>(nums) - <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> left &lt;= right:</span><br><span class="line">            middle = <span class="built_in">int</span>((left + right) / <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">if</span> nums[middle] &gt; target:</span><br><span class="line">                right = middle - <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> nums[middle] &lt; target:</span><br><span class="line">                left = middle + <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> middle</span><br><span class="line">        <span class="keyword">return</span> left</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h1 id="相关题目2：34-在排序数组中查找元素的第一个和最后一个位置"><a href="#相关题目2：34-在排序数组中查找元素的第一个和最后一个位置" class="headerlink" title="相关题目2：34. 在排序数组中查找元素的第一个和最后一个位置"></a>相关题目2：34. 在排序数组中查找元素的第一个和最后一个位置</h1><blockquote>
-<p>题目链接 <a class="link"   target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/" >link<i class="fas fa-external-link-alt"></i></a><br>给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置。</p>
-</blockquote>
-<p>如果数组中不存在目标值 target，返回 [-1, -1]。</p>
-<p>进阶：你可以设计并实现时间复杂度为 $O(\log n)$ 的算法解决此问题吗？</p>
+<p>找出该数组中满足其总和大于等于 target 的长度最小的 子数组 [numsl, numsl+1, …, numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0 。</p>
 <p>示例 1：</p>
 <blockquote>
-<p>输入：nums &#x3D; [5,7,7,8,8,10], target &#x3D; 8<br>输出：[3,4]</p>
+<p>输入：target &#x3D; 7, nums &#x3D; [2,3,1,2,4,3]<br>输出：2<br>解释：子数组 [4,3] 是该条件下的长度最小的子数组。</p>
 </blockquote>
 <p>示例 2：</p>
 <blockquote>
-<p>输入：nums &#x3D; [5,7,7,8,8,10], target &#x3D; 6<br>输出：[-1,-1]</p>
+<p>输入：target &#x3D; 4, nums &#x3D; [1,4,4]<br>输出：1</p>
 </blockquote>
 <p>示例 3：</p>
 <blockquote>
-<p>输入：nums &#x3D; [], target &#x3D; 0<br>输出：[-1,-1]</p>
+<p>输入：target &#x3D; 11, nums &#x3D; [1,1,1,1,1,1,1,1]<br>输出：0</p>
 </blockquote>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
-<li>相似于二分查找，分别找左边界和右边界，找到一个目标后<ul>
-<li>若要找<strong>左边界</strong>，则在找到的目标的<strong>左边数组</strong>中再次查找，right &#x3D; middle - 1。即认为当前找到的数比实际的 target 大。</li>
-<li>相似的，若要找<strong>右边界</strong>，则在找到的目标的<strong>右边数组</strong>中再次查找，left &#x3D; middle + 1。即认为当前找到的数比实际的 target 小。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">searchRange</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        </span><br><span class="line">        leftb = mySearch(nums, target, <span class="literal">True</span>)</span><br><span class="line">        rightb = mySearch(nums, target, <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">mySearch</span>(<span class="params">nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span>, side: <span class="built_in">bool</span></span>):</span><br><span class="line">            left = <span class="number">0</span></span><br><span class="line">            right = <span class="built_in">len</span>(nums) - <span class="number">1</span></span><br><span class="line">            res = -<span class="number">1</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> left &lt;= right:</span><br><span class="line">                middle = <span class="built_in">int</span>((left + right) / <span class="number">2</span>)</span><br><span class="line">                <span class="keyword">if</span> nums[middle] &gt; target:</span><br><span class="line">                    right = middle - <span class="number">1</span></span><br><span class="line">                <span class="keyword">elif</span> nums[middle] &lt; target:</span><br><span class="line">                    left = middle + <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    res = middle</span><br><span class="line">                    <span class="keyword">if</span> side:</span><br><span class="line">                        <span class="comment"># 左边界</span></span><br><span class="line">                        right = middle - <span class="number">1</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        left = middle + <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> [leftb, rightb]</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h1 id="相关题目3：367-有效的完全平方数"><a href="#相关题目3：367-有效的完全平方数" class="headerlink" title="相关题目3：367. 有效的完全平方数"></a>相关题目3：367. 有效的完全平方数</h1><blockquote>
-<p>题目链接 <a class="link"   target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-perfect-square/description/" >link<i class="fas fa-external-link-alt"></i></a><br>给你一个非负整数 x ，计算并返回 x 的 算术平方根 。</p>
+<h2 id="解法1：暴力循环"><a href="#解法1：暴力循环" class="headerlink" title="解法1：暴力循环"></a>解法1：暴力循环</h2><p>两个 for 循环即可解决，分别遍历子数组的开头以及子数组内部。使用 python 可能会超出时间限制。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def minSubArrayLen(self, target: int, nums: List[int]) -&gt; int:</span><br><span class="line">        min_len = 0</span><br><span class="line">        for i in range(len(nums)):</span><br><span class="line">            array_sum = 0</span><br><span class="line">            for j in range(i, len(nums)):</span><br><span class="line">                </span><br><span class="line">                array_sum += nums[j]</span><br><span class="line">                if array_sum &gt;= target:</span><br><span class="line">                    cur_len = j - i + 1</span><br><span class="line">                    if min_len == 0 or min_len &gt; cur_len:</span><br><span class="line">                        min_len = cur_len</span><br><span class="line">                    break</span><br><span class="line">        </span><br><span class="line">        return min_len</span><br></pre></td></tr></table></figure>
+
+<h2 id="解法2：前缀和-二分查找"><a href="#解法2：前缀和-二分查找" class="headerlink" title="解法2：前缀和+二分查找"></a>解法2：前缀和+二分查找</h2><p>方法一中，确定了数组的开始位置，查找结束位置的时间复杂度为 O(n)，如果使用二分查找，可以优化到 O(logn)。为了使用二分查找，需要额外创建一个数组 sums 用于存储数组 nums 的前缀和，其中 sums[i] 表示从 nums[0] 到 nums[i−1] 的元素和。得到前缀和之后，对于每个开始下标 i，可通过二分查找得到大于或等于 i 的最小下标 bound，使得 sums[bound]−sums[i−1]≥target，并更新子数组的最小长度（此时子数组的长度是 bound−(i−1)）。</p>
+<p>相当于是查找特定元素的插入位置，这个值就是题目中给定的 target，但是要注意，当窗口的起始位置不为 0 时，target 需要加上当前窗口的起始前缀和，因为我们的窗口要满足条件 sums[end] - sums[start] &gt;&#x3D; s，即 sums[end] &gt;&#x3D; s + sums[start]，要找到满足这个条件的 end，所以二分查找的 target1 定义为 target &#x3D; s + sums[start]。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def minSubArrayLen(self, s: int, nums: List[int]) -&gt; int:</span><br><span class="line">        if not nums:</span><br><span class="line">            return 0</span><br><span class="line">        </span><br><span class="line">        n = len(nums)</span><br><span class="line">        ans = n + 1</span><br><span class="line">        sums = [0]</span><br><span class="line">        for i in range(n):</span><br><span class="line">            sums.append(sums[-1] + nums[i])</span><br><span class="line">        </span><br><span class="line">        for i in range(1, n + 1):</span><br><span class="line">            target = s + sums[i - 1]</span><br><span class="line">            bound = bisect.bisect_left(sums, target)</span><br><span class="line">            if bound != len(sums):</span><br><span class="line">                ans = min(ans, bound - (i - 1))</span><br><span class="line">        </span><br><span class="line">        return 0 if ans == n + 1 else ans</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="解法3：滑动窗口"><a href="#解法3：滑动窗口" class="headerlink" title="解法3：滑动窗口"></a>解法3：滑动窗口</h2><p>在暴力解法中，是一个for循环滑动窗口的起始位置，一个for循环为滑动窗口的终止位置，用两个for循环完成了一个不断搜索区间的过程。</p>
+<p>只用一个for循环，那么这个循环的索引，一定是表示滑动窗口的终止位置。对于窗口的起始位置，则基于窗口的和来判断是否需要移动。使用一个 while 循环来表示，如果子数组的和大于 target，则减去窗口起始位置的值，并使窗口起始位置 +1。</p>
+<p>此外，不要以为for里放一个while就以为是O(n^2)， 主要是看<strong>每一个元素被操作的次数</strong>，每个元素在滑动窗后进来操作一次，出去操作一次，每个元素都是被操作两次，所以时间复杂度是 2 × n 也就是O(n)。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def minSubArrayLen(self, target: int, nums: List[int]) -&gt; int:</span><br><span class="line">        min_len = 0</span><br><span class="line">        start = 0</span><br><span class="line">        array_sum = 0</span><br><span class="line">        for end in range(len(nums)):</span><br><span class="line">            array_sum += nums[end]</span><br><span class="line">            while array_sum &gt;= target:</span><br><span class="line">                cur_len = end - start + 1</span><br><span class="line">                if min_len == 0 or min_len &gt; cur_len:</span><br><span class="line">                    min_len = cur_len</span><br><span class="line">                array_sum -= nums[start]</span><br><span class="line">                start += 1</span><br><span class="line">        return min_len</span><br></pre></td></tr></table></figure>
+
+<h1 id="904-水果成篮"><a href="#904-水果成篮" class="headerlink" title="904. 水果成篮"></a>904. 水果成篮</h1><blockquote>
+<p>题目链接 <a class="link"   target="_blank" rel="noopener" href="https://leetcode.cn/problems/fruit-into-baskets/description/" >link<i class="fas fa-external-link-alt"></i></a></p>
 </blockquote>
-<p>由于返回类型是整数，结果只保留 整数部分 ，小数部分将被 舍去 。</p>
-<p>注意：不允许使用任何内置指数函数和算符，例如 pow(x, 0.5) 或者 x ** 0.5 。</p>
+<p>你正在探访一家农场，农场从左到右种植了一排果树。这些树用一个整数数组 fruits 表示，其中 fruits[i] 是第 i 棵树上的水果种类 。</p>
+<p>你想要尽可能多地收集水果。然而，农场的主人设定了一些严格的规矩，你必须按照要求采摘水果：</p>
+<p>你只有 两个 篮子，并且每个篮子只能装 单一类型 的水果。每个篮子能够装的水果总量没有限制。<br>你可以选择任意一棵树开始采摘，你必须从 每棵 树（包括开始采摘的树）上 恰好摘一个水果 。采摘的水果应当符合篮子中的水果类型。每采摘一次，你将会向右移动到下一棵树，并继续采摘。<br>一旦你走到某棵树前，但水果不符合篮子的水果类型，那么就必须停止采摘。<br>给你一个整数数组 fruits ，返回你可以收集的水果的 最大 数目。</p>
 <p>示例 1：</p>
 <blockquote>
-<p>输入：x &#x3D; 4<br>输出：2</p>
+<p>输入：fruits &#x3D; [1,2,1]<br>输出：3<br>解释：可以采摘全部 3 棵树。</p>
 </blockquote>
 <p>示例 2：</p>
 <blockquote>
-<p>输入：x &#x3D; 8<br>输出：2<br>解释：8 的算术平方根是 2.82842…, 由于返回类型是整数，小数部分将被舍去。</p>
+<p>输入：fruits &#x3D; [0,1,2,2]<br>输出：3<br>解释：可以采摘 [1,2,2] 这三棵树。如果从第一棵树开始采摘，则只能采摘 [0,1] 这两棵树。</p>
 </blockquote>
-<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><ul>
-<li>二分查找，找到第一个平方不大于 x 的数字。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">mySqrt</span>(<span class="params">self, x: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = x - <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> x == <span class="number">0</span>: <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> x == <span class="number">1</span>: <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> left &lt;= right:</span><br><span class="line">            middle = <span class="built_in">int</span>((left + right) / <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">if</span> middle * middle &gt; x:</span><br><span class="line">                right = middle - <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> middle * middle &lt; x:</span><br><span class="line">                left = middle + <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> middle</span><br><span class="line">        <span class="keyword">return</span> right</span><br><span class="line">        </span><br></pre></td></tr></table></figure></li>
-</ul>
+<p>示例 3：</p>
+<blockquote>
+<p>输入：fruits &#x3D; [1,2,3,2,2]<br>输出：4<br>解释：可以采摘 [2,3,2,2] 这四棵树。如果从第一棵树开始采摘，则只能采摘 [1,2] 这两棵树。</p>
+</blockquote>
+<p>示例 4：</p>
+<blockquote>
+<p>输入：fruits &#x3D; [3,3,3,1,2,1,1,2,3,3,4]<br>输出：5<br>解释：可以采摘 [1,2,1,1,2] 这五棵树。</p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>相当于是只包含两个数字的最长子数组，使用了一个 Counter 类，Counter 是一个计数器<strong>字典</strong>，可以自动统计元素出现的次数。pop 方法用于删除指定的 key，并可以返回其 value。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def totalFruit(self, fruits: List[int]) -&gt; int:</span><br><span class="line">        max_len = 0</span><br><span class="line">        start = 0</span><br><span class="line">        cnt = Counter()</span><br><span class="line">        for end in range(0, len(fruits)):</span><br><span class="line">            cnt[fruits[end]] += 1</span><br><span class="line"></span><br><span class="line">            while len(cnt) &gt; 2:</span><br><span class="line">                cnt[fruits[start]] -= 1</span><br><span class="line">                if cnt[fruits[start]] == 0:</span><br><span class="line">                    cnt.pop(fruits[start])</span><br><span class="line">            </span><br><span class="line">                start += 1</span><br><span class="line">            max_len = max(max_len, end - start + 1)</span><br><span class="line">        </span><br><span class="line">        return max_len</span><br></pre></td></tr></table></figure>
 
+<p>Counter 类等价于</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnt = &#123;&#125;</span><br><span class="line">cnt[x] = cnt.get(x, 0)</span><br></pre></td></tr></table></figure>
+
+<p>get 方法查找指定 key 对应的 value，找不到时返回默认值，使用原始 dict 的代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def totalFruit(self, fruits: List[int]) -&gt; int:</span><br><span class="line">        max_len = 0</span><br><span class="line">        start = 0</span><br><span class="line">        cnt = dict()</span><br><span class="line">        for end in range(0, len(fruits)):</span><br><span class="line">            cnt[fruits[end]] = cnt.get(fruits[end], 0) + 1</span><br><span class="line"></span><br><span class="line">            while len(cnt) &gt; 2:</span><br><span class="line">                cnt[fruits[start]] -= 1</span><br><span class="line">                if cnt[fruits[start]] == 0:</span><br><span class="line">                    cnt.pop(fruits[start])</span><br><span class="line">            </span><br><span class="line">                start += 1</span><br><span class="line">            max_len = max(max_len, end - start + 1)</span><br><span class="line">        </span><br><span class="line">        return max_len</span><br><span class="line">            </span><br></pre></td></tr></table></figure>
+
+<h1 id="76-最小覆盖子串（Hard）"><a href="#76-最小覆盖子串（Hard）" class="headerlink" title="76. 最小覆盖子串（Hard）"></a>76. 最小覆盖子串（Hard）</h1><blockquote>
+<p>题目链接 <a class="link"   target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-window-substring/description/" >link<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 “” 。</p>
+<p>注意：</p>
+<p>对于 t 中重复字符，我们寻找的子字符串中该字符数量必须不少于 t 中该字符数量。<br>如果 s 中存在这样的子串，我们保证它是唯一的答案。</p>
+<p>示例 1：</p>
+<blockquote>
+<p>输入：s &#x3D; “ADOBECODEBANC”, t &#x3D; “ABC”<br>输出：”BANC”<br>解释：最小覆盖子串 “BANC” 包含来自字符串 t 的 ‘A’、’B’ 和 ‘C’。  </p>
+</blockquote>
+<p>示例 2：</p>
+<blockquote>
+<p>输入：s &#x3D; “a”, t &#x3D; “a”<br>输出：”a”<br>解释：整个字符串 s 是最小覆盖子串。</p>
+</blockquote>
+<p>示例 3:</p>
+<blockquote>
+<p>输入: s &#x3D; “a”, t &#x3D; “aa”<br>输出: “”<br>解释: t 中两个字符 ‘a’ 均应包含在 s 的子串中，因此没有符合条件的子字符串，返回空字符串。</p>
+</blockquote>
+<h2 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h2><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://assets.leetcode-cn.com/solution-static/76/76_fig1.gif"
+                        alt="alt text"
+                 ></p>
+<p>核心为如何判断当前 s 的窗口是否覆盖了 t。可以使用一个哈希表来记录，同时，t 中可能有重复的字符，所以需要记录字符的个数（两个计数器，需要的字符个数，和当前窗口已经有的个数）。此外，Counter 可以直接使用大于和小于运算符来进行判断是否覆盖。所以可以写出以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def minWindow(self, s: str, t: str) -&gt; str:</span><br><span class="line">        min_str = &quot;&quot;</span><br><span class="line">        s_list = list(s)</span><br><span class="line">        t_list = list(t)</span><br><span class="line">        start = 0</span><br><span class="line"></span><br><span class="line">        t_cnt = Counter()</span><br><span class="line">        s_cnt = Counter()</span><br><span class="line"></span><br><span class="line">        for i in t_list:</span><br><span class="line">            t_cnt[i] += 1  </span><br><span class="line"></span><br><span class="line">        for end in range(len(s_list)):</span><br><span class="line">            s_cnt[s_list[end]] += 1</span><br><span class="line">            while s_cnt &gt;= t_cnt:</span><br><span class="line"></span><br><span class="line">                if min_str == &quot;&quot; or len(min_str) &gt; end - start + 1:</span><br><span class="line">                    min_str = &quot;&quot;.join(s_list[start: end + 1])</span><br><span class="line"></span><br><span class="line">                s_cnt[s_list[start]] -= 1</span><br><span class="line">                start += 1</span><br><span class="line">        </span><br><span class="line">        return min_str</span><br></pre></td></tr></table></figure>
+<p>但是，上述代码会提示超时，原因是每次更新最小子字符串时，都会进行切片操作， 也是新建字符串对象（O(end - start)，所以可以使用两个变量 ans_start 和 ans_end 来记录对应的下标，只在最后对字符串进行操作。<br>需要注意的是，ans_end 不能一开始就设置为0，因为如果没有满足的子字符串，会直接返回 s[0：1]，不符合要求。可以把 ans_end 设置为 len(s)。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def minWindow(self, s: str, t: str) -&gt; str:</span><br><span class="line"></span><br><span class="line">        s_list = list(s)</span><br><span class="line">        t_list = list(t)</span><br><span class="line">        start = 0</span><br><span class="line"></span><br><span class="line">        t_cnt = Counter()</span><br><span class="line">        s_cnt = Counter()</span><br><span class="line">        ans_start = 0</span><br><span class="line">        ans_end = len(s)</span><br><span class="line">        for i in t_list:</span><br><span class="line">            t_cnt[i] += 1  </span><br><span class="line"></span><br><span class="line">        for end in range(len(s_list)):</span><br><span class="line">            s_cnt[s_list[end]] += 1</span><br><span class="line">            while s_cnt &gt;= t_cnt:</span><br><span class="line"></span><br><span class="line">                if ans_end == len(s) or ans_end - ans_start &gt; end - start:</span><br><span class="line">                    ans_end = end</span><br><span class="line">                    ans_start = start</span><br><span class="line"></span><br><span class="line">                s_cnt[s_list[start]] -= 1</span><br><span class="line">                start += 1</span><br><span class="line">        if ans_end == len(s):</span><br><span class="line">            return &quot;&quot;</span><br><span class="line">        else:</span><br><span class="line">            return &quot;&quot;.join(s_list[ans_start: ans_end + 1])</span><br></pre></td></tr></table></figure>
+
+<p>Counter 本质上是一个 dict，如果使用 dict，需要定义一个判断函数，注意，这里是遍历了 t 对应的 dict，即需要的字符数量，时间复杂度为 O(|len(t)|)，dict 为哈希表，读写的时间复杂度为 O(1)。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    def minWindow(self, s: str, t: str) -&gt; str:</span><br><span class="line"></span><br><span class="line">        s_list = list(s)</span><br><span class="line">        t_list = list(t)</span><br><span class="line">        start = 0</span><br><span class="line"></span><br><span class="line">        t_cnt = dict()</span><br><span class="line">        s_cnt = dict()</span><br><span class="line">        ans_start = 0</span><br><span class="line">        ans_end = len(s)</span><br><span class="line">        for i in t_list:</span><br><span class="line">            t_cnt[i] = t_cnt.get(i, 0) + 1  </span><br><span class="line"></span><br><span class="line">        for end in range(len(s_list)):</span><br><span class="line">            s_cnt[s_list[end]] = s_cnt.get(s_list[end], 0) + 1</span><br><span class="line">            while self.check(s_cnt, t_cnt):</span><br><span class="line"></span><br><span class="line">                if ans_end == len(s) or ans_end - ans_start &gt; end - start:</span><br><span class="line">                    ans_end = end</span><br><span class="line">                    ans_start = start</span><br><span class="line"></span><br><span class="line">                s_cnt[s_list[start]] -= 1</span><br><span class="line">                start += 1</span><br><span class="line">        if ans_end == len(s):</span><br><span class="line">            return &quot;&quot;</span><br><span class="line">        else:</span><br><span class="line">            return &quot;&quot;.join(s_list[ans_start: ans_end + 1])</span><br><span class="line">            </span><br><span class="line">    def check(self, s_cnt1, t_cnt1):</span><br><span class="line">        for key, value in t_cnt1.items():</span><br><span class="line">            if value &gt; s_cnt1.get(key, 0):</span><br><span class="line">                return False</span><br><span class="line">        </span><br><span class="line">        return True</span><br></pre></td></tr></table></figure>
                     
                 </div>
 
@@ -494,11 +474,11 @@
     <div class="copyright-info-content border-box">
         <div class="copyright-info-top border-box">
             <div class="copyright-post-title border-box text-ellipsis">
-                【代码随想录】数组1-二分查找
+                【代码随想录】数组3-滑动窗口法
             </div>
 
             <div class="copyright-post-link border-box text-ellipsis">
-                Leetcode/array1/
+                Leetcode/array3/
             </div>
         </div>
 
@@ -514,7 +494,7 @@
                 <div class="type">
                     发布于
                 </div>
-                <div class="content">2025-02-09 13:36</div>
+                <div class="content">2025-06-23 16:16</div>
             </div>
 
 
@@ -592,14 +572,14 @@
                             <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
-                                   href="/blog/Mark/git-443/"
-                                   title="git timeout 报错443解决方法"
+                                   href="/blog/Leetcode/array4/"
+                                   title="【代码随想录】数组4-模拟过程"
                                 >
                                     <span class="left arrow-icon flex-center">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">git timeout 报错443解决方法</span>
+                                        <span class="post-nav-title-item text-ellipsis">【代码随想录】数组4-模拟过程</span>
                                         <span class="post-nav-item">上一篇</span>
                                     </span>
                                 </a>
@@ -609,11 +589,11 @@
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/blog/Kaggle-course/pandas-kaggle/"
-                                   title="【Kaggle Courses】4-pandas"
+                                   href="/blog/hello-world/"
+                                   title="Hello World 👋"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">【Kaggle Courses】4-pandas</span>
+                                        <span class="post-nav-title-item text-ellipsis">Hello World 👋</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">
@@ -641,7 +621,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">基本知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#704-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-number">2.</span> <span class="nav-text">704. 二分查找</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E8%A6%81%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">两个要点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">解法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A6%E5%8F%B3%E5%85%A8%E9%97%AD"><span class="nav-number">2.2.1.</span> <span class="nav-text">左右全闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A6%E9%97%AD%E5%8F%B3%E5%BC%80"><span class="nav-number">2.2.2.</span> <span class="nav-text">左闭右开</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE1%EF%BC%9A35-%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">相关题目1：35. 搜索插入位置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A6%81%E7%82%B9"><span class="nav-number">3.1.</span> <span class="nav-text">要点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE2%EF%BC%9A34-%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">相关题目2：34. 在排序数组中查找元素的第一个和最后一个位置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">4.1.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE3%EF%BC%9A367-%E6%9C%89%E6%95%88%E7%9A%84%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">相关题目3：367. 有效的完全平方数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-number">5.1.</span> <span class="nav-text">思路</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84"><span class="nav-number">1.</span> <span class="nav-text">209.长度最小的子数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%951%EF%BC%9A%E6%9A%B4%E5%8A%9B%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.1.</span> <span class="nav-text">解法1：暴力循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%952%EF%BC%9A%E5%89%8D%E7%BC%80%E5%92%8C-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-number">1.2.</span> <span class="nav-text">解法2：前缀和+二分查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%953%EF%BC%9A%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="nav-number">1.3.</span> <span class="nav-text">解法3：滑动窗口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#904-%E6%B0%B4%E6%9E%9C%E6%88%90%E7%AF%AE"><span class="nav-number">2.</span> <span class="nav-text">904. 水果成篮</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#76-%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2%EF%BC%88Hard%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">76. 最小覆盖子串（Hard）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="nav-number">3.1.</span> <span class="nav-text">滑动窗口</span></a></li></ol></li></ol>
     </div>
 </div>
 
@@ -835,7 +815,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">基本知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#704-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-number">2.</span> <span class="nav-text">704. 二分查找</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E8%A6%81%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">两个要点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">解法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A6%E5%8F%B3%E5%85%A8%E9%97%AD"><span class="nav-number">2.2.1.</span> <span class="nav-text">左右全闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A6%E9%97%AD%E5%8F%B3%E5%BC%80"><span class="nav-number">2.2.2.</span> <span class="nav-text">左闭右开</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE1%EF%BC%9A35-%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">相关题目1：35. 搜索插入位置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A6%81%E7%82%B9"><span class="nav-number">3.1.</span> <span class="nav-text">要点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE2%EF%BC%9A34-%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">相关题目2：34. 在排序数组中查找元素的第一个和最后一个位置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">4.1.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE3%EF%BC%9A367-%E6%9C%89%E6%95%88%E7%9A%84%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">相关题目3：367. 有效的完全平方数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-number">5.1.</span> <span class="nav-text">思路</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84"><span class="nav-number">1.</span> <span class="nav-text">209.长度最小的子数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%951%EF%BC%9A%E6%9A%B4%E5%8A%9B%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.1.</span> <span class="nav-text">解法1：暴力循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%952%EF%BC%9A%E5%89%8D%E7%BC%80%E5%92%8C-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-number">1.2.</span> <span class="nav-text">解法2：前缀和+二分查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%953%EF%BC%9A%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="nav-number">1.3.</span> <span class="nav-text">解法3：滑动窗口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#904-%E6%B0%B4%E6%9E%9C%E6%88%90%E7%AF%AE"><span class="nav-number">2.</span> <span class="nav-text">904. 水果成篮</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#76-%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2%EF%BC%88Hard%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">76. 最小覆盖子串（Hard）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="nav-number">3.1.</span> <span class="nav-text">滑动窗口</span></a></li></ol></li></ol>
     </div>
 </div>
 
