@@ -317,7 +317,7 @@
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
-                    <span class="datetime" data-updated="Tue Jun 24 2025 22:32:22 GMT+0800">2025-06-24 22:32:22</span>
+                    <span class="datetime" data-updated="Wed Jun 25 2025 16:54:28 GMT+0800">2025-06-25 16:54:28</span>
                 </span>
             
         
@@ -347,12 +347,12 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>370 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>1.1k 字</span>
             </span>
         
         
             <span class="meta-info-item post-min2read">
-                <i class="icon fas fa-clock"></i>&nbsp;<span>1 分钟</span>
+                <i class="icon fas fa-clock"></i>&nbsp;<span>4 分钟</span>
             </span>
         
         
@@ -397,6 +397,46 @@
 
 <p>更改后的代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">input = sys.stdin.read</span><br><span class="line"></span><br><span class="line">data = input().split()</span><br><span class="line">n = int(data[0])</span><br><span class="line">sums = [0]</span><br><span class="line">for i in range(1, n+1):</span><br><span class="line">    sums.append(int(data[i]) + sums[-1])</span><br><span class="line"></span><br><span class="line">index = n + 1</span><br><span class="line">res = []</span><br><span class="line">while index &lt; len(data):</span><br><span class="line">    a = int(data[index])</span><br><span class="line">    b = int(data[index+1])</span><br><span class="line">    index += 2</span><br><span class="line">    </span><br><span class="line">    res.append(sums[b+1] - sums[a])</span><br><span class="line">    print(res)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="44-开发商购买土地"><a href="#44-开发商购买土地" class="headerlink" title="44. 开发商购买土地"></a>44. 开发商购买土地</h1><blockquote>
+<p>题目链接 <a class="link"   target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1044" >link<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>在一个城市区域内，被划分成了n * m个连续的区块，每个区块都拥有不同的权值，代表着其土地价值。目前，有两家开发公司，A 公司和 B 公司，希望购买这个城市区域的土地。 </p>
+<p>现在，需要将这个城市区域的所有区块分配给 A 公司和 B 公司。</p>
+<p>然而，由于城市规划的限制，只允许将区域按横向或纵向划分成两个子区域，而且每个子区域都必须包含一个或多个区块。 为了确保公平竞争，你需要找到一种分配方式，使得 A 公司和 B 公司各自的子区域内的土地总价值之差最小。 </p>
+<p>注意：区块不可再分。</p>
+<p>第一行输入两个正整数，代表 n 和 m。接下来的 n 行，每行输出 m 个正整数。请输出一个整数，代表两个子区域内土地总价值之间的最小差距。</p>
+<p>示例：输入</p>
+<blockquote>
+<p>3 3<br>1 2 3<br>2 1 3<br>1 2 3  </p>
+</blockquote>
+<p>输出：</p>
+<blockquote>
+<p>0</p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>本质上还是区间和，之不是二维的，需要考虑两个方向的求和。可以先针对两个方向求前缀和，然后进行判断。例如水平分割时，可以将数组先按行求和，然后再计算前缀和。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line"></span><br><span class="line">input = sys.stdin.read</span><br><span class="line"></span><br><span class="line">data = input().split()</span><br><span class="line"></span><br><span class="line">n, m = int(data[0]), int(data[1])</span><br><span class="line"></span><br><span class="line">num = [[0] * m for _ in range(n)]</span><br><span class="line"></span><br><span class="line">index = 2</span><br><span class="line">for i in range(n):</span><br><span class="line">    for j in range(m):</span><br><span class="line">        num[i][j] = int(data[index])</span><br><span class="line">        index += 1</span><br><span class="line"></span><br><span class="line"># 求每一行的和</span><br><span class="line">sumx = [sum(num[i]) for i in range(n)]</span><br><span class="line"></span><br><span class="line"># 按行的前缀和</span><br><span class="line">sumx_pre = [sumx[0]]</span><br><span class="line"></span><br><span class="line">for i in range(1, n):</span><br><span class="line">    sumx_pre.append(sumx[i] + sumx_pre[-1])</span><br><span class="line"></span><br><span class="line">minx = float(&#x27;inf&#x27;)</span><br><span class="line"># 计算最小的差</span><br><span class="line">for i in range(0, n - 1):</span><br><span class="line">    p1 = sumx_pre[i]</span><br><span class="line">    p2 = sumx_pre[-1] - sumx_pre[i]</span><br><span class="line">    dif = abs(p2 - p1)</span><br><span class="line">    if minx &gt; dif:</span><br><span class="line">        minx = dif</span><br><span class="line"></span><br><span class="line"># 求每一列的和</span><br><span class="line">sumy = [sum(num[i][j] for i in range(n)) for j in range(m)]</span><br><span class="line"></span><br><span class="line"># 按列的前缀和</span><br><span class="line">sumy_pre = [sumy[0]]</span><br><span class="line"></span><br><span class="line">for j in range(1, m):</span><br><span class="line">    sumy_pre.append(sumy[j] + sumy_pre[-1])</span><br><span class="line"></span><br><span class="line">miny = float(&#x27;inf&#x27;)</span><br><span class="line"></span><br><span class="line">for j in range(0, m - 1):</span><br><span class="line">    p1 = sumy_pre[j]</span><br><span class="line">    p2 = sumy_pre[-1] - sumy_pre[j]</span><br><span class="line">    dif = abs(p2 - p1)</span><br><span class="line">    if  miny &gt; dif:</span><br><span class="line">        miny = dif</span><br><span class="line"></span><br><span class="line">print(min(miny, minx))</span><br></pre></td></tr></table></figure>
+
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>在读取数据时，直接求整个矩阵的和。然后分别两个方向求和，模拟行分割和列分割。每求和一行（列），就计算差值。这样可以省去计算前缀和的步骤。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>ACM 格式下，需要自己处理输入，这里重写了 input 方法：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">input = sys.stdin.read</span><br><span class="line"></span><br><span class="line">data = input().split()</span><br></pre></td></tr></table></figure>
+
+<p>重写的和自带的方法对比如下：<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/20250625164114.png"
+                        alt="20250625164114"
+                 ></p>
+<p>重写的方法可以将所有输入作为一整个字符串读取，可以减少 IO 时间。后续使用 .split() 方法来拆分每个输入即可。</p>
+<ul>
+<li><p>题目要求求最小值时，可以将表示最小值的变量预先定义为正无穷 float(‘inf’)，便于后续比较。同理，最大值可以定义为服务器 float(‘-inf’)。</p>
+</li>
+<li><p>本题中需要计算的是两个块之间的差，注意使用绝对值 abs()。</p>
+</li>
+</ul>
+
                     
                 </div>
 
@@ -501,6 +541,22 @@
                 
                     <div class="post-nav border-box">
                         
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/blog/Leetcode/list1/"
+                                   title="【代码随想录】链表1-定义"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">【代码随想录】链表1-定义</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
                         
                             <div class="next-post">
                                 <a class="next"
@@ -537,7 +593,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#58-%E5%8C%BA%E9%97%B4%E5%92%8C"><span class="nav-number">1.</span> <span class="nav-text">58. 区间和</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF%EF%BC%9A%E5%89%8D%E7%BC%80%E5%92%8C"><span class="nav-number">1.1.</span> <span class="nav-text">思路：前缀和</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#58-%E5%8C%BA%E9%97%B4%E5%92%8C"><span class="nav-number">1.</span> <span class="nav-text">58. 区间和</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF%EF%BC%9A%E5%89%8D%E7%BC%80%E5%92%8C"><span class="nav-number">1.1.</span> <span class="nav-text">思路：前缀和</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#44-%E5%BC%80%E5%8F%91%E5%95%86%E8%B4%AD%E4%B9%B0%E5%9C%9F%E5%9C%B0"><span class="nav-number">2.</span> <span class="nav-text">44. 开发商购买土地</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">2.2.</span> <span class="nav-text">优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol>
     </div>
 </div>
 
@@ -583,7 +639,7 @@
             
                 <span class="count-item border-box word">
                     <span class="item-type border-box">总字数</span>
-                    <span class="item-value border-box word">16.3k</span>
+                    <span class="item-value border-box word">20.3k</span>
                 </span>
             
 
@@ -731,7 +787,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#58-%E5%8C%BA%E9%97%B4%E5%92%8C"><span class="nav-number">1.</span> <span class="nav-text">58. 区间和</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF%EF%BC%9A%E5%89%8D%E7%BC%80%E5%92%8C"><span class="nav-number">1.1.</span> <span class="nav-text">思路：前缀和</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#58-%E5%8C%BA%E9%97%B4%E5%92%8C"><span class="nav-number">1.</span> <span class="nav-text">58. 区间和</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF%EF%BC%9A%E5%89%8D%E7%BC%80%E5%92%8C"><span class="nav-number">1.1.</span> <span class="nav-text">思路：前缀和</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#44-%E5%BC%80%E5%8F%91%E5%95%86%E8%B4%AD%E4%B9%B0%E5%9C%9F%E5%9C%B0"><span class="nav-number">2.</span> <span class="nav-text">44. 开发商购买土地</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">2.2.</span> <span class="nav-text">优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol>
     </div>
 </div>
 
