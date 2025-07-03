@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="wbfwonderful">
+    
+    <title>
+        
+            【代码随想录】字符串2-KMP算法 |
+        
+        wbfwonderful&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/blog/css/style.css">
+
+    
+        <link rel="shortcut icon" href="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile-transparent.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/brands.min.css">
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"wbfwonderful.github.io","root":"/blog/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"wbfwonderful's Blog","author":"wbfwonderful","avatar":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg","logo":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg","favicon":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile-transparent.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","categories":"/categories || fa-solid fa-layer-group","photos":"/photos || fa-solid fa-image","about":"/about || fa-solid fa-user-graduate"},"first_screen":{"enable":true,"background_img":"/images/screen.gif","background_img_dark":"/images/screen.gif","description":null,"hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/wbfwonderful","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":"wangbf23@mail2.sysu.edu.cn","bilibili":"https://space.bilibili.com/214019111"}},"scroll":{"progress_bar":false,"percent":false,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"created || fa-solid fa-arrow-up-from-bracket","post_datetime_format":"YYYY-MM-DD HH:mm:ss"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null,"icon":null},"created_datetime_icon":"fa-solid fa-arrow-up-from-bracket","updated_datetime_icon":"fa-solid fa-arrows-rotate"},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2024,"word_count":true,"site_deploy":{"enable":true,"provider":"github","url":"https://github.com"},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":["/css/custom-photos.css"],"js":[null]},"root":"/blog","source_data":{"photos":[{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg","name":"头像"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/hainan-warship.jpg","name":"海南舰"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/mayday.jpg","name":"5525深圳站"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/balls.gif","name":"五月天五个球球"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/JJ20.jpg","name":"JJ20深圳站"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/HKDisney.jpg","name":"香港迪士尼"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/ktv.jpg","name":"笑忘歌"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/lights.jpg","name":"2025自贡灯会"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/fireworks.jpg","name":"2025新年快乐！"}]},"version":"4.2.4"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/blog/">
+                    <img src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg">
+                </a>
+            
+            <a class="site-name border-box" href="/blog/">
+               wbfwonderful&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/tags">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/categories">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                
+                                分类
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/photos">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-image"></i>
+                                
+                                相册
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/tags">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tags"></i>
+                                </span>
+                            
+                            标签
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/categories">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                </span>
+                            
+                            分类
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/photos">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-image"></i>
+                                </span>
+                            
+                            相册
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        【代码随想录】字符串2-KMP算法
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">wbfwonderful</span>
+                                
+                                    <span class="author-badge">Lv3</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-arrow-up-from-bracket"></i>&nbsp;
+                <span class="datetime">2025-07-02 19:04:15</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
+                    <span class="datetime" data-updated="Thu Jul 03 2025 22:33:43 GMT+0800">2025-07-03 22:33:43</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/blog/categories/Leetcode/">Leetcode</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/blog/tags/string/">string</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>2.8k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>11 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body code-block-unshrink">
+                    
+
+                    
+                         <h1 id="KMP-算法"><a href="#KMP-算法" class="headerlink" title="KMP 算法"></a>KMP 算法</h1><h2 id="KMP有什么用"><a href="#KMP有什么用" class="headerlink" title="KMP有什么用"></a>KMP有什么用</h2><p>KMP的经典思想就是:当出现字符串不匹配时，可以记录一部分之前已经匹配的文本内容，利用这些信息避免从头再去做匹配。所以如何记录已经匹配的文本内容，是KMP的重点，也是next数组肩负的重任。</p>
+<p>next数组就是一个前缀表（prefix table）。前缀表是用来回退的，它记录了模式串与主串(文本串)不匹配的时候，模式串应该从哪里开始重新匹配。</p>
+<p>例子：要在文本串：aabaabaafa 中查找是否出现过一个模式串：aabaaf。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/2025-07-03-14-58-54.png"
+                        alt="2025-07-03-14-58-54"
+                 ></p>
+<p>可以看出，文本串中第六个字符b 和 模式串的第六个字符f，不匹配了。如果暴力匹配，发现不匹配，此时就要从头匹配了。</p>
+<p>但如果使用前缀表，就不会从头匹配，而是从上次已经匹配的内容开始匹配，找到了模式串中第三个字符b继续开始匹配。</p>
+<p><strong>理解</strong>：<strong>在当前对文本串和模式串检索的过程中，若出现了不匹配，如何充分利用已经匹配的部分</strong>。到不匹配时，找到匹配的字符串中，最长的相等的前后缀。例如上面的例子，已经匹配了 aabaa，下一个不匹配了，找到最长相等的前后缀为 aa。这个 aa 表示：</p>
+<ul>
+<li>模式串的前两个 aa</li>
+<li>匹配了的文本串的后两个 aa</li>
+</ul>
+<p>这两个部分是相等的，所以这两部分不用匹配，直接从 aa 的下一个字符开始匹配，如图所示：</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/2025-07-03-17-20-57.png"
+                        alt="2025-07-03-17-20-57"
+                 ></p>
+<h2 id="next-数组"><a href="#next-数组" class="headerlink" title="next 数组"></a>next 数组</h2><p>参考讲解 <a class="link"   target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1AY4y157yL/?spm_id_from=333.788.recommend_more_video.1&vd_source=cdd5039dc8f2c773b33d88cb1b1a8006" >bilibili<i class="fas fa-external-link-alt"></i></a>，以及其中的评论：  </p>
+<blockquote>
+<p>借视频中例子说明一下 prefix_len &#x3D; next【prefix_len - 1】 的原因。<br>例如，串 A B A C A B A B<br>　　　　 0 1 2 3 4 5 6 7<br>扫描到 6 号位的 A 时，最长公共前后缀是 ABA；而扫描到 7 号位的 B 时，ABAC 和 ABAB 不匹配了，即原来的最长公共前后缀失配。这时候我们要做的事情就是，找上一次匹配中次长的公共前后缀，看与 7 号位的 B 拼接起来是否能匹配。<br>这时候，注意到上一次扫描中 0 ~ 2 位的 ABA 是和 4 ~ 6 位的 ABA 完全相同的（贪心原则保证上次结果一定是包含前一位置字符的最长公共前后缀），所以考察上一次匹配中次长的公共前后缀，只能在考察上一次匹配中的最长公共前后缀中考察，也就是说，只能考察 ABA 中更短的 BA、A 是否是次长的，而这直接在前面一个 ABA 中考察都行，所以我们把 ABA C ABA 中中间部分（C）和后缀（ABA）直接抛弃，等效于一个串 ABA（也就是前缀）与 B 拼接成 ABAB。这样再来计算第 7 位的 B 的 next 值，等价于计算 ABAB 第 3 位的 B 的 next 值。prefix_len &#x3D; next【prefix_len - 1】 也就是这个等效过程的代码展示。  </p>
+</blockquote>
+<p>next 数组表示的就是：下标i之前（包括i）的字符串中，有多大长度的相同前缀后缀。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/2025-07-03-15-30-21.png"
+                        alt="2025-07-03-15-30-21"
+                 ></p>
+<p>在比较时找到的不匹配的位置，那么此时我们要看它的前一个字符的前缀表的数值是多少。然后移动到前缀表数值对应的下标处重新开始匹配。</p>
+<p>如何计算 next 数组？核心是“<strong>回退</strong>”，利用前面计算好的 next 数组来简化计算。可以分为三个步骤：</p>
+<ul>
+<li>初始化</li>
+<li>字符相同时</li>
+<li>字符不同时</li>
+</ul>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>初始化两个指针，i 表示后缀的末尾，从 1 开始；j 表示前缀的末尾（也表示前缀的长度），从 0 开始。最开始 next[0] 一定为 0，因为没有意义。然后 i 遍历 range(1, len(patt))。分别处理相同和不相同的情况。（先理解后面两种情况，然后再理解为什么这样初始化）</p>
+<h3 id="字符相同"><a href="#字符相同" class="headerlink" title="字符相同"></a>字符相同</h3><p>例如，已经找到了当前最长的相同前后缀为 AB，此时 j&#x3D;1（B），i&#x3D;5（B）。在下一轮，我们只需要判断下一个字符是否相同，即 j&#x3D;2（A），i&#x3D;6（B），此时相同，那么就可以直接将前缀长度 j（也等于 next[i-1]，但是为了统一表达，还是使用 j，详见下面的情况） 加一作为当前的 next[i]。<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/2025-07-03-16-44-17.png"
+                        alt="2025-07-03-16-44-17"
+                 ></p>
+<h3 id="字符不同"><a href="#字符不同" class="headerlink" title="字符不同"></a>字符不同</h3><p>上一步已经找到最长的相同前后缀为 ABA，但是下一个字符不相同。此时要做的事情是，找上一次匹配中<strong>次长</strong>的相同前后缀，看与 i&#x3D;7 的 B 拼接起来是否能匹配（因为要使用之前计算的 next 数组，最长的不符合就找次长的）。</p>
+<p>而找<strong>次长</strong>的相同前后缀，等价以<strong>当前最长的相同前后缀</strong>为对象，找最长的相同前后缀。（也就是将 ABA 看作单独的字符串，找 ABA 的最长相同子字符串）。因为<strong>次长</strong>的相同前后缀一定在<strong>最长</strong>的前后缀中（贪心原则，每次都是在上一轮最长前后缀的基础上扩展）。</p>
+<p>而 ABA 的最长相同前后缀在之前已经计算好了，为 next[j-1]（此时 j&#x3D;3）（左图）。所以 j 就回退到次长的相同前后缀处（回退后 j&#x3D;1），再次进行比较（中图）。此时字符相同，就可以直接将前缀长度 j 加一作为当前的 next[i]（右图，注意，此时就不能再像上面那个情况一样，使用 next[i-1] 来赋值）。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/2025-07-03-16-50-27.png"
+                        alt="2025-07-03-16-50-27"
+                 ></p>
+<h3 id="计算-next-数组"><a href="#计算-next-数组" class="headerlink" title="计算 next 数组"></a>计算 next 数组</h3><p>在遍历 i 时，注意 for 和 while 循环的不同写法。因为在字符不相同时，j 需要回退到<strong>次长相同前后缀</strong>的位置来再次比较，如果还是不相同还需要回退。所以 i 的值需要手动控制（使用 while 循环）或者对当前 i 进行多次比较（for 循环中再套一层 while）。代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">i = 1</span><br><span class="line">j = 0</span><br><span class="line">next = [0] * len(patt)</span><br><span class="line"></span><br><span class="line">while i &lt; len(patt):</span><br><span class="line">    if patt[i] == patt[j]:</span><br><span class="line">        next[i] = j + 1</span><br><span class="line">        j += 1</span><br><span class="line">        i += 1</span><br><span class="line">    else:</span><br><span class="line">        if j == 0:</span><br><span class="line">            next[i] = j</span><br><span class="line">            i += 1</span><br><span class="line">        else:</span><br><span class="line">            j = next[j - 1]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">j = 0</span><br><span class="line">next = [0] * len(patt)</span><br><span class="line"></span><br><span class="line">for i in range(1, len(patt)):</span><br><span class="line">    while j &gt; 0 and patt[i] != patt[j]:</span><br><span class="line">        j = next[j-1]</span><br><span class="line">    if patt[i] == patt[j]:</span><br><span class="line">        j += 1</span><br><span class="line">    </span><br><span class="line">    next[i] = j</span><br></pre></td></tr></table></figure>
+
+<h1 id="28-实现-strStr"><a href="#28-实现-strStr" class="headerlink" title="28. 实现 strStr()"></a>28. 实现 strStr()</h1><blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/description/" >link<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>给你两个字符串 haystack 和 needle ，请你在 haystack 字符串中找出 needle 字符串的第一个匹配项的下标（下标从 0 开始）。如果 needle 不是 haystack 的一部分，则返回  -1 。</p>
+<p>示例 1：</p>
+<blockquote>
+<p>输入：haystack &#x3D; “sadbutsad”, needle &#x3D; “sad”<br>输出：0<br>解释：”sad” 在下标 0 和 6 处匹配。<br>第一个匹配项的下标是 0 ，所以返回 0 。</p>
+</blockquote>
+<p>示例 2：</p>
+<blockquote>
+<p>输入：haystack &#x3D; “leetcode”, needle &#x3D; “leeto”<br>输出：-1<br>解释：”leeto” 没有在 “leetcode” 中出现，所以返回 -1 。  </p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>KMP 算法的应用，计算完 next 数组后，就需要进行匹配。使用两个指针，分别在文本串和模式串上移动，当不匹配时，模式串上的指针 j 就回退到前一位对应的 next 数组的值处，即 j &#x3D; next[j-1]。（从这里也可以看出，计算 next 数组本质上也是 KMP 算法！）</p>
+<p>注意两种写法的返回值不一样！</p>
+<p>for 写法：i 是在每次循环开始才增加，在循环中，j 先增加，所以判断是否遍历到模式串末尾时，只有 j 增加了，所以返回需要加 1。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def strStr(self, haystack: str, needle: str) -&gt; int:</span><br><span class="line">        j = 0</span><br><span class="line">        next = [0] * len(needle)</span><br><span class="line"></span><br><span class="line">        for i in range(1, len(needle)):</span><br><span class="line">            while j &gt; 0 and needle[i] != needle[j]:</span><br><span class="line">                j = next[j-1]</span><br><span class="line">            if needle[i] == needle[j]:</span><br><span class="line">                j += 1</span><br><span class="line">            </span><br><span class="line">            next[i] = j</span><br><span class="line">        </span><br><span class="line">        j = 0</span><br><span class="line">        i = 0</span><br><span class="line"></span><br><span class="line">        for i in range(len(haystack)):</span><br><span class="line">            while j &gt; 0 and haystack[i] != needle[j]:</span><br><span class="line">                j = next[j-1]</span><br><span class="line"></span><br><span class="line">            if haystack[i] == needle[j]:</span><br><span class="line">                j += 1</span><br><span class="line"></span><br><span class="line">            if j == len(needle):</span><br><span class="line">                return i - j + 1</span><br><span class="line">    return -1</span><br></pre></td></tr></table></figure>
+
+<p>while 写法：while 循环是我们自己控制 i 和 j 的增减，所以如果满足条件，他们是同时增加的。所以判断是否遍历到模式串末尾时，不需要加 1。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def strStr(self, haystack: str, needle: str) -&gt; int:</span><br><span class="line">        j = 0</span><br><span class="line">        next = [0] * len(needle)</span><br><span class="line"></span><br><span class="line">        for i in range(1, len(needle)):</span><br><span class="line">            while j &gt; 0 and needle[i] != needle[j]:</span><br><span class="line">                j = next[j-1]</span><br><span class="line">            if needle[i] == needle[j]:</span><br><span class="line">                j += 1</span><br><span class="line">            </span><br><span class="line">            next[i] = j</span><br><span class="line">        </span><br><span class="line">        j = 0</span><br><span class="line">        i = 0</span><br><span class="line">            </span><br><span class="line">        while i &lt; len(haystack):</span><br><span class="line">            if haystack[i] == needle[j]:</span><br><span class="line">                j += 1</span><br><span class="line">                i += 1</span><br><span class="line">            else:</span><br><span class="line">                if j == 0:</span><br><span class="line">                    i += 1</span><br><span class="line">                else:</span><br><span class="line">                    j = next[j-1]</span><br><span class="line"></span><br><span class="line">            if j == len(needle):</span><br><span class="line">                return i - j </span><br><span class="line"></span><br><span class="line">        return -1</span><br></pre></td></tr></table></figure>
+
+<h1 id="459-重复的子字符串"><a href="#459-重复的子字符串" class="headerlink" title="459. 重复的子字符串"></a>459. 重复的子字符串</h1><blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://leetcode.cn/problems/repeated-substring-pattern/description/" >link<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>给定一个非空的字符串 s ，检查是否可以通过由它的一个子串重复多次构成。</p>
+<p>示例 1:</p>
+<blockquote>
+<p>输入: s &#x3D; “abab”<br>输出: true<br>解释: 可由子串 “ab” 重复两次构成。  </p>
+</blockquote>
+<p>示例 2:</p>
+<blockquote>
+<p>输入: s &#x3D; “aba”<br>输出: false  </p>
+</blockquote>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路 1"></a>思路 1</h2><p>对每个子串都应用 KMP 算法，优化的点：</p>
+<ul>
+<li>传入的 haystack 串可以去除选择的子串</li>
+<li>遍历子串的时候，如果剩余长度小于子串长度，则跳过</li>
+<li>return 的时机：  <ul>
+<li>不相等直接 return False</li>
+<li>两个指针同时指向各自字符串的末尾</li>
+</ul>
+</li>
+</ul>
+<p>但是会超出时间限制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line"></span><br><span class="line">    def kmp(self, haystack, needle):</span><br><span class="line">        j = 0</span><br><span class="line">        next = [0] * len(needle)</span><br><span class="line"></span><br><span class="line">        for i in range(1, len(needle)):</span><br><span class="line">            while j &gt; 0 and needle[i] != needle[j]:</span><br><span class="line">                j = next[j-1]</span><br><span class="line">            if needle[i] == needle[j]:</span><br><span class="line">                j += 1</span><br><span class="line">            </span><br><span class="line">            next[i] = j</span><br><span class="line">        </span><br><span class="line">        j = 0</span><br><span class="line">        i = 0</span><br><span class="line">            </span><br><span class="line">        while i &lt; len(haystack):</span><br><span class="line">            if haystack[i] == needle[j]:</span><br><span class="line">                j += 1</span><br><span class="line">                i += 1</span><br><span class="line">            else:</span><br><span class="line">                return False</span><br><span class="line"></span><br><span class="line">            if j == len(needle):</span><br><span class="line">                if i == len(haystack):</span><br><span class="line">                    return True</span><br><span class="line">                else:</span><br><span class="line">                    j = 0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    def repeatedSubstringPattern(self, s: str) -&gt; bool:</span><br><span class="line">        for i in range(len(s)):</span><br><span class="line">            left = len(s) - i - 1</span><br><span class="line">            if left &lt; i + 1:</span><br><span class="line">                return False</span><br><span class="line">            </span><br><span class="line">            if self.kmp(s[i+1:], s[0:i+1]):</span><br><span class="line">                return True</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+<h2 id="思路-2：暴力"><a href="#思路-2：暴力" class="headerlink" title="思路 2：暴力"></a>思路 2：暴力</h2><p>一个for循环获取 子串的终止位置， 然后判断子串是否能重复构成字符串，又嵌套一个for循环，所以是O(n^2)的时间复杂度。</p>
+<h2 id="思路-3：移动匹配"><a href="#思路-3：移动匹配" class="headerlink" title="思路 3：移动匹配"></a>思路 3：移动匹配</h2><p>如果一个字符串 s 由子串构成，那么 s+s 去掉首尾之后一定包含 s。</p>
+<p>需要证明充要性:（？）</p>
+<blockquote>
+<p>s 可由某个非空子串重复 k≥2 次构成 &lt;–&gt; s 是 (s+s)[1:−1] 的一个子串.</p>
+</blockquote>
+<p>可以直接用 in，也可以用 KMP 实现的 strStr()。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def strStr(self, haystack: str, needle: str) -&gt; int:</span><br><span class="line">        j = 0</span><br><span class="line">        next = [0] * len(needle)</span><br><span class="line"></span><br><span class="line">        for i in range(1, len(needle)):</span><br><span class="line">            while j &gt; 0 and needle[i] != needle[j]:</span><br><span class="line">                j = next[j-1]</span><br><span class="line">            if needle[i] == needle[j]:</span><br><span class="line">                j += 1</span><br><span class="line">            </span><br><span class="line">            next[i] = j</span><br><span class="line">        </span><br><span class="line">        j = 0</span><br><span class="line">        i = 0</span><br><span class="line">            </span><br><span class="line">        while i &lt; len(haystack):</span><br><span class="line">            if haystack[i] == needle[j]:</span><br><span class="line">                j += 1</span><br><span class="line">                i += 1</span><br><span class="line">            else:</span><br><span class="line">                if j == 0:</span><br><span class="line">                    i += 1</span><br><span class="line">                else:</span><br><span class="line">                    j = next[j-1]</span><br><span class="line"></span><br><span class="line">            if j == len(needle):</span><br><span class="line">                return True</span><br><span class="line"></span><br><span class="line">        return False</span><br><span class="line">    def repeatedSubstringPattern(self, s: str) -&gt; bool:</span><br><span class="line">        </span><br><span class="line">        ss = s + s</span><br><span class="line">        return self.strStr(ss[1:-1], s)</span><br></pre></td></tr></table></figure>
+
+<h2 id="思路-4：KMP"><a href="#思路-4：KMP" class="headerlink" title="思路 4：KMP"></a>思路 4：KMP</h2><p>在一个串中查找是否出现过另一个串，这是KMP的看家本领。KMP算法中next数组为什么遇到字符不匹配的时候可以找到上一个匹配过的位置继续匹配，靠的是有计算好的前缀表。前缀表里，统计了各个位置为终点字符串的最长相同前后缀的长度。那么 最长相同前后缀和重复子串的关系又有什么关系呢？</p>
+<p>字符串s是由重复子串组成 &lt;&#x3D;&#x3D;&#x3D;&gt; <strong>最长相等前后缀</strong>不包含的<strong>子串</strong>是字符串s的最小重复子串</p>
+
+                    
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                【代码随想录】字符串2-KMP算法
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                Leetcode/string2/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">wbfwonderful</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2025-07-02 19:04</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank">
+                        
+                            <i class="fa-brands fa-creative-commons"></i>
+                            <i class="fa-brands fa-creative-commons-by"></i>
+                            <i class="fa-brands fa-creative-commons-nc"></i>
+                            <i class="fa-brands fa-creative-commons-sa"></i>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/blog/tags/string/">string</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/blog/Leetcode/double-pointer/"
+                                   title="【代码随想录】双指针法"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">【代码随想录】双指针法</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/blog/Leetcode/string1/"
+                                   title="【代码随想录】字符串1"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">【代码随想录】字符串1</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#KMP-%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">KMP 算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#KMP%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">KMP有什么用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-%E6%95%B0%E7%BB%84"><span class="nav-number">1.2.</span> <span class="nav-text">next 数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.2.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E7%9B%B8%E5%90%8C"><span class="nav-number">1.2.2.</span> <span class="nav-text">字符相同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%8D%E5%90%8C"><span class="nav-number">1.2.3.</span> <span class="nav-text">字符不同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97-next-%E6%95%B0%E7%BB%84"><span class="nav-number">1.2.4.</span> <span class="nav-text">计算 next 数组</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#28-%E5%AE%9E%E7%8E%B0-strStr"><span class="nav-number">2.</span> <span class="nav-text">28. 实现 strStr()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#459-%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">3.</span> <span class="nav-text">459. 重复的子字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-number">3.1.</span> <span class="nav-text">思路 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2%EF%BC%9A%E6%9A%B4%E5%8A%9B"><span class="nav-number">3.2.</span> <span class="nav-text">思路 2：暴力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-3%EF%BC%9A%E7%A7%BB%E5%8A%A8%E5%8C%B9%E9%85%8D"><span class="nav-number">3.3.</span> <span class="nav-text">思路 3：移动匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-4%EF%BC%9AKMP"><span class="nav-number">3.4.</span> <span class="nav-text">思路 4：KMP</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2024</span>&nbsp;-&nbsp;2025
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/blog/">wbfwonderful</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+                <a target="_blank" rel="nofollow" href="https://github.com">
+            
+            本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/blog/images/brands/github.png"></span> 提供部署服务
+            
+                </a>
+            
+        </div>
+    
+
+    
+        <div class="count-info info-item">
+            
+                <span class="count-item border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">29.5k</span>
+                </span>
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#KMP-%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">KMP 算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#KMP%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">KMP有什么用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-%E6%95%B0%E7%BB%84"><span class="nav-number">1.2.</span> <span class="nav-text">next 数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.2.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E7%9B%B8%E5%90%8C"><span class="nav-number">1.2.2.</span> <span class="nav-text">字符相同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%8D%E5%90%8C"><span class="nav-number">1.2.3.</span> <span class="nav-text">字符不同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97-next-%E6%95%B0%E7%BB%84"><span class="nav-number">1.2.4.</span> <span class="nav-text">计算 next 数组</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#28-%E5%AE%9E%E7%8E%B0-strStr"><span class="nav-number">2.</span> <span class="nav-text">28. 实现 strStr()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#459-%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">3.</span> <span class="nav-text">459. 重复的子字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-number">3.1.</span> <span class="nav-text">思路 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2%EF%BC%9A%E6%9A%B4%E5%8A%9B"><span class="nav-number">3.2.</span> <span class="nav-text">思路 2：暴力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-3%EF%BC%9A%E7%A7%BB%E5%8A%A8%E5%8C%B9%E9%85%8D"><span class="nav-number">3.3.</span> <span class="nav-text">思路 3：移动匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-4%EF%BC%9AKMP"><span class="nav-number">3.4.</span> <span class="nav-text">思路 4：KMP</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/lazyload.min.js"></script>
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/copyright-info.min.js"></script>
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

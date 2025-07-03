@@ -317,7 +317,7 @@
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
-                    <span class="datetime" data-updated="Thu Jun 26 2025 22:37:26 GMT+0800">2025-06-26 22:37:26</span>
+                    <span class="datetime" data-updated="Mon Jun 30 2025 21:50:12 GMT+0800">2025-06-30 21:50:12</span>
                 </span>
             
         
@@ -347,12 +347,12 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>365 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>612 字</span>
             </span>
         
         
             <span class="meta-info-item post-min2read">
-                <i class="icon fas fa-clock"></i>&nbsp;<span>1 分钟</span>
+                <i class="icon fas fa-clock"></i>&nbsp;<span>2 分钟</span>
             </span>
         
         
@@ -400,7 +400,16 @@
                        data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/550595a9fb0c7456b3176aeb29c8e1b.jpg"
                         alt="550595a9fb0c7456b3176aeb29c8e1b"
                  ></p>
-
+<h3 id="思路-2-2"><a href="#思路-2-2" class="headerlink" title="思路 2-2"></a>思路 2-2</h3><p>更进一步，如图所示，慢指针走了 b，快指针走了 b + nc（n 为圈数），快指针每次移动两格，所以有 2b &#x3D; b + nc，即 b &#x3D; nc。相当于慢指针走的总长度为圈长度的 n 倍。但是，慢指针走的路程中（nc）中，有一段不在环中（即要求的 a），所以说，还需要再走 a 才相当于走满了 n 圈。</p>
+<p>然后再使用双指针，分别从头节点和相遇节点出发，他们一定会在环的起点相遇。</p>
+<p>思路 2-1 可以认为是特殊情况，先求出环的长度 c，快指针先走 c，还需要再走 a 才能回到环的起点，此时两个指针同时移动，相遇时则走了 a。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/2025-06-30-21-27-52.png"
+                        alt="2025-06-30-21-27-52"
+                 ></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def detectCycle(self, head: Optional[ListNode]) -&gt; Optional[ListNode]:</span><br><span class="line">        fast = head</span><br><span class="line">        slow = head</span><br><span class="line"></span><br><span class="line">        while fast != None and fast.next != None:</span><br><span class="line">            fast = fast.next.next</span><br><span class="line">            slow = slow.next</span><br><span class="line">            if fast == slow:</span><br><span class="line">                new_slow = head</span><br><span class="line"></span><br><span class="line">                while new_slow != slow:</span><br><span class="line">                    slow = slow.next</span><br><span class="line">                    new_slow = new_slow.next</span><br><span class="line">                </span><br><span class="line">                return new_slow</span><br><span class="line">        </span><br><span class="line">        return None</span><br></pre></td></tr></table></figure>
                     
                 </div>
 
@@ -505,6 +514,22 @@
                 
                     <div class="post-nav border-box">
                         
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/blog/Leetcode/hash1/"
+                                   title="【代码随想录】哈希表1"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">【代码随想录】哈希表1</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
                         
                             <div class="next-post">
                                 <a class="next"
@@ -541,7 +566,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II"><span class="nav-number">1.</span> <span class="nav-text">142.环形链表II</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1%EF%BC%9A%E5%93%88%E5%B8%8C%E8%A1%A8"><span class="nav-number">1.1.</span> <span class="nav-text">思路 1：哈希表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2%EF%BC%9A%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88"><span class="nav-number">1.2.</span> <span class="nav-text">思路 2：快慢指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">思路 2-1</span></a></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II"><span class="nav-number">1.</span> <span class="nav-text">142.环形链表II</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1%EF%BC%9A%E5%93%88%E5%B8%8C%E8%A1%A8"><span class="nav-number">1.1.</span> <span class="nav-text">思路 1：哈希表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2%EF%BC%9A%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88"><span class="nav-number">1.2.</span> <span class="nav-text">思路 2：快慢指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">思路 2-1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2-2"><span class="nav-number">1.2.2.</span> <span class="nav-text">思路 2-2</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
 
@@ -587,7 +612,7 @@
             
                 <span class="count-item border-box word">
                     <span class="item-type border-box">总字数</span>
-                    <span class="item-value border-box word">20.3k</span>
+                    <span class="item-value border-box word">29.5k</span>
                 </span>
             
 
@@ -735,7 +760,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II"><span class="nav-number">1.</span> <span class="nav-text">142.环形链表II</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1%EF%BC%9A%E5%93%88%E5%B8%8C%E8%A1%A8"><span class="nav-number">1.1.</span> <span class="nav-text">思路 1：哈希表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2%EF%BC%9A%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88"><span class="nav-number">1.2.</span> <span class="nav-text">思路 2：快慢指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">思路 2-1</span></a></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II"><span class="nav-number">1.</span> <span class="nav-text">142.环形链表II</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1%EF%BC%9A%E5%93%88%E5%B8%8C%E8%A1%A8"><span class="nav-number">1.1.</span> <span class="nav-text">思路 1：哈希表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2%EF%BC%9A%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88"><span class="nav-number">1.2.</span> <span class="nav-text">思路 2：快慢指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">思路 2-1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2-2"><span class="nav-number">1.2.2.</span> <span class="nav-text">思路 2-2</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
 
