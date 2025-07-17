@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="wbfwonderful">
+    
+    <title>
+        
+            【代码随想录】单调栈 |
+        
+        wbfwonderful&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/blog/css/style.css">
+
+    
+        <link rel="shortcut icon" href="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile-transparent.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/brands.min.css">
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"wbfwonderful.github.io","root":"/blog/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"wbfwonderful's Blog","author":"wbfwonderful","avatar":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg","logo":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg","favicon":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile-transparent.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","categories":"/categories || fa-solid fa-layer-group","photos":"/photos || fa-solid fa-image","about":"/about || fa-solid fa-user-graduate"},"first_screen":{"enable":true,"background_img":"/images/screen.gif","background_img_dark":"/images/screen.gif","description":null,"hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/wbfwonderful","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":"wangbf23@mail2.sysu.edu.cn","bilibili":"https://space.bilibili.com/214019111"}},"scroll":{"progress_bar":false,"percent":false,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"created || fa-solid fa-arrow-up-from-bracket","post_datetime_format":"YYYY-MM-DD HH:mm:ss"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null,"icon":null},"created_datetime_icon":"fa-solid fa-arrow-up-from-bracket","updated_datetime_icon":"fa-solid fa-arrows-rotate"},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2024,"word_count":true,"site_deploy":{"enable":true,"provider":"github","url":"https://github.com"},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":["/css/custom-photos.css"],"js":[null]},"root":"/blog","source_data":{"photos":[{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg","name":"头像"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/hainan-warship.jpg","name":"海南舰"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/mayday.jpg","name":"5525深圳站"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/balls.gif","name":"五月天五个球球"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/JJ20.jpg","name":"JJ20深圳站"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/HKDisney.jpg","name":"香港迪士尼"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/ktv.jpg","name":"笑忘歌"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/lights.jpg","name":"2025自贡灯会"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/fireworks.jpg","name":"2025新年快乐！"}]},"version":"4.2.4"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/blog/">
+                    <img src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg">
+                </a>
+            
+            <a class="site-name border-box" href="/blog/">
+               wbfwonderful&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/tags">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/categories">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                
+                                分类
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/photos">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-image"></i>
+                                
+                                相册
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/tags">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tags"></i>
+                                </span>
+                            
+                            标签
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/categories">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                </span>
+                            
+                            分类
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/photos">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-image"></i>
+                                </span>
+                            
+                            相册
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        【代码随想录】单调栈
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">wbfwonderful</span>
+                                
+                                    <span class="author-badge">Lv4</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-arrow-up-from-bracket"></i>&nbsp;
+                <span class="datetime">2025-07-16 21:47:19</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
+                    <span class="datetime" data-updated="Thu Jul 17 2025 16:28:08 GMT+0800">2025-07-17 16:28:08</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/blog/categories/Leetcode/">Leetcode</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/blog/tags/stack/">stack</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>2.7k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>10 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body code-block-unshrink">
+                    
+
+                    
+                         <h1 id="739-每日温度"><a href="#739-每日温度" class="headerlink" title="739. 每日温度"></a>739. 每日温度</h1><blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://leetcode.cn/problems/daily-temperatures/" >link<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>请根据每日 气温 列表，重新生成一个列表。对应位置的输出为：要想观测到更高的气温，至少需要等待的天数。如果气温在这之后都不会升高，请在该位置用 0 来代替。</p>
+<p>例如，给定一个列表 temperatures &#x3D; [73, 74, 75, 71, 69, 72, 76, 73]，你的输出应该是 [1, 1, 4, 2, 1, 1, 0, 0]。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>使用单调栈的时机：通常是一维数组，要寻找任一个元素的右边或者左边第一个比自己大或者小的元素的位置，此时我们就要想到可以用单调栈了。时间复杂度为 O(n)。</p>
+<ul>
+<li>单调栈的本质是空间换时间，因为在遍历的过程中需要用一个栈来记录右边第一个比当前元素高的元素，优点是整个数组只需要遍历一次。</li>
+<li>更直白来说，就是用一个栈来记录我们遍历过的元素，因为我们遍历数组的时候，我们不知道之前都遍历了哪些元素，以至于遍历一个元素找不到是不是之前遍历过一个更小的，所以我们需要用一个容器（这里用单调栈）来记录我们遍历过的元素。</li>
+</ul>
+<p>核心点：</p>
+<ul>
+<li>单调栈里存放的元素是什么？<br>单调栈里只需要存放元素的下标 i 就可以了，如果需要使用对应的元素，直接 T[i] 就可以获取。</li>
+<li>单调栈里元素是递增呢？ 还是递减呢？<br>顺序的描述为<strong>从栈头到栈底</strong>的顺序，这里要使用递增循序，因为只有递增的时候，栈里要加入一个元素 i 的时候，才知道栈顶元素在数组中右面第一个比栈顶元素大的元素是 i。</li>
+</ul>
+<p>单调栈满足：</p>
+<ul>
+<li>栈中存的是“还没找到更高温度的那些天”，即：这些天还在等更暖的一天。当发现某天比他们“暖”，就将他们移出栈，并更新它们的等待时间。</li>
+<li>栈保持的是“温度单调递减”，因为只有温度递减才会出现“等待更暖的天”。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def dailyTemperatures(self, temperatures: List[int]) -&gt; List[int]:</span><br><span class="line">        stack = []</span><br><span class="line"></span><br><span class="line">        res = [0] * len(temperatures)</span><br><span class="line"></span><br><span class="line">        for i in range(0, len(temperatures)):</span><br><span class="line">            while len(stack) &gt; 0:</span><br><span class="line">                if temperatures[stack[-1]] &lt; temperatures[i]:</span><br><span class="line">                    res[stack[-1]] = i - stack[-1]</span><br><span class="line">                    stack.pop()</span><br><span class="line">                else:</span><br><span class="line">                    break</span><br><span class="line">            </span><br><span class="line">            stack.append(i)</span><br><span class="line">        return res</span><br></pre></td></tr></table></figure>
+<p>以上代码为精简版，即如果栈不为空，就一直比较：</p>
+<ul>
+<li>如果当前元素比栈底元素大，说明找到了第一个大于当前元素的元素，就可以更新结果。为了保证栈的递增性，就要把当前元素移出，然后再循环判断</li>
+<li>如果当前元素比栈底元素小，说明当前元素不满足要求，跳出循环</li>
+<li>最后在 while 循环外将当前元素添加到栈中（无论如何都需要添加）</li>
+</ul>
+<h1 id="496-下一个更大元素-I"><a href="#496-下一个更大元素-I" class="headerlink" title="496.下一个更大元素 I"></a>496.下一个更大元素 I</h1><blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-greater-element-i/" >link<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>给你两个 没有重复元素 的数组 nums1 和 nums2 ，其中nums1 是 nums2 的子集。请你找出 nums1 中每个元素在 nums2 中的下一个比其大的值。nums1 中数字 x 的下一个更大元素是指 x 在 nums2 中对应位置的右边的第一个比 x 大的元素。如果不存在，对应位置输出 -1 。</p>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>类似于上一题，首先针对 nums2 中的每一个元素，在其右边找到第一个大于当前元素的元素 存放在 res 中，如果找不到就存 -1（默认值为 -1）。然后对于 nums1 中的每一个元素，先在 nums2 中找到下标，然后将 res 中对应下标的值存到新的 res 中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -&gt; List[int]:</span><br><span class="line">        res = [-1] * len(nums2)</span><br><span class="line">        stack = []</span><br><span class="line">        for i in range(len(nums2)):</span><br><span class="line">            while len(stack) &gt; 0:</span><br><span class="line">                if nums2[stack[-1]] &lt; nums2[i]:</span><br><span class="line">                    res[stack[-1]] = nums2[i]</span><br><span class="line">                    stack.pop()</span><br><span class="line">                else:</span><br><span class="line">                    break</span><br><span class="line">                </span><br><span class="line">            stack.append(i)</span><br><span class="line">        </span><br><span class="line">        new_res = []</span><br><span class="line">        # 也可以使用哈希表来存储</span><br><span class="line">        for i in nums1:</span><br><span class="line">            cur = res[nums2.index(i)]</span><br><span class="line">            new_res.append(cur)</span><br><span class="line">        return new_res</span><br></pre></td></tr></table></figure>
+
+<h1 id="503-下一个更大元素-II"><a href="#503-下一个更大元素-II" class="headerlink" title="503. 下一个更大元素 II"></a>503. 下一个更大元素 II</h1><blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-greater-element-ii/description/" >link<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>给定一个循环数组（最后一个元素的下一个元素是数组的第一个元素），输出每个元素的下一个更大元素。数字 x 的下一个更大的元素是按数组遍历顺序，这个数字之后的第一个比它更大的数，这意味着你应该循环地搜索它的下一个更大的数。如果不存在，则输出 -1。</p>
+<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>要处理循环数组，可以遍历当前数组两次来模拟（相当于是把两个相同的数组拼在一起）。每次处理下标是，都需要取余操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def nextGreaterElements(self, nums: List[int]) -&gt; List[int]:</span><br><span class="line">        stack = []</span><br><span class="line">        n = len(nums)</span><br><span class="line">        res = [-1] * n</span><br><span class="line">        for i in range(n * 2):</span><br><span class="line">            while len(stack) &gt; 0:</span><br><span class="line">                cur = stack[-1]</span><br><span class="line">                if nums[cur % n] &lt; nums[i % n]:</span><br><span class="line">                    res[cur % n] = nums[i % n]</span><br><span class="line">                    stack.pop()</span><br><span class="line">                else:</span><br><span class="line">                    break</span><br><span class="line">            </span><br><span class="line">            stack.append(i)</span><br><span class="line">        </span><br><span class="line">        return res</span><br></pre></td></tr></table></figure>
+
+<h1 id="42-接雨水"><a href="#42-接雨水" class="headerlink" title="42. 接雨水"></a>42. 接雨水</h1><blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://leetcode.cn/problems/trapping-rain-water/description/" >link<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p>
+<p>示例：</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/2025-07-17-13-56-44.png"
+                        alt="2025-07-17-13-56-44"
+                 ></p>
+<blockquote>
+<p>输入：height &#x3D; [0,1,0,2,1,0,1,3,2,1,2,1]<br>输出：6<br>解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。   </p>
+</blockquote>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路 1"></a>思路 1</h2><p>核心点：每一根柱子上方能接多少水，取决于：它<strong>左边最高的柱子</strong> 和 <strong>右边最高的柱子</strong> 的较小值，减去自己的高度，即 water[i] &#x3D; min(max_left[i], max_right[i]) - height[i]</p>
+<p>所以先正向和反向都遍历一遍，找到当前柱子左右两边的最大值，然后通过上述公式计算即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def trap(self, height: List[int]) -&gt; int:</span><br><span class="line">        n = len(height)</span><br><span class="line">        if n == 0:</span><br><span class="line">            return 0</span><br><span class="line">        </span><br><span class="line">        max_left = [0] * n</span><br><span class="line">        max_right = [0] * n</span><br><span class="line"></span><br><span class="line">        # 从左向右预处理左侧最大高度</span><br><span class="line">        max_left[0] = height[0]</span><br><span class="line">        for i in range(1, n):</span><br><span class="line">            max_left[i] = max(max_left[i - 1], height[i])</span><br><span class="line"></span><br><span class="line">        # 从右向左预处理右侧最大高度</span><br><span class="line">        max_right[n - 1] = height[n - 1]</span><br><span class="line">        for i in range(n - 2, -1, -1):</span><br><span class="line">            max_right[i] = max(max_right[i + 1], height[i])</span><br><span class="line"></span><br><span class="line">        # 计算每个柱子上方可接雨水量</span><br><span class="line">        total_water = 0</span><br><span class="line">        for i in range(n):</span><br><span class="line">            water = min(max_left[i], max_right[i]) - height[i]</span><br><span class="line">            if water &gt; 0:</span><br><span class="line">                total_water += water</span><br><span class="line"></span><br><span class="line">        return total_water</span><br></pre></td></tr></table></figure>
+
+<p>这种方法是按<strong>列</strong>来进行计算的。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/2025-07-17-15-02-16.png"
+                        alt="2025-07-17-15-02-16"
+                 ></p>
+<h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路 2"></a>思路 2</h2><p>使用一个单调递减栈（存的是下标）来找出：</p>
+<ul>
+<li>当前柱子是否可以构成一个“接水凹槽”</li>
+<li>如果可以，我们就计算凹槽中间那一段的接水量</li>
+</ul>
+<p>每次遇到更高的柱子，就回头找左边有没有柱子能形成一对“墙”。</p>
+<p>假设当前遍历到下标 i，高度为 height[i]：</p>
+<ul>
+<li>如果 栈为空 或 当前高度 &lt;&#x3D; 栈顶高度：<ul>
+<li>入栈（表示还没形成接水凹槽）。</li>
+</ul>
+</li>
+<li>如果 当前高度 &gt; 栈顶高度：<ul>
+<li>说明可能形成“接水凹槽”，开始出栈并计算。</li>
+</ul>
+</li>
+<li>每次出栈后：<ul>
+<li>栈顶是 凹槽的左墙</li>
+<li>当前是 右墙</li>
+<li>被出栈的那个柱子是 底部</li>
+</ul>
+</li>
+<li>水的计算方式：<ul>
+<li>高度 &#x3D; min(左墙高度, 右墙高度) - 底部高度</li>
+<li>宽度 &#x3D; 右墙索引 - 左墙索引 - 1</li>
+<li>水量 &#x3D; 高度 × 宽度</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def trap(self, height: List[int]) -&gt; int:</span><br><span class="line">        stack = []</span><br><span class="line">        water = 0</span><br><span class="line"></span><br><span class="line">        for i in range(len(height)):</span><br><span class="line">            </span><br><span class="line">            while stack:</span><br><span class="line">                if height[stack[-1]] &lt; height[i]:</span><br><span class="line">                    last = stack.pop()</span><br><span class="line">                    # 注意底部出栈后，可能没有左墙，则需要跳出当前循环</span><br><span class="line">                    if not stack:</span><br><span class="line">                        break</span><br><span class="line">                    </span><br><span class="line">                    w = i - stack[-1] - 1</span><br><span class="line">                    # last 是底部，i 是右墙，stack[-1] 是左墙</span><br><span class="line">                    h = min(height[stack[-1]], height[i]) - height[last]</span><br><span class="line"></span><br><span class="line">                    water += h * w</span><br><span class="line">                else:</span><br><span class="line">                    break</span><br><span class="line">            stack.append(i)</span><br><span class="line">        </span><br><span class="line">        return water</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这种方法是按行来计算的：</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/2025-07-17-15-19-13.png"
+                        alt="2025-07-17-15-19-13"
+                 ></p>
+<h1 id="84-柱状图中最大的矩形"><a href="#84-柱状图中最大的矩形" class="headerlink" title="84.柱状图中最大的矩形"></a>84.柱状图中最大的矩形</h1><blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://leetcode.cn/problems/largest-rectangle-in-histogram/description/" >link<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。求在该柱状图中，能够勾勒出来的矩形的最大面积。</p>
+<p>示例 1：</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/2025-07-17-15-34-12.png"
+                        alt="2025-07-17-15-34-12"
+                 ></p>
+<blockquote>
+<p>输入：heights &#x3D; [2,1,5,6,2,3]<br>输出：10<br>解释：最大的矩形为图中红色区域，面积为 10  </p>
+</blockquote>
+<p>示例 2：</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/2025-07-17-15-34-50.png"
+                        alt="2025-07-17-15-34-50"
+                 ></p>
+<blockquote>
+<p>输入： heights &#x3D; [2,4]<br>输出： 4  </p>
+</blockquote>
+<h2 id="思路-1-1"><a href="#思路-1-1" class="headerlink" title="思路 1"></a>思路 1</h2><p>目标： 找出每个柱子向左和向右能延伸的最大范围，即为<strong>当前柱子</strong>能构成的最大矩形。使用单调栈，只不过从栈头到栈尾是递增的。</p>
+<ul>
+<li>当前柱子高度 比栈顶高 → 继续入栈（栈保持递增）</li>
+<li>当前柱子高度 比栈顶低 → 出栈，并计算以该柱子（出栈的那个柱子）为高的最大矩形<ul>
+<li>矩形的高：当前出栈的柱子</li>
+<li>矩形宽的起点：出栈之后的栈顶</li>
+<li>矩形宽的终点：当前 i</li>
+<li>注意，如果出栈的柱子下标和当前 i 不相邻，则说明之前一定有一个（或多个）更高的柱子出栈过，此时就是跨柱子框选矩形的情况了。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def largestRectangleArea(self, heights: List[int]) -&gt; int:</span><br><span class="line">        size = 0</span><br><span class="line">        heights = [0] + heights + [0]</span><br><span class="line">        stack = []</span><br><span class="line"></span><br><span class="line">        for i in range(len(heights)):</span><br><span class="line">            while stack:</span><br><span class="line">                if heights[stack[-1]] &gt; heights[i]:</span><br><span class="line">                    last = stack.pop()</span><br><span class="line">                    w = i - stack[-1] - 1</span><br><span class="line">                    h = heights[last]</span><br><span class="line">                    cur = h * w</span><br><span class="line">                    size = max(cur, size)</span><br><span class="line">                else:</span><br><span class="line">                    break</span><br><span class="line">            </span><br><span class="line">            stack.append(i)</span><br><span class="line"></span><br><span class="line">        return size</span><br></pre></td></tr></table></figure>
+
+<p>注意，这里需要在 heights 的左右各添加一个哨兵 0，用于处理边界的情况。对比 接雨水 和本题：</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/2025-07-17-16-14-33.png"
+                        alt="2025-07-17-16-14-33"
+                 ></p>
+<ul>
+<li><p><strong>柱状图最大矩形</strong> 需要哨兵：</p>
+<ul>
+<li>本质：每根柱子都可能是最大矩形的“最矮墙”</li>
+<li>所以每根柱子都要参与处理</li>
+<li>但单调栈不会主动处理栈中剩下的元素，必须手动“清栈”</li>
+<li>加个尾部哨兵 0 会自动触发清栈逻辑，不需要额外代码</li>
+</ul>
+</li>
+<li><p><strong>接雨水</strong> 不需要哨兵：</p>
+<ul>
+<li>本质：只在 当前柱子比栈顶高 时才处理接水逻辑</li>
+<li>不满足条件（右墙不高）就跳过</li>
+<li>到最后一根柱子后，也不需要强制处理栈里剩下的柱子</li>
+<li>因为没有右墙就不会装水</li>
+</ul>
+</li>
+</ul>
+<h2 id="思路-2-1"><a href="#思路-2-1" class="headerlink" title="思路 2"></a>思路 2</h2><p>同样，本题也可以类似于 接雨水，对每个柱子，找到<strong>左右两边</strong>第一个小于当前柱子的柱子。然后构建的矩形的高为当前柱子，，宽度是能延伸到左右两边第一个比它小的柱子之间的范围。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def largestRectangleArea(self, heights: List[int]) -&gt; int:</span><br><span class="line">        n = len(heights)</span><br><span class="line">        left = [-1] * n      # 左边第一个比它小的位置</span><br><span class="line">        right = [n] * n      # 右边第一个比它小的位置</span><br><span class="line">        stack = []</span><br><span class="line"></span><br><span class="line">        # 计算 left[]</span><br><span class="line">        for i in range(n):</span><br><span class="line">            while stack and heights[stack[-1]] &gt;= heights[i]:</span><br><span class="line">                stack.pop()</span><br><span class="line">            left[i] = stack[-1] if stack else -1</span><br><span class="line">            stack.append(i)</span><br><span class="line"></span><br><span class="line">        stack.clear()</span><br><span class="line"></span><br><span class="line">        # 计算 right[]</span><br><span class="line">        for i in reversed(range(n)):</span><br><span class="line">            while stack and heights[stack[-1]] &gt;= heights[i]:</span><br><span class="line">                stack.pop()</span><br><span class="line">            right[i] = stack[-1] if stack else n</span><br><span class="line">            stack.append(i)</span><br><span class="line"></span><br><span class="line">        # 枚举每个柱子作为矩形的“最矮边”</span><br><span class="line">        max_area = 0</span><br><span class="line">        for i in range(n):</span><br><span class="line">            width = right[i] - left[i] - 1</span><br><span class="line">            area = heights[i] * width</span><br><span class="line">            max_area = max(max_area, area)</span><br><span class="line"></span><br><span class="line">        return max_area</span><br></pre></td></tr></table></figure>
+
+                    
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                【代码随想录】单调栈
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                Leetcode/monotonic-stack/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">wbfwonderful</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2025-07-16 21:47</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank">
+                        
+                            <i class="fa-brands fa-creative-commons"></i>
+                            <i class="fa-brands fa-creative-commons-by"></i>
+                            <i class="fa-brands fa-creative-commons-nc"></i>
+                            <i class="fa-brands fa-creative-commons-sa"></i>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/blog/tags/stack/">stack</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/blog/Leetcode/greedy6/"
+                                   title="【代码随想录】贪心算法6"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">【代码随想录】贪心算法6</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#739-%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6"><span class="nav-number">1.</span> <span class="nav-text">739. 每日温度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#496-%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0-I"><span class="nav-number">2.</span> <span class="nav-text">496.下一个更大元素 I</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#503-%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0-II"><span class="nav-number">3.</span> <span class="nav-text">503. 下一个更大元素 II</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="nav-number">3.1.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#42-%E6%8E%A5%E9%9B%A8%E6%B0%B4"><span class="nav-number">4.</span> <span class="nav-text">42. 接雨水</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-number">4.1.</span> <span class="nav-text">思路 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="nav-number">4.2.</span> <span class="nav-text">思路 2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E6%9C%80%E5%A4%A7%E7%9A%84%E7%9F%A9%E5%BD%A2"><span class="nav-number">5.</span> <span class="nav-text">84.柱状图中最大的矩形</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1-1"><span class="nav-number">5.1.</span> <span class="nav-text">思路 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2-1"><span class="nav-number">5.2.</span> <span class="nav-text">思路 2</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2024</span>&nbsp;-&nbsp;2025
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/blog/">wbfwonderful</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+                <a target="_blank" rel="nofollow" href="https://github.com">
+            
+            本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/blog/images/brands/github.png"></span> 提供部署服务
+            
+                </a>
+            
+        </div>
+    
+
+    
+        <div class="count-info info-item">
+            
+                <span class="count-item border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">59.2k</span>
+                </span>
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#739-%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6"><span class="nav-number">1.</span> <span class="nav-text">739. 每日温度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#496-%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0-I"><span class="nav-number">2.</span> <span class="nav-text">496.下一个更大元素 I</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#503-%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0-II"><span class="nav-number">3.</span> <span class="nav-text">503. 下一个更大元素 II</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="nav-number">3.1.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#42-%E6%8E%A5%E9%9B%A8%E6%B0%B4"><span class="nav-number">4.</span> <span class="nav-text">42. 接雨水</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-number">4.1.</span> <span class="nav-text">思路 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="nav-number">4.2.</span> <span class="nav-text">思路 2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E6%9C%80%E5%A4%A7%E7%9A%84%E7%9F%A9%E5%BD%A2"><span class="nav-number">5.</span> <span class="nav-text">84.柱状图中最大的矩形</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1-1"><span class="nav-number">5.1.</span> <span class="nav-text">思路 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-2-1"><span class="nav-number">5.2.</span> <span class="nav-text">思路 2</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/lazyload.min.js"></script>
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/copyright-info.min.js"></script>
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>
