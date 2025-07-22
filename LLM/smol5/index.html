@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="wbfwonderful">
+    
+    <title>
+        
+            【Smol Course】5-视觉语言模型 |
+        
+        wbfwonderful&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/blog/css/style.css">
+
+    
+        <link rel="shortcut icon" href="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile-transparent.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/brands.min.css">
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"wbfwonderful.github.io","root":"/blog/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"wbfwonderful's Blog","author":"wbfwonderful","avatar":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg","logo":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg","favicon":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile-transparent.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","categories":"/categories || fa-solid fa-layer-group","photos":"/photos || fa-solid fa-image","about":"/about || fa-solid fa-user-graduate"},"first_screen":{"enable":true,"background_img":"/images/screen.gif","background_img_dark":"/images/screen.gif","description":null,"hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/wbfwonderful","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":"wangbf23@mail2.sysu.edu.cn","bilibili":"https://space.bilibili.com/214019111"}},"scroll":{"progress_bar":false,"percent":false,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"created || fa-solid fa-arrow-up-from-bracket","post_datetime_format":"YYYY-MM-DD HH:mm:ss"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null,"icon":null},"created_datetime_icon":"fa-solid fa-arrow-up-from-bracket","updated_datetime_icon":"fa-solid fa-arrows-rotate"},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2024,"word_count":true,"site_deploy":{"enable":true,"provider":"github","url":"https://github.com"},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":["/css/custom-photos.css"],"js":[null]},"root":"/blog","source_data":{"photos":[{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg","name":"头像"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/hainan-warship.jpg","name":"海南舰"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/mayday.jpg","name":"5525深圳站"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/balls.gif","name":"五月天五个球球"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/JJ20.jpg","name":"JJ20深圳站"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/HKDisney.jpg","name":"香港迪士尼"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/ktv.jpg","name":"笑忘歌"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/lights.jpg","name":"2025自贡灯会"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/fireworks.jpg","name":"2025新年快乐！"}]},"version":"4.2.4"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/blog/">
+                    <img src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg">
+                </a>
+            
+            <a class="site-name border-box" href="/blog/">
+               wbfwonderful&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/tags">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/categories">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                
+                                分类
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/photos">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-image"></i>
+                                
+                                相册
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/tags">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tags"></i>
+                                </span>
+                            
+                            标签
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/categories">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                </span>
+                            
+                            分类
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/photos">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-image"></i>
+                                </span>
+                            
+                            相册
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        【Smol Course】5-视觉语言模型
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">wbfwonderful</span>
+                                
+                                    <span class="author-badge">Lv4</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-arrow-up-from-bracket"></i>&nbsp;
+                <span class="datetime">2025-07-22 15:03:01</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
+                    <span class="datetime" data-updated="Tue Jul 22 2025 21:44:36 GMT+0800">2025-07-22 21:44:36</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/blog/categories/LLM/">LLM</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/blog/tags/trl/">trl</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>3.4k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>16 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body code-block-unshrink">
+                    
+
+                    
+                         <h1 id="VLM-Usage"><a href="#VLM-Usage" class="headerlink" title="VLM Usage"></a>VLM Usage</h1><p>视觉语言模型（vlm）弥合了图像和文本之间的差距，实现了高级任务，如生成图像字幕，基于视觉回答问题，或理解文本和视觉数据之间的关系。它们的架构旨在无缝地处理这两种模式。</p>
+<h2 id="Chat-Format"><a href="#Chat-Format" class="headerlink" title="Chat Format"></a>Chat Format</h2><p>许多 vlm 的结构以类似聊天机器人的方式进行交互，从而增强了可用性。该格式包括：</p>
+<ul>
+<li>为模型设置角色或上下文的<strong>系统消息</strong>，例如“您是分析可视化数据的助手”。</li>
+<li>结合文本输入和相关图像的<strong>用户查询</strong>。</li>
+<li><strong>辅助响应</strong>提供来自多模态分析的文本输出。</li>
+</ul>
+<p>这种会话结构是直观的，符合用户的期望，特别是对于交互式应用程序，如客户服务或教育工具。下面是一个格式化输入的示例</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;role&quot;</span><span class="punctuation">:</span> <span class="string">&quot;system&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;content&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;text&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;text&quot;</span><span class="punctuation">:</span> <span class="string">&quot;You are a Vision Language Model specialized in interpreting visual data from chart images...&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;role&quot;</span><span class="punctuation">:</span> <span class="string">&quot;user&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;content&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">            <span class="punctuation">&#123;</span><span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;image&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;image&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&lt;image_data&gt;&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="punctuation">&#123;</span><span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;text&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;text&quot;</span><span class="punctuation">:</span> <span class="string">&quot;What is the highest value in the bar chart?&quot;</span><span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;role&quot;</span><span class="punctuation">:</span> <span class="string">&quot;assistant&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;content&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;text&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;text&quot;</span><span class="punctuation">:</span> <span class="string">&quot;42&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+
+<p>vlm 还可以通过调整输入结构来适应顺序或并行视觉输入，从而处理多个图像甚至视频。对于视频，帧可以作为单独的图像进行提取和处理，同时保持时间顺序。</p>
+<h2 id="Practice"><a href="#Practice" class="headerlink" title="Practice"></a>Practice</h2><p>加载模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch, PIL</span><br><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoProcessor, AutoModelForVision2Seq, BitsAndBytesConfig</span><br><span class="line"><span class="keyword">from</span> transformers.image_utils <span class="keyword">import</span> load_image</span><br><span class="line"></span><br><span class="line">device = (</span><br><span class="line">    <span class="string">&quot;cuda&quot;</span></span><br><span class="line">    <span class="keyword">if</span> torch.cuda.is_available()</span><br><span class="line">    <span class="keyword">else</span> <span class="string">&quot;mps&quot;</span> <span class="keyword">if</span> torch.backends.mps.is_available() <span class="keyword">else</span> <span class="string">&quot;cpu&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">model_name = <span class="string">&quot;HuggingFaceTB/SmolVLM-Instruct&quot;</span></span><br><span class="line">model = AutoModelForVision2Seq.from_pretrained(</span><br><span class="line">    model_name,</span><br><span class="line">    cache_dir=<span class="string">&quot;D:\study\smol-course\data\SmolVLM-Instruct&quot;</span></span><br><span class="line">).to(device)</span><br><span class="line"></span><br><span class="line">processor = AutoProcessor.from_pretrained(<span class="string">&quot;HuggingFaceTB/SmolVLM-Instruct&quot;</span>, cache_dir=<span class="string">&quot;D:\study\smol-course\data\SmolVLM-Instruct&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(processor.image_processor.size)</span><br></pre></td></tr></table></figure>
+
+<p>AutoProcessor.from_pretrained 自动加载该模型所需的图像预处理器和文本分词器，封装为一个 processor 对象，后续可直接用它将输入图像 + 问题处理成模型所需的格式。</p>
+<h3 id="处理单张图像"><a href="#处理单张图像" class="headerlink" title="处理单张图像"></a>处理单张图像</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Load  one image</span></span><br><span class="line">image1 = load_image(image_url1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create input messages</span></span><br><span class="line">messages = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>,</span><br><span class="line">        <span class="string">&quot;content&quot;</span>: [</span><br><span class="line">            &#123;<span class="string">&quot;type&quot;</span>: <span class="string">&quot;image&quot;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span>, <span class="string">&quot;text&quot;</span>: <span class="string">&quot;Can you describe the image?&quot;</span>&#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Prepare inputs</span></span><br><span class="line">prompt = processor.apply_chat_template(messages, add_generation_prompt=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">inputs = processor(text=prompt, images=[image1], return_tensors=<span class="string">&quot;pt&quot;</span>)</span><br><span class="line"></span><br><span class="line">inputs = inputs.to(device)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Generate outputs</span></span><br><span class="line">generated_ids = model.generate(**inputs, max_new_tokens=<span class="number">500</span>)</span><br><span class="line">generated_texts = processor.batch_decode(</span><br><span class="line">    generated_ids,</span><br><span class="line">    skip_special_tokens=<span class="literal">True</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(generated_texts)</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li>图像数据 并不是放在 messages 里，而是通过 processor(…, images&#x3D;[image1]) 传进去的，messages 只是 告诉模型“这里应该有一张图”，实际的图像张量（token）由 processor 自动插入并对齐。</li>
+<li>processor.apply_chat_template 本质上是将 messages 转换为：<code>&lt;|user|&gt; \&lt;image&gt; Can you describe the image? &lt;|assistant|&gt;</code><ul>
+<li>&lt;image&gt; 是一个 特殊 token 占位符，不是图像数据，而是告诉模型“这里会插入图像的视觉 token”</li>
+<li>接下来在 processor(text&#x3D;prompt, images&#x3D;[image1], return_tensors&#x3D;”pt”) 中：<ul>
+<li>images&#x3D;[image1]：真正传入图像数据的位置</li>
+<li>processor 会自动将 image1：<ul>
+<li>resize、normalize</li>
+<li>转为 tensor</li>
+<li>并对齐到 prompt 中的 &lt;image&gt; token 位置</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="处理多张图像"><a href="#处理多张图像" class="headerlink" title="处理多张图像"></a>处理多张图像</h3><p>将 message 更改为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">messages = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>,</span><br><span class="line">        <span class="string">&quot;content&quot;</span>: [</span><br><span class="line">            &#123;<span class="string">&quot;type&quot;</span>: <span class="string">&quot;image&quot;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&quot;type&quot;</span>: <span class="string">&quot;image&quot;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span>, <span class="string">&quot;text&quot;</span>: <span class="string">&quot;What event do they both represent?&quot;</span>&#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>添加了一个 iamge 占位符，相应的，在调用 processor 时，也要传入两个 image 对象：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">prompt = processor.apply_chat_template(messages, add_generation_prompt=<span class="literal">True</span>)</span><br><span class="line">inputs = processor(text=prompt, images=[image1, image2], return_tensors=<span class="string">&quot;pt&quot;</span>)</span><br><span class="line">inputs = inputs.to(device)</span><br></pre></td></tr></table></figure>
+
+<h3 id="处理视频"><a href="#处理视频" class="headerlink" title="处理视频"></a>处理视频</h3><p>抽取视频关键帧，将其作为<strong>多张图像</strong>来传递给模型。首先定义抽帧和缩放函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.display <span class="keyword">import</span> Video</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">extract_frames</span>(<span class="params">video_path, max_frames=<span class="number">50</span>, target_size=<span class="literal">None</span></span>):</span><br><span class="line">    cap = cv2.VideoCapture(video_path)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> cap.isOpened():</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">f&quot;Could not open video: <span class="subst">&#123;video_path&#125;</span>&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    total_frames = <span class="built_in">int</span>(cap.get(cv2.CAP_PROP_FRAME_COUNT))</span><br><span class="line">    frame_indices = np.linspace(<span class="number">0</span>, total_frames - <span class="number">1</span>, max_frames, dtype=<span class="built_in">int</span>)</span><br><span class="line"></span><br><span class="line">    frames = []</span><br><span class="line">    <span class="keyword">for</span> idx <span class="keyword">in</span> frame_indices:</span><br><span class="line">        cap.<span class="built_in">set</span>(cv2.CAP_PROP_POS_FRAMES, idx)</span><br><span class="line">        ret, frame = cap.read()</span><br><span class="line">        <span class="keyword">if</span> ret:</span><br><span class="line">            frame = PIL.Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))</span><br><span class="line">            <span class="keyword">if</span> target_size:</span><br><span class="line">                frames.append(resize_and_crop(frame, target_size))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                frames.append(frame)</span><br><span class="line">    cap.release()</span><br><span class="line">    <span class="keyword">return</span> frames</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">resize_and_crop</span>(<span class="params">image, target_size</span>):</span><br><span class="line">    width, height = image.size</span><br><span class="line">    scale = target_size / <span class="built_in">min</span>(width, height)</span><br><span class="line">    image = image.resize((<span class="built_in">int</span>(width * scale), <span class="built_in">int</span>(height * scale)), PIL.Image.Resampling.LANCZOS)</span><br><span class="line">    left = (image.width - target_size) // <span class="number">2</span></span><br><span class="line">    top = (image.height - target_size) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> image.crop((left, top, left + target_size, top + target_size))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>extract_frames 将视频抽帧后，使用 opencv 来进行读取，并且转换为 numpy 数组。 </li>
+<li>resize_and_crop 根据需要将视频帧进行裁剪</li>
+</ul>
+<p>接下来定义了一个 generate_response 函数，用于生成回答。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">generate_response</span>(<span class="params">model, processor, frames, question</span>):</span><br><span class="line"></span><br><span class="line">    image_tokens = [&#123;<span class="string">&quot;type&quot;</span>: <span class="string">&quot;image&quot;</span>&#125; <span class="keyword">for</span> _ <span class="keyword">in</span> frames]</span><br><span class="line">    messages = [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>,</span><br><span class="line">            <span class="string">&quot;content&quot;</span>: [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="string">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span>, </span><br><span class="line">                    <span class="string">&quot;text&quot;</span>: <span class="string">&quot;Following are the frames of a video in temporal order.&quot;</span></span><br><span class="line">                &#125;, </span><br><span class="line">                    *image_tokens, </span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="string">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;text&quot;</span>: question</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">    inputs = processor(</span><br><span class="line">        text=processor.apply_chat_template(messages, add_generation_prompt=<span class="literal">True</span>),</span><br><span class="line">        images=frames,</span><br><span class="line">        return_tensors=<span class="string">&quot;pt&quot;</span></span><br><span class="line">    ).to(model.device)</span><br><span class="line"></span><br><span class="line">    outputs = model.generate(</span><br><span class="line">        **inputs, max_new_tokens=<span class="number">100</span>, num_beams=<span class="number">5</span>, temperature=<span class="number">0.7</span>, do_sample=<span class="literal">True</span>, use_cache=<span class="literal">True</span></span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">return</span> processor.decode(outputs[<span class="number">0</span>], skip_special_tokens=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>注意： </p>
+<ul>
+<li>message 里面的 image_tokens，重复了 len(frames) 次，即将视频帧作为多张图像传入。</li>
+<li>generate 的参数：<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/2025-07-22-16-08-10.png"
+                        alt="2025-07-22-16-08-10"
+                 ></li>
+</ul>
+<h3 id="QwenVL-处理视频"><a href="#QwenVL-处理视频" class="headerlink" title="QwenVL 处理视频"></a>QwenVL 处理视频</h3><p>Qwen 支持多种方法传入视频：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Messages containing a images list as a video and a text query</span></span><br><span class="line">messages = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>,</span><br><span class="line">        <span class="string">&quot;content&quot;</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;type&quot;</span>: <span class="string">&quot;video&quot;</span>,</span><br><span class="line">                <span class="string">&quot;video&quot;</span>: [</span><br><span class="line">                    <span class="string">&quot;file:///path/to/frame1.jpg&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;file:///path/to/frame2.jpg&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;file:///path/to/frame3.jpg&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;file:///path/to/frame4.jpg&quot;</span>,</span><br><span class="line">                ],</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;<span class="string">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span>, <span class="string">&quot;text&quot;</span>: <span class="string">&quot;Describe this video.&quot;</span>&#125;,</span><br><span class="line">        ],</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Messages containing a local video path and a text query</span></span><br><span class="line">messages = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>,</span><br><span class="line">        <span class="string">&quot;content&quot;</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;type&quot;</span>: <span class="string">&quot;video&quot;</span>,</span><br><span class="line">                <span class="string">&quot;video&quot;</span>: <span class="string">&quot;file:///path/to/video1.mp4&quot;</span>,</span><br><span class="line">                <span class="string">&quot;max_pixels&quot;</span>: <span class="number">360</span> * <span class="number">420</span>,</span><br><span class="line">                <span class="string">&quot;fps&quot;</span>: <span class="number">1.0</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;<span class="string">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span>, <span class="string">&quot;text&quot;</span>: <span class="string">&quot;Describe this video.&quot;</span>&#125;,</span><br><span class="line">        ],</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Messages containing a video url and a text query</span></span><br><span class="line">messages = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>,</span><br><span class="line">        <span class="string">&quot;content&quot;</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;type&quot;</span>: <span class="string">&quot;video&quot;</span>,</span><br><span class="line">                <span class="string">&quot;video&quot;</span>: <span class="string">&quot;https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen2-VL/space_woaudio.mp4&quot;</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;<span class="string">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span>, <span class="string">&quot;text&quot;</span>: <span class="string">&quot;Describe this video.&quot;</span>&#125;,</span><br><span class="line">        ],</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>核心处理方法为 process_vision_info：</p>
+<ul>
+<li>下载&#x2F;读取本地视频或图片帧</li>
+<li>自动抽帧（基于 message 中给的信息（如果有，例如上述的第二种情况））</li>
+<li>标准化图片尺寸（基于 message 中给的信息（如果有，例如上述的第二种情况））</li>
+<li>返回三类信息：<ul>
+<li>image_inputs: 图像列表（如果有）</li>
+<li>video_inputs: 视频帧图像列表（tensor 格式）</li>
+<li>video_kwargs: 与视频处理相关的参数（如帧时间戳、维度等）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">image_inputs, video_inputs, video_kwargs = process_vision_info(messages, return_video_kwargs=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="VLM-Fine-Tuning"><a href="#VLM-Fine-Tuning" class="headerlink" title="VLM Fine-Tuning"></a>VLM Fine-Tuning</h1><h2 id="Efficient-Fine-Tuning"><a href="#Efficient-Fine-Tuning" class="headerlink" title="Efficient Fine-Tuning"></a>Efficient Fine-Tuning</h2><h3 id="Quantization"><a href="#Quantization" class="headerlink" title="Quantization"></a>Quantization</h3><p>量化降低了模型权重和激活的精度，显著降低了内存使用并加快了计算速度。例如，从 float32 切换到 bfloat16 可以在保持性能的同时减少每个参数的内存需求。对于更激进的压缩，可以使用 8 位和 4 位量化，进一步减少内存使用，但代价是一定的准确性。这些技术可以应用于模型和优化器设置，从而在有限的资源下对硬件进行有效的训练。</p>
+<h3 id="PEFT-LoRA"><a href="#PEFT-LoRA" class="headerlink" title="PEFT &amp; LoRA"></a>PEFT &amp; LoRA</h3><p>LoRA （Low-Rank Adaptation）专注于学习紧凑的秩分解矩阵，同时保持原始模型权值不变。这大大减少了可训练参数的数量，显著减少了资源需求。当LoRA与PEFT集成时，只需调整一小部分可训练的参数子集，就可以对大型模型进行微调。这种方法对于特定于任务的调整特别有效，在保持性能的同时将数十亿个可训练参数减少到数百万个。</p>
+<h3 id="Batch-Size-Optimization"><a href="#Batch-Size-Optimization" class="headerlink" title="Batch Size Optimization"></a>Batch Size Optimization</h3><p>为了优化批大小以进行微调，可以从一个较大的值开始，并在发生内存不足（OOM）错误时减小它。通过增加 gradient_accumulation_steps 进行补偿，有效地维护多个更新的总批大小。此外，启用 gradient_checkpointing，通过在反向传递期间重新计算中间状态来降低内存使用，以减少计算时间来减少激活内存需求。这些策略最大限度地提高了硬件利用率，并有助于克服内存限制。</p>
+<p>简单来说，batch size 过大会导致 OOM（Out-Of-Memory），可以使用以下策略：</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/2025-07-22-20-40-07.png"
+                        alt="2025-07-22-20-40-07"
+                 ></p>
+<p>设置如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> TrainingArguments</span><br><span class="line"></span><br><span class="line">training_args = TrainingArguments(</span><br><span class="line">    output_dir=<span class="string">&quot;./fine_tuned_model&quot;</span>,  <span class="comment"># Directory for model checkpoints</span></span><br><span class="line">    per_device_train_batch_size=<span class="number">4</span>,   <span class="comment"># Batch size per device (GPU/TPU)</span></span><br><span class="line">    num_train_epochs=<span class="number">3</span>,              <span class="comment"># Total training epochs</span></span><br><span class="line">    learning_rate=<span class="number">5e-5</span>,              <span class="comment"># Learning rate</span></span><br><span class="line">    save_steps=<span class="number">1000</span>,                 <span class="comment"># Save checkpoint every 1000 steps</span></span><br><span class="line">    bf16=<span class="literal">True</span>,                       <span class="comment"># Use mixed precision for training</span></span><br><span class="line">    gradient_checkpointing=<span class="literal">True</span>,     <span class="comment"># Enable to reduce activation memory usage</span></span><br><span class="line">    gradient_accumulation_steps=<span class="number">16</span>,  <span class="comment"># Accumulate gradients over 16 steps</span></span><br><span class="line">    logging_steps=<span class="number">50</span>                 <span class="comment"># Log metrics every 50 steps</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Supervised-Fine-Tuning"><a href="#Supervised-Fine-Tuning" class="headerlink" title="Supervised Fine-Tuning"></a>Supervised Fine-Tuning</h2><p>监督微调（SFT）通过利用包含成对输入（如图像和相应文本）的标记数据集，使预训练的视觉语言模型（VLM）适应特定任务。该方法增强了模型执行特定领域或特定任务功能的能力，例如可视化问题回答、图像字幕或图表解释。</p>
+<h2 id="Preference-Optimization"><a href="#Preference-Optimization" class="headerlink" title="Preference Optimization"></a>Preference Optimization</h2><p>偏好优化，特别是直接偏好优化（DPO），训练视觉语言模型（VLM）与人类偏好保持一致。该模型不是严格遵循预定义的指令，而是学会优先考虑人类主观上喜欢的输出。这种方法对于涉及创造性判断、细致推理或不同可接受答案的任务特别有用。</p>
+<h2 id="Practice-with-SFT"><a href="#Practice-with-SFT" class="headerlink" title="Practice with SFT"></a>Practice with SFT</h2><p>加载模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">model_name = <span class="string">&quot;HuggingFaceTB/SmolVLM-Instruct&quot;</span></span><br><span class="line">model = AutoModelForVision2Seq.from_pretrained(</span><br><span class="line">    model_name,</span><br><span class="line">    quantization_config=quantization_config,</span><br><span class="line">    torch_dtype=torch.bfloat16,</span><br><span class="line">).to(device)</span><br><span class="line">processor = AutoProcessor.from_pretrained(<span class="string">&quot;HuggingFaceTB/SmolVLM-Instruct&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>设置 LoRA。注意这里使用的是 get_peft_model 方法。前面的代码在加载模型时就添加了 peft 参数，但是更推荐下面这种方法，即先加载模型，然后再将可训练的参数结合到模型中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">from peft import LoraConfig, get_peft_model</span><br><span class="line"></span><br><span class="line"># Configure LoRA</span><br><span class="line">peft_config = LoraConfig(</span><br><span class="line">    lora_alpha=16,</span><br><span class="line">    lora_dropout=0.05,</span><br><span class="line">    r=8,</span><br><span class="line">    bias=&quot;none&quot;,</span><br><span class="line">    target_modules=[&quot;q_proj&quot;, &quot;v_proj&quot;],</span><br><span class="line">    task_type=&quot;CAUSAL_LM&quot;,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># Apply PEFT model adaptation</span><br><span class="line">peft_model = get_peft_model(model, peft_config)</span><br><span class="line"></span><br><span class="line"># Print trainable parameters</span><br><span class="line">peft_model.print_trainable_parameters()</span><br></pre></td></tr></table></figure>
+
+<p>定义 collate_fn 函数用于预处理数据，目的是将一个批次（batch）的图文对话样本，整理为模型可以直接使用的张量输入格式。</p>
+<ol>
+<li>examples 是一个 batch 的原始样本列表。</li>
+<li>对于 batch 中的每个样本，都构建一个 message 字典。</li>
+<li>对构造好的 message 添加聊天模板，然后存放在 text_inputs 中</li>
+<li>对当前图像进行预处理，在这个例子中，加载的数据集结构如下，image 字段已经是一个 PIL 对象。将处理好的 image 保存到 image_inputs 中。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">print(ds)</span><br><span class="line">DatasetDict(&#123;</span><br><span class="line">    train: Dataset(&#123;</span><br><span class="line">        features: [&#x27;image&#x27;, &#x27;query&#x27;, &#x27;label&#x27;, &#x27;human_or_machine&#x27;],</span><br><span class="line">        num_rows: 28299</span><br><span class="line">    &#125;)</span><br><span class="line">    val: Dataset(&#123;</span><br><span class="line">        features: [&#x27;image&#x27;, &#x27;query&#x27;, &#x27;label&#x27;, &#x27;human_or_machine&#x27;],</span><br><span class="line">        num_rows: 1920</span><br><span class="line">    &#125;)</span><br><span class="line">    test: Dataset(&#123;</span><br><span class="line">        features: [&#x27;image&#x27;, &#x27;query&#x27;, &#x27;label&#x27;, &#x27;human_or_machine&#x27;],</span><br><span class="line">        num_rows: 2500</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">print(type(ds[&#x27;train&#x27;][0][&#x27;image&#x27;]))</span><br><span class="line">&lt;class &#x27;PIL.PngImagePlugin.PngImageFile&#x27;&gt;</span><br></pre></td></tr></table></figure></li>
+<li>将文本 prompt + 图像输入送入 processor，返回的 batch 为一个 list，其中的一个元素包含：<ul>
+<li>input_ids（文本 token ids）</li>
+<li>pixel_values（图像 tensor）</li>
+<li>attention_mask （mask）</li>
+</ul>
+</li>
+<li>构造 labels 字段,把 padding token 的位置置为 -100，告诉 loss 不计算这些位置</li>
+<li>将 image token 位置同样也设置为 -100，图像在文本中是通过一个特殊 token（如 &lt;image&gt;）占位的，但这个 token 不是模型要预测的目标，所以也将其设为 -100 以屏蔽 loss</li>
+<li>最终返回构造好的样本:<ul>
+<li>input_ids</li>
+<li>attention_mask</li>
+<li>pixel_values</li>
+<li>labels</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">collate_fn</span>(<span class="params">examples</span>):</span><br><span class="line">    <span class="comment"># System message template for the VLM</span></span><br><span class="line">    system_message = <span class="string">&quot;&quot;&quot;You are a Vision Language Model specialized in interpreting visual data from chart images.</span></span><br><span class="line"><span class="string">    Your task is to analyze the provided chart image and respond to queries with concise answers, usually a single word, number, or short phrase.</span></span><br><span class="line"><span class="string">    The charts include a variety of types (e.g., line charts, bar charts) and contain colors, labels, and text.</span></span><br><span class="line"><span class="string">    Focus on delivering accurate, succinct answers based on the visual information. Avoid additional explanation unless absolutely necessary.&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Initialize lists for text and image inputs</span></span><br><span class="line">    text_inputs = []</span><br><span class="line">    image_inputs = []</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Process all examples in one loop</span></span><br><span class="line">    <span class="keyword">for</span> example <span class="keyword">in</span> examples:</span><br><span class="line">        <span class="comment"># Format the chat structure for the processor</span></span><br><span class="line">        formatted_example = &#123;</span><br><span class="line">            <span class="string">&quot;messages&quot;</span>: [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="string">&quot;role&quot;</span>: <span class="string">&quot;system&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;content&quot;</span>: [&#123;<span class="string">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span>, <span class="string">&quot;text&quot;</span>: system_message&#125;],</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;content&quot;</span>: [</span><br><span class="line">                        &#123;</span><br><span class="line">                            <span class="string">&quot;type&quot;</span>: <span class="string">&quot;image&quot;</span>,</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            <span class="string">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span>,</span><br><span class="line">                            <span class="string">&quot;text&quot;</span>: example[<span class="string">&quot;query&quot;</span>],</span><br><span class="line">                        &#125;,</span><br><span class="line">                    ],</span><br><span class="line">                &#125;,</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment"># Apply chat template and strip extra spaces</span></span><br><span class="line">        text_inputs.append(processor.apply_chat_template(formatted_example[<span class="string">&quot;messages&quot;</span>], tokenize=<span class="literal">False</span>).strip())</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Ensure images are in RGB mode</span></span><br><span class="line">        image = example[<span class="string">&quot;image&quot;</span>]</span><br><span class="line">        <span class="keyword">if</span> image.mode != <span class="string">&#x27;RGB&#x27;</span>:</span><br><span class="line">            image = image.convert(<span class="string">&#x27;RGB&#x27;</span>)</span><br><span class="line">        image_inputs.append( [image] )</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Tokenize the texts and process the images</span></span><br><span class="line">    batch = processor(</span><br><span class="line">        text=text_inputs,</span><br><span class="line">        images=image_inputs,</span><br><span class="line">        return_tensors=<span class="string">&quot;pt&quot;</span>,</span><br><span class="line">        padding=<span class="literal">True</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Clone input IDs for labels</span></span><br><span class="line">    labels = batch[<span class="string">&quot;input_ids&quot;</span>].clone()</span><br><span class="line">    labels[labels == processor.tokenizer.pad_token_id] = -<span class="number">100</span>  <span class="comment"># Mask padding tokens in labels</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Ensure image_token is converted to string if it is an AddedToken</span></span><br><span class="line">    <span class="comment"># In some processor, processor.image_token return a list for each image.</span></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> AutoProcessor.from_pretrained(&quot;HuggingFaceTB/SmolVLM-Instruct&quot;) only have one ?</span></span><br><span class="line">    image_token_id = processor.tokenizer.convert_tokens_to_ids(<span class="built_in">str</span>(processor.image_token))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Mask image token IDs in the labels</span></span><br><span class="line">    labels[labels == image_token_id] = -<span class="number">100</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Add labels back to the batch</span></span><br><span class="line">    batch[<span class="string">&quot;labels&quot;</span>] = labels</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> batch</span><br></pre></td></tr></table></figure>
+
+<p>最后配置参数。注意在 SFTConfig 中：</p>
+<ul>
+<li>dataset_text_field&#x3D;””：指定数据集中用作文本输入的字段，这里留空（因使用自定义 collate_fn）</li>
+<li>skip_prepare_dataset&#x3D;True：告诉 trl 不需要自动预处理数据集，我们手动处理</li>
+<li>remove_unused_columns&#x3D;False：保留所有字段，否则只会保留 tokenizer 用到的字段，会丢图像等信息</li>
+</ul>
+<p>SFTTrainer 中，设置 data_collator&#x3D;collate_fn，表示自定义的批处理函数，用于图文混合数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> trl <span class="keyword">import</span> SFTConfig, SFTTrainer</span><br><span class="line"></span><br><span class="line"><span class="comment"># Configure the Trainer</span></span><br><span class="line">training_args = SFTConfig(</span><br><span class="line">    output_dir=<span class="string">&quot;sft_output&quot;</span>,  <span class="comment"># Directory to save the model</span></span><br><span class="line">    num_train_epochs=<span class="number">3</span>,                     <span class="comment"># number of training epochs</span></span><br><span class="line">    per_device_train_batch_size=<span class="number">1</span>,          <span class="comment"># batch size per device during training</span></span><br><span class="line">    gradient_accumulation_steps=<span class="number">16</span>,         <span class="comment"># number of steps before performing a backward/update pass</span></span><br><span class="line">    gradient_checkpointing=<span class="literal">True</span>,            <span class="comment"># use gradient checkpointing to save memory</span></span><br><span class="line">    optim=<span class="string">&quot;adamw_torch_fused&quot;</span>,              <span class="comment"># use fused adamw optimizer</span></span><br><span class="line">    logging_steps=<span class="number">5</span>,                        <span class="comment"># log every 10 steps</span></span><br><span class="line">    save_strategy=<span class="string">&quot;epoch&quot;</span>,                  <span class="comment"># save checkpoint every epoch</span></span><br><span class="line">    learning_rate=<span class="number">2e-4</span>,                     <span class="comment"># learning rate, based on QLoRA paper</span></span><br><span class="line">    bf16=<span class="literal">True</span>,                              <span class="comment"># use bfloat16 precision</span></span><br><span class="line">    tf32=<span class="literal">True</span>,                              <span class="comment"># use tf32 precision</span></span><br><span class="line">    max_grad_norm=<span class="number">0.3</span>,                      <span class="comment"># max gradient norm based on QLoRA paper</span></span><br><span class="line">    warmup_ratio=<span class="number">0.03</span>,                      <span class="comment"># warmup ratio based on QLoRA paper</span></span><br><span class="line">    lr_scheduler_type=<span class="string">&quot;constant&quot;</span>,           <span class="comment"># use constant learning rate scheduler</span></span><br><span class="line">    push_to_hub=<span class="literal">True</span>,                       <span class="comment"># push model to hub</span></span><br><span class="line">    gradient_checkpointing_kwargs = &#123;<span class="string">&quot;use_reentrant&quot;</span>: <span class="literal">False</span>&#125;, <span class="comment"># use reentrant checkpointing</span></span><br><span class="line">    <span class="comment"># dataloader_num_workers=16, </span></span><br><span class="line">    dataset_text_field=<span class="string">&quot;&quot;</span>, <span class="comment"># need a dummy field for collator</span></span><br><span class="line">    dataset_kwargs = &#123;<span class="string">&quot;skip_prepare_dataset&quot;</span>: <span class="literal">True</span>&#125;, <span class="comment"># important for collator</span></span><br><span class="line">    remove_unused_columns = <span class="literal">False</span>                    <span class="comment"># necessary else features except label will be removed</span></span><br><span class="line">)</span><br><span class="line"><span class="comment"># Initialize the Trainer</span></span><br><span class="line">trainer = SFTTrainer(</span><br><span class="line">    model=model,</span><br><span class="line">    args=training_args,</span><br><span class="line">    train_dataset=ds[<span class="string">&quot;train&quot;</span>],</span><br><span class="line">    eval_dataset=ds[<span class="string">&quot;test&quot;</span>],</span><br><span class="line">    data_collator=collate_fn,</span><br><span class="line">    peft_config=peft_config,</span><br><span class="line">    tokenizer=processor.tokenizer,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+                    
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                【Smol Course】5-视觉语言模型
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                LLM/smol5/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">wbfwonderful</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2025-07-22 15:03</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank">
+                        
+                            <i class="fa-brands fa-creative-commons"></i>
+                            <i class="fa-brands fa-creative-commons-by"></i>
+                            <i class="fa-brands fa-creative-commons-nc"></i>
+                            <i class="fa-brands fa-creative-commons-sa"></i>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/blog/tags/trl/">trl</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/blog/LLM/smol6/"
+                                   title="【Smol Course】6-合成数据"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">【Smol Course】6-合成数据</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/blog/LLM/smol4/"
+                                   title="【Smol Course】4-评估"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">【Smol Course】4-评估</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VLM-Usage"><span class="nav-number">1.</span> <span class="nav-text">VLM Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chat-Format"><span class="nav-number">1.1.</span> <span class="nav-text">Chat Format</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Practice"><span class="nav-number">1.2.</span> <span class="nav-text">Practice</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%8D%95%E5%BC%A0%E5%9B%BE%E5%83%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">处理单张图像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%A4%9A%E5%BC%A0%E5%9B%BE%E5%83%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">处理多张图像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E8%A7%86%E9%A2%91"><span class="nav-number">1.2.3.</span> <span class="nav-text">处理视频</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QwenVL-%E5%A4%84%E7%90%86%E8%A7%86%E9%A2%91"><span class="nav-number">1.2.4.</span> <span class="nav-text">QwenVL 处理视频</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VLM-Fine-Tuning"><span class="nav-number">2.</span> <span class="nav-text">VLM Fine-Tuning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Efficient-Fine-Tuning"><span class="nav-number">2.1.</span> <span class="nav-text">Efficient Fine-Tuning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Quantization"><span class="nav-number">2.1.1.</span> <span class="nav-text">Quantization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PEFT-LoRA"><span class="nav-number">2.1.2.</span> <span class="nav-text">PEFT &amp; LoRA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Batch-Size-Optimization"><span class="nav-number">2.1.3.</span> <span class="nav-text">Batch Size Optimization</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Supervised-Fine-Tuning"><span class="nav-number">2.2.</span> <span class="nav-text">Supervised Fine-Tuning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Preference-Optimization"><span class="nav-number">2.3.</span> <span class="nav-text">Preference Optimization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Practice-with-SFT"><span class="nav-number">2.4.</span> <span class="nav-text">Practice with SFT</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2024</span>&nbsp;-&nbsp;2025
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/blog/">wbfwonderful</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+                <a target="_blank" rel="nofollow" href="https://github.com">
+            
+            本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/blog/images/brands/github.png"></span> 提供部署服务
+            
+                </a>
+            
+        </div>
+    
+
+    
+        <div class="count-info info-item">
+            
+                <span class="count-item border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">70.8k</span>
+                </span>
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VLM-Usage"><span class="nav-number">1.</span> <span class="nav-text">VLM Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chat-Format"><span class="nav-number">1.1.</span> <span class="nav-text">Chat Format</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Practice"><span class="nav-number">1.2.</span> <span class="nav-text">Practice</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%8D%95%E5%BC%A0%E5%9B%BE%E5%83%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">处理单张图像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%A4%9A%E5%BC%A0%E5%9B%BE%E5%83%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">处理多张图像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E8%A7%86%E9%A2%91"><span class="nav-number">1.2.3.</span> <span class="nav-text">处理视频</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QwenVL-%E5%A4%84%E7%90%86%E8%A7%86%E9%A2%91"><span class="nav-number">1.2.4.</span> <span class="nav-text">QwenVL 处理视频</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VLM-Fine-Tuning"><span class="nav-number">2.</span> <span class="nav-text">VLM Fine-Tuning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Efficient-Fine-Tuning"><span class="nav-number">2.1.</span> <span class="nav-text">Efficient Fine-Tuning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Quantization"><span class="nav-number">2.1.1.</span> <span class="nav-text">Quantization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PEFT-LoRA"><span class="nav-number">2.1.2.</span> <span class="nav-text">PEFT &amp; LoRA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Batch-Size-Optimization"><span class="nav-number">2.1.3.</span> <span class="nav-text">Batch Size Optimization</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Supervised-Fine-Tuning"><span class="nav-number">2.2.</span> <span class="nav-text">Supervised Fine-Tuning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Preference-Optimization"><span class="nav-number">2.3.</span> <span class="nav-text">Preference Optimization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Practice-with-SFT"><span class="nav-number">2.4.</span> <span class="nav-text">Practice with SFT</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/lazyload.min.js"></script>
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/copyright-info.min.js"></script>
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

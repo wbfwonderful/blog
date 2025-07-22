@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="wbfwonderful">
+    
+    <title>
+        
+            【Smol Course】3-参数高效微调 |
+        
+        wbfwonderful&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/blog/css/style.css">
+
+    
+        <link rel="shortcut icon" href="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile-transparent.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/brands.min.css">
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"wbfwonderful.github.io","root":"/blog/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"wbfwonderful's Blog","author":"wbfwonderful","avatar":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg","logo":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg","favicon":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile-transparent.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","categories":"/categories || fa-solid fa-layer-group","photos":"/photos || fa-solid fa-image","about":"/about || fa-solid fa-user-graduate"},"first_screen":{"enable":true,"background_img":"/images/screen.gif","background_img_dark":"/images/screen.gif","description":null,"hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/wbfwonderful","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":"wangbf23@mail2.sysu.edu.cn","bilibili":"https://space.bilibili.com/214019111"}},"scroll":{"progress_bar":false,"percent":false,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"created || fa-solid fa-arrow-up-from-bracket","post_datetime_format":"YYYY-MM-DD HH:mm:ss"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null,"icon":null},"created_datetime_icon":"fa-solid fa-arrow-up-from-bracket","updated_datetime_icon":"fa-solid fa-arrows-rotate"},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2024,"word_count":true,"site_deploy":{"enable":true,"provider":"github","url":"https://github.com"},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":["/css/custom-photos.css"],"js":[null]},"root":"/blog","source_data":{"photos":[{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg","name":"头像"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/hainan-warship.jpg","name":"海南舰"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/mayday.jpg","name":"5525深圳站"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/balls.gif","name":"五月天五个球球"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/JJ20.jpg","name":"JJ20深圳站"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/HKDisney.jpg","name":"香港迪士尼"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/ktv.jpg","name":"笑忘歌"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/lights.jpg","name":"2025自贡灯会"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/fireworks.jpg","name":"2025新年快乐！"}]},"version":"4.2.4"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/blog/">
+                    <img src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg">
+                </a>
+            
+            <a class="site-name border-box" href="/blog/">
+               wbfwonderful&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/tags">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/categories">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                
+                                分类
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/photos">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-image"></i>
+                                
+                                相册
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/tags">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tags"></i>
+                                </span>
+                            
+                            标签
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/categories">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                </span>
+                            
+                            分类
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/photos">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-image"></i>
+                                </span>
+                            
+                            相册
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        【Smol Course】3-参数高效微调
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">wbfwonderful</span>
+                                
+                                    <span class="author-badge">Lv4</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-arrow-up-from-bracket"></i>&nbsp;
+                <span class="datetime">2025-07-22 11:59:12</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
+                    <span class="datetime" data-updated="Tue Jul 22 2025 14:45:33 GMT+0800">2025-07-22 14:45:33</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/blog/categories/LLM/">LLM</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/blog/tags/trl/">trl</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>1.7k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>7 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body code-block-unshrink">
+                    
+
+                    
+                         <h1 id="Parameter-Efficient-Fine-Tuning-PEFT"><a href="#Parameter-Efficient-Fine-Tuning-PEFT" class="headerlink" title="Parameter-Efficient Fine-Tuning (PEFT)"></a>Parameter-Efficient Fine-Tuning (PEFT)</h1><p>随着语言模型变得越来越大，传统的微调变得越来越具有挑战性。即使是 1.7B 参数模型的全面微调也需要大量的 GPU 内存，使存储单独的模型副本变得昂贵，并且有可能灾难性地忘记模型的原始功能。参数有效微调（PEFT）方法通过仅修改模型参数的一小部分而保持大部分模型不变来解决这些挑战。</p>
+<p>传统的微调在训练过程中更新所有的模型参数，这对于大型模型来说是不切实际的。PEFT 方法引入了使用较少可训练参数（通常小于原始模型大小的 1%）来调整模型的方法。可训练参数的大幅减少使：</p>
+<ul>
+<li>在 GPU 内存有限的消费者硬件上进行微调</li>
+<li>有效地存储多个特定于任务的适应性</li>
+<li>在低数据场景下更好的泛化</li>
+<li>更快的训练和迭代周期</li>
+</ul>
+<h1 id="LoRA-Low-Rank-Adaptation"><a href="#LoRA-Low-Rank-Adaptation" class="headerlink" title="LoRA (Low-Rank Adaptation)"></a>LoRA (Low-Rank Adaptation)</h1><p>LoRA 已成为最广泛采用的 PEFT 方法。它的工作原理是将小秩分解矩阵添加到注意力权重中，通常会将可训练参数减少约 90%。在推理期间，这些适配器权重可以与基本模型合并，从而不会产生额外的延迟开销。LoRA 对于使大型语言模型适应特定的任务或领域，同时保持资源需求可管理特别有用。</p>
+<h2 id="Loading-LoRA-Adapters"><a href="#Loading-LoRA-Adapters" class="headerlink" title="Loading LoRA Adapters"></a>Loading LoRA Adapters</h2><p>可以使用 load_adapter() 将适配器加载到预训练的模型中，这对于尝试未合并权重的不同适配器非常有用。使用 set_adapter() 函数设置活动适配器权重。要返回基本模型，可以使用 unload() 卸载所有的 LoRA 模块。这使得在不同的任务特定权重之间切换变得很容易。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from transformers import AutoModelForCausalLM</span><br><span class="line">from peft import PeftModel</span><br><span class="line"></span><br><span class="line">base_model = AutoModelForCausalLM.from_pretrained(&quot;&lt;base_model_name&gt;&quot;)</span><br><span class="line">peft_model_id = &quot;&lt;peft_adapter_id&gt;&quot;</span><br><span class="line">model = PeftModel.from_pretrained(base_model, peft_model_id)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Merging-LoRA-Adapters"><a href="#Merging-LoRA-Adapters" class="headerlink" title="Merging LoRA Adapters"></a>Merging LoRA Adapters</h2><p>在使用 LoRA 进行训练之后，您可能希望将适配器权重合并回基本模型中，以便于部署。这将创建具有组合权重的单个模型，从而消除了在推理期间单独加载适配器的需要。</p>
+<p>合并过程需要注意内存管理和精度。由于您需要同时加载基本模型和适配器权重，因此请确保有足够的 GPU&#x2F;CPU 内存可用。在 transformer 中使用 device_map&#x3D;”auto” 将有助于自动内存管理。在整个过程中保持一致的精度（例如，float16），匹配训练期间使用的精度，并以相同的格式保存合并模型以供部署。在部署之前，始终通过将其输出和性能指标与基于适配器的版本进行比较来验证合并模型。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">from transformers import AutoModelForCausalLM</span><br><span class="line">from peft import PeftModel</span><br><span class="line"></span><br><span class="line"># 1. Load the base model</span><br><span class="line">base_model = AutoModelForCausalLM.from_pretrained(</span><br><span class="line">    &quot;base_model_name&quot;,</span><br><span class="line">    torch_dtype=torch.float16,</span><br><span class="line">    device_map=&quot;auto&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># 2. Load the PEFT model with adapter</span><br><span class="line">peft_model = PeftModel.from_pretrained(</span><br><span class="line">    base_model,</span><br><span class="line">    &quot;path/to/adapter&quot;,</span><br><span class="line">    torch_dtype=torch.float16</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># 3. Merge adapter weights with base model</span><br><span class="line">try:</span><br><span class="line">    merged_model = peft_model.merge_and_unload()</span><br><span class="line">except RuntimeError as e:</span><br><span class="line">    print(f&quot;Merging failed: &#123;e&#125;&quot;)</span><br><span class="line">    # Implement fallback strategy or memory optimization</span><br><span class="line"></span><br><span class="line"># 4. Save the merged model</span><br><span class="line">merged_model.save_pretrained(&quot;path/to/save/merged_model&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>注意，PEFT 保存的模型只保存 adapter（如 LoRA 权重）部分，但是，AutoPeftModelForCausalLM 会：</p>
+<ul>
+<li>自动加载 base model（如 LLaMA、Qwen、GPT-NeoX）：通过在 adapter config 中保存的 base model 路径（或你传的路径）；</li>
+<li>然后在此基础上加载 adapter 权重；</li>
+<li>得到一个完整的、可运行的 PEFT 模型。</li>
+<li>换句话说，传入的 args.output_dir 实际上是包含：<ul>
+<li>adapter 权重</li>
+<li>adapter 配置</li>
+<li>一个可解析的 base_model_name_or_path 字段（指向原始模型）</li>
+</ul>
+</li>
+</ul>
+<h2 id="Using-TRL-with-PEFT"><a href="#Using-TRL-with-PEFT" class="headerlink" title="Using TRL with PEFT"></a>Using TRL with PEFT</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">from peft import LoraConfig</span><br><span class="line">from transformers import AutoModelForCausalLM</span><br><span class="line"></span><br><span class="line"># Load model with PEFT config</span><br><span class="line">lora_config = LoraConfig(</span><br><span class="line">    r=16,</span><br><span class="line">    lora_alpha=32,</span><br><span class="line">    lora_dropout=0.05,</span><br><span class="line">    bias=&quot;none&quot;,</span><br><span class="line">    task_type=&quot;CAUSAL_LM&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># Load model on specific device</span><br><span class="line">model = AutoModelForCausalLM.from_pretrained(</span><br><span class="line">    &quot;your-model-name&quot;,</span><br><span class="line">    load_in_8bit=True,  # Optional: use 8-bit precision</span><br><span class="line">    device_map=&quot;auto&quot;,</span><br><span class="line">    peft_config=lora_config</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Practice"><a href="#Practice" class="headerlink" title="Practice"></a>Practice</h2><h3 id="Parameters"><a href="#Parameters" class="headerlink" title="Parameters"></a>Parameters</h3><p>定义 PEFT 参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">from peft import LoraConfig</span><br><span class="line"></span><br><span class="line"># TODO: Configure LoRA parameters</span><br><span class="line"># r: rank dimension for LoRA update matrices (smaller = more compression)</span><br><span class="line">rank_dimension = 6</span><br><span class="line"># lora_alpha: scaling factor for LoRA layers (higher = stronger adaptation)</span><br><span class="line">lora_alpha = 8</span><br><span class="line"># lora_dropout: dropout probability for LoRA layers (helps prevent overfitting)</span><br><span class="line">lora_dropout = 0.05</span><br><span class="line"></span><br><span class="line">peft_config = LoraConfig(</span><br><span class="line">    r=rank_dimension,  # Rank dimension - typically between 4-32</span><br><span class="line">    lora_alpha=lora_alpha,  # LoRA scaling factor - typically 2x rank</span><br><span class="line">    lora_dropout=lora_dropout,  # Dropout probability for LoRA layers</span><br><span class="line">    bias=&quot;none&quot;,  # Bias type for LoRA. the corresponding biases will be updated during training.</span><br><span class="line">    target_modules=&quot;all-linear&quot;,  # Which modules to apply LoRA to</span><br><span class="line">    task_type=&quot;CAUSAL_LM&quot;,  # Task type for model architecture</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>将 PEFT 参数添加到 SFTTrainer 中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">max_seq_length = 1512  # max sequence length for model and packing of the dataset</span><br><span class="line"></span><br><span class="line"># Create SFTTrainer with LoRA configuration</span><br><span class="line">trainer = SFTTrainer(</span><br><span class="line">    model=model,</span><br><span class="line">    args=args,</span><br><span class="line">    train_dataset=dataset[&quot;train&quot;],</span><br><span class="line">    peft_config=peft_config,  # LoRA configuration</span><br><span class="line">    max_seq_length=max_seq_length,  # Maximum sequence length</span><br><span class="line">    tokenizer=tokenizer,</span><br><span class="line">    packing=True,  # Enable input packing for efficiency</span><br><span class="line">    dataset_kwargs=&#123;</span><br><span class="line">        &quot;add_special_tokens&quot;: False,  # Special tokens handled by template</span><br><span class="line">        &quot;append_concat_token&quot;: False,  # No additional separator needed</span><br><span class="line">    &#125;,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Load-adapters-from-the-Hub"><a href="#Load-adapters-from-the-Hub" class="headerlink" title="Load adapters from the Hub"></a>Load adapters from the Hub</h3><ul>
+<li>首先加载的是 PeftConfig</li>
+<li>然后基于 PeftConfig 加载 base model</li>
+<li>最后加载带 LoRA 的模型</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import transformers</span><br><span class="line">from datasets import load_dataset</span><br><span class="line">from peft import LoraConfig, get_peft_model</span><br><span class="line">from peft import PeftModel, PeftConfig</span><br><span class="line">from transformers import AutoModelForCausalLM, AutoTokenizer</span><br><span class="line"></span><br><span class="line">peft_model_id = &quot;ybelkada/opt-6.7b-lora&quot;</span><br><span class="line">config = PeftConfig.from_pretrained(peft_model_id)</span><br><span class="line">model = AutoModelForCausalLM.from_pretrained(</span><br><span class="line">    config.base_model_name_or_path,</span><br><span class="line">    return_dict=True,</span><br><span class="line">    load_in_8bit=True,</span><br><span class="line">    device_map=&quot;auto&quot;,</span><br><span class="line">)</span><br><span class="line">tokenizer = AutoTokenizer.from_pretrained(config.base_model_name_or_path)</span><br><span class="line"></span><br><span class="line"># Load the Lora model</span><br><span class="line">model = PeftModel.from_pretrained(model, peft_model_id)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Prompt-Tuning"><a href="#Prompt-Tuning" class="headerlink" title="Prompt Tuning"></a>Prompt Tuning</h1><p>提示调优是一种参数高效的方法，它修改输入表示，而不是模型权重。与更新所有模型参数的传统微调不同，提示调优在保持基本模型不变的同时添加并优化了一小组可训练的令牌。提示调优将可训练的连续向量（软提示）添加到输入文本中。</p>
+<p>这些软提示是模型嵌入空间中的连续向量，在训练过程中得到优化。与使用自然语言标记的传统离散提示不同，软提示没有固有的含义，而是通过梯度下降学习从冻结模型中引出所需的行为。该技术对于多任务场景特别有效，因为每个任务只需要存储一个小的提示向量（通常是几百个参数），而不是一个完整的模型副本。这种方法不仅保持了最小的内存占用，而且还支持快速的任务切换。</p>
+<p>在训练过程中，只更新提示参数，而基本模型保持冻结。这种集中的方法使用标准的训练目标，但需要仔细注意提示符号的学习率和梯度行为。</p>
+<h2 id="Implementation-with-PEFT"><a href="#Implementation-with-PEFT" class="headerlink" title="Implementation with PEFT"></a>Implementation with PEFT</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> peft <span class="keyword">import</span> PromptTuningConfig, TaskType, get_peft_model</span><br><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoModelForCausalLM, AutoTokenizer</span><br><span class="line"></span><br><span class="line"><span class="comment"># Load base model</span></span><br><span class="line">model = AutoModelForCausalLM.from_pretrained(<span class="string">&quot;your-base-model&quot;</span>)</span><br><span class="line">tokenizer = AutoTokenizer.from_pretrained(<span class="string">&quot;your-base-model&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Configure prompt tuning</span></span><br><span class="line">peft_config = PromptTuningConfig(</span><br><span class="line">    task_type=TaskType.CAUSAL_LM,</span><br><span class="line">    num_virtual_tokens=<span class="number">8</span>,  <span class="comment"># Number of trainable tokens</span></span><br><span class="line">    prompt_tuning_init=<span class="string">&quot;TEXT&quot;</span>,  <span class="comment"># Initialize from text</span></span><br><span class="line">    prompt_tuning_init_text=<span class="string">&quot;Classify if this text is positive or negative:&quot;</span>,</span><br><span class="line">    tokenizer_name_or_path=<span class="string">&quot;your-base-model&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create prompt-tunable model</span></span><br><span class="line">model = get_peft_model(model, peft_config)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Comparison"><a href="#Comparison" class="headerlink" title="Comparison"></a>Comparison</h2><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Parameters</th>
+<th>Memory</th>
+<th>Task Switching</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Prompt Tuning</td>
+<td>Very Low</td>
+<td>Minimal</td>
+<td>Easy</td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td>Low</td>
+<td>Low</td>
+<td>Requires Loading</td>
+</tr>
+<tr>
+<td>Full Fine-tuning</td>
+<td>High</td>
+<td>High</td>
+<td>New Model Copy</td>
+</tr>
+</tbody></table>
+<p>提示调优在以下几个场景中表现出色：</p>
+<ul>
+<li>多任务部署</li>
+<li>资源受限的环境</li>
+<li>快速任务适应</li>
+<li>隐私的应用程序</li>
+</ul>
+
+                    
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                【Smol Course】3-参数高效微调
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                LLM/smol3/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">wbfwonderful</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2025-07-22 11:59</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank">
+                        
+                            <i class="fa-brands fa-creative-commons"></i>
+                            <i class="fa-brands fa-creative-commons-by"></i>
+                            <i class="fa-brands fa-creative-commons-nc"></i>
+                            <i class="fa-brands fa-creative-commons-sa"></i>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/blog/tags/trl/">trl</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/blog/LLM/smol4/"
+                                   title="【Smol Course】4-评估"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">【Smol Course】4-评估</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/blog/LLM/smol2/"
+                                   title="【Smol Course】2-偏好对齐"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">【Smol Course】2-偏好对齐</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Parameter-Efficient-Fine-Tuning-PEFT"><span class="nav-number">1.</span> <span class="nav-text">Parameter-Efficient Fine-Tuning (PEFT)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LoRA-Low-Rank-Adaptation"><span class="nav-number">2.</span> <span class="nav-text">LoRA (Low-Rank Adaptation)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Loading-LoRA-Adapters"><span class="nav-number">2.1.</span> <span class="nav-text">Loading LoRA Adapters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Merging-LoRA-Adapters"><span class="nav-number">2.2.</span> <span class="nav-text">Merging LoRA Adapters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-TRL-with-PEFT"><span class="nav-number">2.3.</span> <span class="nav-text">Using TRL with PEFT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Practice"><span class="nav-number">2.4.</span> <span class="nav-text">Practice</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Parameters"><span class="nav-number">2.4.1.</span> <span class="nav-text">Parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Load-adapters-from-the-Hub"><span class="nav-number">2.4.2.</span> <span class="nav-text">Load adapters from the Hub</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Prompt-Tuning"><span class="nav-number">3.</span> <span class="nav-text">Prompt Tuning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-with-PEFT"><span class="nav-number">3.1.</span> <span class="nav-text">Implementation with PEFT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comparison"><span class="nav-number">3.2.</span> <span class="nav-text">Comparison</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2024</span>&nbsp;-&nbsp;2025
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/blog/">wbfwonderful</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+                <a target="_blank" rel="nofollow" href="https://github.com">
+            
+            本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/blog/images/brands/github.png"></span> 提供部署服务
+            
+                </a>
+            
+        </div>
+    
+
+    
+        <div class="count-info info-item">
+            
+                <span class="count-item border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">70.8k</span>
+                </span>
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Parameter-Efficient-Fine-Tuning-PEFT"><span class="nav-number">1.</span> <span class="nav-text">Parameter-Efficient Fine-Tuning (PEFT)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LoRA-Low-Rank-Adaptation"><span class="nav-number">2.</span> <span class="nav-text">LoRA (Low-Rank Adaptation)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Loading-LoRA-Adapters"><span class="nav-number">2.1.</span> <span class="nav-text">Loading LoRA Adapters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Merging-LoRA-Adapters"><span class="nav-number">2.2.</span> <span class="nav-text">Merging LoRA Adapters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-TRL-with-PEFT"><span class="nav-number">2.3.</span> <span class="nav-text">Using TRL with PEFT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Practice"><span class="nav-number">2.4.</span> <span class="nav-text">Practice</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Parameters"><span class="nav-number">2.4.1.</span> <span class="nav-text">Parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Load-adapters-from-the-Hub"><span class="nav-number">2.4.2.</span> <span class="nav-text">Load adapters from the Hub</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Prompt-Tuning"><span class="nav-number">3.</span> <span class="nav-text">Prompt Tuning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-with-PEFT"><span class="nav-number">3.1.</span> <span class="nav-text">Implementation with PEFT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comparison"><span class="nav-number">3.2.</span> <span class="nav-text">Comparison</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/lazyload.min.js"></script>
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/copyright-info.min.js"></script>
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

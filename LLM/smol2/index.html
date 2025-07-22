@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="wbfwonderful">
+    
+    <title>
+        
+            【Smol Course】2-偏好对齐 |
+        
+        wbfwonderful&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/blog/css/style.css">
+
+    
+        <link rel="shortcut icon" href="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile-transparent.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/font/css/brands.min.css">
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"wbfwonderful.github.io","root":"/blog/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"wbfwonderful's Blog","author":"wbfwonderful","avatar":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg","logo":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg","favicon":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile-transparent.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","categories":"/categories || fa-solid fa-layer-group","photos":"/photos || fa-solid fa-image","about":"/about || fa-solid fa-user-graduate"},"first_screen":{"enable":true,"background_img":"/images/screen.gif","background_img_dark":"/images/screen.gif","description":null,"hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/wbfwonderful","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":"wangbf23@mail2.sysu.edu.cn","bilibili":"https://space.bilibili.com/214019111"}},"scroll":{"progress_bar":false,"percent":false,"hide_header":false},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"created || fa-solid fa-arrow-up-from-bracket","post_datetime_format":"YYYY-MM-DD HH:mm:ss"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null,"icon":null},"created_datetime_icon":"fa-solid fa-arrow-up-from-bracket","updated_datetime_icon":"fa-solid fa-arrows-rotate"},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2024,"word_count":true,"site_deploy":{"enable":true,"provider":"github","url":"https://github.com"},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":["/css/custom-photos.css"],"js":[null]},"root":"/blog","source_data":{"photos":[{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg","name":"头像"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/hainan-warship.jpg","name":"海南舰"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/mayday.jpg","name":"5525深圳站"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/balls.gif","name":"五月天五个球球"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/JJ20.jpg","name":"JJ20深圳站"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/HKDisney.jpg","name":"香港迪士尼"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/ktv.jpg","name":"笑忘歌"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/lights.jpg","name":"2025自贡灯会"},{"url":"https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/fireworks.jpg","name":"2025新年快乐！"}]},"version":"4.2.4"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/blog/">
+                    <img src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg">
+                </a>
+            
+            <a class="site-name border-box" href="/blog/">
+               wbfwonderful&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/tags">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/categories">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                
+                                分类
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/photos">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-image"></i>
+                                
+                                相册
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/blog/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/tags">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tags"></i>
+                                </span>
+                            
+                            标签
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/categories">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                </span>
+                            
+                            分类
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/photos">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-image"></i>
+                                </span>
+                            
+                            相册
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/blog/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        【Smol Course】2-偏好对齐
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/profile.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">wbfwonderful</span>
+                                
+                                    <span class="author-badge">Lv4</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-arrow-up-from-bracket"></i>&nbsp;
+                <span class="datetime">2025-07-21 14:04:49</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
+                    <span class="datetime" data-updated="Tue Jul 22 2025 14:45:20 GMT+0800">2025-07-22 14:45:20</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/blog/categories/LLM/">LLM</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/blog/tags/trl/">trl</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>2.4k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>10 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body code-block-unshrink">
+                    
+
+                    
+                         <h1 id="Preference-Alignment"><a href="#Preference-Alignment" class="headerlink" title="Preference Alignment"></a>Preference Alignment</h1><p>监督微调有助于模型学习任务，但偏好对齐鼓励输出符合人类的期望和价值观。</p>
+<ul>
+<li>Direct Preference Optimization (DPO)：直接偏好优化（DPO）通过使用偏好数据直接优化模型来简化偏好对齐。这种方法消除了对单独的奖励模型和复杂的强化学习的需要，使其比传统的基于人类反馈的强化学习（RLHF）更加稳定和高效。</li>
+<li>Odds Ratio Preference Optimization (ORPO)：ORPO在单个进程中引入了指令调优和偏好对齐的组合方法。它通过在 token 级别上将负对数似然损失与比值比项结合起来，修改了标准语言建模目标。该方法具有统一的单阶段训练过程、参考无模型架构和提高计算效率的特点。</li>
+</ul>
+<h1 id="DPO"><a href="#DPO" class="headerlink" title="DPO"></a>DPO</h1><p>DPO 将偏好对齐重新定义为<strong>人类偏好数据的分类问题</strong>。传统的 RLHF 方法需要训练一个单独的奖励模型，并使用复杂的强化学习算法（如 PPO）来校准模型输出。DPO 通过定义一个损失函数来简化这一过程，该损失函数可以根据首选输出和非首选输出直接优化模型的策略。</p>
+<h2 id="How-DPO-works"><a href="#How-DPO-works" class="headerlink" title="How DPO works"></a>How DPO works</h2><p>DPO 过程需要监督微调（SFT）来使模型适应目标域。这为通过在标准指令遵循数据集上进行训练来进行偏好学习奠定了基础。该模型在保持其一般能力的同时学习基本任务的完成。</p>
+<p>接下来是偏好学习，其中模型在成对的输出上进行训练——一个是首选的，一个是非首选的。偏好对帮助模型理解哪种反应更符合人类的价值观和期望。</p>
+<p>DPO 的核心创新在于其直接优化方法。DPO 不是训练单独的奖励模型，而是使用二元交叉熵损失来直接更新基于偏好数据的模型权重。这种简化的过程使训练更加稳定和高效，同时达到与传统 RLHF 相当或更好的结果。</p>
+<h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><p>DPO 的数据集通常是通过将响应对注释为首选或非首选来创建的。通常包含 prompt、chosen 和 selected 三部分。</p>
+<p>Prompt 包含用于生成 selected 和 Rejected 响应的提示。selected 和 Rejected 分别包含首选和非首选的响应。</p>
+<h2 id="Implementation-with-TRL"><a href="#Implementation-with-TRL" class="headerlink" title="Implementation with TRL"></a>Implementation with TRL</h2><p>简单实现如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> trl <span class="keyword">import</span> DPOConfig, DPOTrainer</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define arguments</span></span><br><span class="line">training_args = DPOConfig(</span><br><span class="line">    ...</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Initialize trainer</span></span><br><span class="line">trainer = DPOTrainer(</span><br><span class="line">    model,</span><br><span class="line">    train_dataset=dataset,</span><br><span class="line">    tokenizer=tokenizer,</span><br><span class="line">    ...</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Train model</span></span><br><span class="line">trainer.train()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Practice"><a href="#Practice" class="headerlink" title="Practice"></a>Practice</h2><h3 id="导入包"><a href="#导入包" class="headerlink" title="导入包"></a>导入包</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import os</span><br><span class="line">from transformers import AutoModelForCausalLM, AutoTokenizer</span><br><span class="line">from datasets import load_dataset</span><br><span class="line">from trl import DPOTrainer, DPOConfig</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p>设置 cache_dir 字段即可将其下载到指定目录。后续可以直接加载使用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataset = load_dataset(&quot;argilla/ultrafeedback-binarized-preferences&quot;, split=&quot;train&quot;, cache_dir=&quot;D:\study\smol-course\data&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>查看数据集，核心为 instruction、chosen_response 和 rejected_response。</p>
+<blockquote><pre>
+Dataset({
+    features: ['source', 'instruction', 'chosen_response', 'rejected_response', 'chosen_avg_rating', 'rejected_avg_rating', 'chosen_model'],
+    num_rows: 63619
+})
+</pre></blockquote>
+
+<p>但是，chosen_response 和 rejected_response 只有回答，没有形成对话列表。所以需要定义处理数据集的函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">def process_dataset(example):</span><br><span class="line">    chosen = [</span><br><span class="line">        &#123;</span><br><span class="line">            &#x27;role&#x27;: &#x27;user&#x27;,</span><br><span class="line">            &#x27;content&#x27;: example[&#x27;instruction&#x27;]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            &#x27;role&#x27;: &#x27;assistant&#x27;,</span><br><span class="line">            &#x27;content&#x27;: example[&#x27;chosen_response&#x27;]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">    rejected = [</span><br><span class="line">        &#123;</span><br><span class="line">            &#x27;role&#x27;: &#x27;user&#x27;,</span><br><span class="line">            &#x27;content&#x27;: example[&#x27;instruction&#x27;]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            &#x27;role&#x27;: &#x27;assistant&#x27;,</span><br><span class="line">            &#x27;content&#x27;: example[&#x27;rejected_response&#x27;]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    return &#123;&#x27;chosen&#x27;: chosen, &#x27;rejected&#x27;: rejected, &#x27;prompt&#x27;: example[&quot;instruction&quot;]&#125;</span><br><span class="line"></span><br><span class="line">dataset = dataset.map(process_dataset)</span><br></pre></td></tr></table></figure>
+
+<h3 id="加载模型"><a href="#加载模型" class="headerlink" title="加载模型"></a>加载模型</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">model_name = &quot;HuggingFaceTB/SmolLM2-135M-Instruct&quot;</span><br><span class="line"></span><br><span class="line">device = (</span><br><span class="line">    &quot;cuda&quot;</span><br><span class="line">    if torch.cuda.is_available()</span><br><span class="line">    else &quot;mps&quot; if torch.backends.mps.is_available() else &quot;cpu&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># Model to fine-tune</span><br><span class="line">model = AutoModelForCausalLM.from_pretrained(</span><br><span class="line">    pretrained_model_name_or_path=model_name,</span><br><span class="line">    torch_dtype=torch.float32,</span><br><span class="line">).to(device)</span><br><span class="line">model.config.use_cache = False</span><br><span class="line">tokenizer = AutoTokenizer.from_pretrained(model_name)</span><br><span class="line">tokenizer.pad_token = tokenizer.eos_token</span><br><span class="line"></span><br><span class="line">model, tokenizer = setup_chat_format(model=model, tokenizer=tokenizer)</span><br><span class="line"></span><br><span class="line"># Set our name for the finetune to be saved &amp;/ uploaded to</span><br><span class="line">finetune_name = &quot;SmolLM2-FT-DPO&quot;</span><br><span class="line">finetune_tags = [&quot;smol-course&quot;, &quot;module_1&quot;]</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li>model.config.use_cache &#x3D; False：禁用 KV-cache（Key&#x2F;Value Cache）。通常在训练&#x2F;微调时禁用缓存（不然梯度计算会出错）；而在推理时开启以提升生成速度。</li>
+<li>tokenizer.pad_token &#x3D; tokenizer.eos_token：将 pad_token 设置为 eos_token（结束符）。原因：有些模型（如 GPT）没有专门定义 pad token，训练时又需要对序列进行 padding，这种情况下通常将 pad token 和 eos token 设为同一个。否则训练时可能会出现缺失 pad_token 的错误。</li>
+<li>这里需要设置聊天模板：model, tokenizer &#x3D; setup_chat_format(model&#x3D;model, tokenizer&#x3D;tokenizer)</li>
+</ul>
+<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><p>DPOConfig 参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"># Training arguments</span><br><span class="line">training_args = DPOConfig(</span><br><span class="line">    # Training batch size per GPU</span><br><span class="line">    per_device_train_batch_size=4,</span><br><span class="line">    # Number of updates steps to accumulate before performing a backward/update pass</span><br><span class="line">    # Effective batch size = per_device_train_batch_size * gradient_accumulation_steps</span><br><span class="line">    gradient_accumulation_steps=4,</span><br><span class="line">    # Saves memory by not storing activations during forward pass</span><br><span class="line">    # Instead recomputes them during backward pass</span><br><span class="line">    gradient_checkpointing=True,</span><br><span class="line">    # Base learning rate for training</span><br><span class="line">    learning_rate=5e-5,</span><br><span class="line">    # Learning rate schedule - &#x27;cosine&#x27; gradually decreases LR following cosine curve</span><br><span class="line">    lr_scheduler_type=&quot;cosine&quot;,</span><br><span class="line">    # Total number of training steps</span><br><span class="line">    max_steps=200,</span><br><span class="line">    # Disables model checkpointing during training</span><br><span class="line">    save_strategy=&quot;no&quot;,</span><br><span class="line">    # How often to log training metrics</span><br><span class="line">    logging_steps=1,</span><br><span class="line">    # Directory to save model outputs</span><br><span class="line">    output_dir=&quot;smol_dpo_output&quot;,</span><br><span class="line">    # Number of steps for learning rate warmup</span><br><span class="line">    warmup_steps=100,</span><br><span class="line">    # Use bfloat16 precision for faster training</span><br><span class="line">    bf16=True,</span><br><span class="line">    # Disable wandb/tensorboard logging</span><br><span class="line">    report_to=&quot;none&quot;,</span><br><span class="line">    # Keep all columns in dataset even if not used</span><br><span class="line">    remove_unused_columns=False,</span><br><span class="line">    # Enable MPS (Metal Performance Shaders) for Mac devices</span><br><span class="line">    use_mps_device=device == &quot;mps&quot;,</span><br><span class="line">    # Model ID for HuggingFace Hub uploads</span><br><span class="line">    hub_model_id=finetune_name,</span><br><span class="line">    # DPO-specific temperature parameter that controls the strength of the preference model</span><br><span class="line">    # Lower values (like 0.1) make the model more conservative in following preferences</span><br><span class="line">    beta=0.1,</span><br><span class="line">    # Maximum length of the input prompt in tokens</span><br><span class="line">    max_prompt_length=1024,</span><br><span class="line">    # Maximum combined length of prompt + response in tokens</span><br><span class="line">    max_length=1536,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>per_device_train_batch_size&#x3D;4：每个设备（GPU&#x2F;MPS）上的微调批大小是 4。若你使用多个 GPU 或 MPS，则总 batch size 会乘以设备数。</li>
+<li>gradient_accumulation_steps&#x3D;4：累积 4 个 mini-batch 的梯度再做一次反向传播。<br>这样可以模拟 4×4&#x3D;16 的有效 batch size，节省显存。</li>
+<li>gradient_checkpointing&#x3D;True：启用梯度检查点技术：节省内存，通过在反向传播时重算中间激活来换取少量计算开销。</li>
+<li>learning_rate&#x3D;5e-5：初始学习率。对于 LoRA + 微调一般推荐 1e-5 ~ 5e-5。</li>
+<li>lr_scheduler_type&#x3D;”cosine”：使用余弦退火学习率策略（cosine schedule）：初期缓慢增大，后期缓慢降低（类似 U 形曲线）。</li>
+<li>max_steps&#x3D;200：总共进行 200 个训练 step。适合小规模调试或快速实验。</li>
+<li>save_strategy&#x3D;”no”：不保存中间模型 checkpoint（节省空间，适合调试）。</li>
+<li>logging_steps&#x3D;1：每 1 步打印一次日志（非常频繁，便于观察）。</li>
+<li>output_dir&#x3D;”smol_dpo_output”：模型微调输出目录。</li>
+<li>warmup_steps&#x3D;100：前 100 个 step 使用 warmup 策略逐渐提高学习率。可避免训练初期模型震荡。</li>
+<li>bf16&#x3D;True：使用 bfloat16 精度训练，适用于支持的设备（如 A100&#x2F;H100）。比 fp16 更稳定，适合 DPO。</li>
+<li>report_to&#x3D;”none”：不启用日志追踪工具（如 WandB、TensorBoard）。</li>
+<li>remove_unused_columns&#x3D;False：保留所有输入字段，必要设置，因为 DPO 使用自定义字段（如 prompt, chosen, rejected）。</li>
+<li>use_mps_device&#x3D;device &#x3D;&#x3D; “mps”：如果在 Mac 上使用 MPS 加速则设为 True。</li>
+<li>hub_model_id&#x3D;finetune_name：训练完成后模型上传到 Hugging Face Hub 的 ID 名（如 “my-org&#x2F;my-dpo-model”）。</li>
+<li>beta&#x3D;0.1	DPO 特有参数：控制 DPO loss 中 policy 与 reference 的对比强度。越小（如 0.1），偏好控制越严格（保守）；越大（如 1.0），更自由。</li>
+<li>max_prompt_length&#x3D;1024：输入的 prompt 最大长度（token 数）。超过则截断。</li>
+<li>max_length&#x3D;1536：prompt + 回复（chosen&#x2F;rejected）拼接后的最大总长度。</li>
+</ul>
+<p>DPOTrainer 参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">trainer = DPOTrainer(</span><br><span class="line">    # The model to be trained</span><br><span class="line">    model=model,</span><br><span class="line">    # Training configuration from above</span><br><span class="line">    args=training_args,</span><br><span class="line">    # Dataset containing preferred/rejected response pairs</span><br><span class="line">    train_dataset=dataset,</span><br><span class="line">    # Tokenizer for processing inputs</span><br><span class="line">    processing_class=tokenizer,</span><br><span class="line">    # DPO-specific temperature parameter that controls the strength of the preference model</span><br><span class="line">    # Lower values (like 0.1) make the model more conservative in following preferences</span><br><span class="line">    # beta=0.1,</span><br><span class="line">    # Maximum length of the input prompt in tokens</span><br><span class="line">    # max_prompt_length=1024,</span><br><span class="line">    # Maximum combined length of prompt + response in tokens</span><br><span class="line">    # max_length=1536,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ref_model：如果没有参考模型，则默认和 model 相同</li>
+<li>args：将 DPOConfig 传入</li>
+<li>train_dataset：训练集。必须包含 prompt, chosen, rejected 三列</li>
+<li>beta：控制 loss 中 π(chosen)&#x2F;π(rejected) 的敏感程度。<ul>
+<li>beta &#x3D; 0.1：趋于保守（更相信参考模型）</li>
+<li>beta &#x3D; 1.0：更自由（训练模型可偏离参考）</li>
+</ul>
+</li>
+</ul>
+<h1 id="ORPO"><a href="#ORPO" class="headerlink" title="ORPO"></a>ORPO</h1><p>ORPO （Odds Ratio Preference Optimization）是一种新颖的微调技术，它将微调和偏好对齐结合到一个统一的过程中。与 RLHF 或 DPO 等传统方法相比，这种组合方法在效率和性能方面具有优势。</p>
+<p>与 DPO 等方法的对齐通常涉及两个单独的步骤：监督微调以使模型适应领域和格式，然后进行偏好对齐以与人类偏好保持一致。虽然 SFT 有效地使模型适应目标域，但它可能无意中增加产生期望和不期望响应的概率。ORPO 通过将这两个步骤集成到一个流程中来解决这一限制。对比如下：</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://wbfwonderful.oss-cn-shenzhen.aliyuncs.com/2025-07-21-21-37-15.png"
+                        alt="2025-07-21-21-37-15"
+                 ></p>
+<h2 id="如何工作"><a href="#如何工作" class="headerlink" title="如何工作"></a>如何工作</h2><p>训练过程利用了一个类似于在 DPO 中使用的偏好数据集，其中每个训练示例包含一个输入提示以及两个响应：一个是首选的，另一个是拒绝的。与其他需要单独阶段和参考模型的校准方法不同，ORPO 将偏好校准直接集成到监督微调过程中。这种单片方法使其无需参考模型，计算效率更高，并且使用更少的 flop 来提高内存效率。</p>
+<p>ORPO 通过结合两个主要组件创建了一个新目标：</p>
+<ol>
+<li><strong>SFT 损失</strong>：语言建模中使用的标准负对数似然损失，它最大限度地提高了生成参考令牌的概率。这有助于维护模型的通用语言功能。</li>
+<li><strong>odd rate 损失</strong>：一个新的组件，惩罚不希望的反应，而奖励首选的。这个损失函数使用比值比在令牌级别上有效地对比受欢迎和不受欢迎的响应。</li>
+</ol>
+
+                    
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                【Smol Course】2-偏好对齐
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                LLM/smol2/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">wbfwonderful</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2025-07-21 14:04</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank">
+                        
+                            <i class="fa-brands fa-creative-commons"></i>
+                            <i class="fa-brands fa-creative-commons-by"></i>
+                            <i class="fa-brands fa-creative-commons-nc"></i>
+                            <i class="fa-brands fa-creative-commons-sa"></i>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/blog/tags/trl/">trl</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/blog/LLM/smol3/"
+                                   title="【Smol Course】3-参数高效微调"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">【Smol Course】3-参数高效微调</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/blog/Leetcode/dp1/"
+                                   title="【代码随想录】动态规划1-基础"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">【代码随想录】动态规划1-基础</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Preference-Alignment"><span class="nav-number">1.</span> <span class="nav-text">Preference Alignment</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DPO"><span class="nav-number">2.</span> <span class="nav-text">DPO</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#How-DPO-works"><span class="nav-number">2.1.</span> <span class="nav-text">How DPO works</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dataset"><span class="nav-number">2.2.</span> <span class="nav-text">Dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-with-TRL"><span class="nav-number">2.3.</span> <span class="nav-text">Implementation with TRL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Practice"><span class="nav-number">2.4.</span> <span class="nav-text">Practice</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E5%8C%85"><span class="nav-number">2.4.1.</span> <span class="nav-text">导入包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">2.4.2.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.4.3.</span> <span class="nav-text">加载模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83"><span class="nav-number">2.4.4.</span> <span class="nav-text">训练</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ORPO"><span class="nav-number">3.</span> <span class="nav-text">ORPO</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C"><span class="nav-number">3.1.</span> <span class="nav-text">如何工作</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2024</span>&nbsp;-&nbsp;2025
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/blog/">wbfwonderful</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+                <a target="_blank" rel="nofollow" href="https://github.com">
+            
+            本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/blog/images/brands/github.png"></span> 提供部署服务
+            
+                </a>
+            
+        </div>
+    
+
+    
+        <div class="count-info info-item">
+            
+                <span class="count-item border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">70.8k</span>
+                </span>
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Preference-Alignment"><span class="nav-number">1.</span> <span class="nav-text">Preference Alignment</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DPO"><span class="nav-number">2.</span> <span class="nav-text">DPO</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#How-DPO-works"><span class="nav-number">2.1.</span> <span class="nav-text">How DPO works</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dataset"><span class="nav-number">2.2.</span> <span class="nav-text">Dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-with-TRL"><span class="nav-number">2.3.</span> <span class="nav-text">Implementation with TRL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Practice"><span class="nav-number">2.4.</span> <span class="nav-text">Practice</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E5%8C%85"><span class="nav-number">2.4.1.</span> <span class="nav-text">导入包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">2.4.2.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.4.3.</span> <span class="nav-text">加载模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83"><span class="nav-number">2.4.4.</span> <span class="nav-text">训练</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ORPO"><span class="nav-number">3.</span> <span class="nav-text">ORPO</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C"><span class="nav-number">3.1.</span> <span class="nav-text">如何工作</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/lazyload.min.js"></script>
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/copyright-info.min.js"></script>
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.4/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>
